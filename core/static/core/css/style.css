@@ -1283,119 +1283,109 @@ p {
 }
 
 
-/* ── BOOTSTRAP INTEGRATION ──────────────────────────────────────── */
-/* Our CSS loads AFTER Bootstrap so these override it */
-
-/* Force our navbar to always be horizontal on desktop */
-.she-navbar {
-  display: block !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 1000 !important;
-  background: rgba(255, 255, 255, 0.97) !important;
-  backdrop-filter: blur(12px) !important;
-  border-bottom: 2px solid var(--primary) !important;
-  box-shadow: var(--shadow-sm) !important;
-  padding: 0 !important;
+/* ── HELPLINES GRID ─────────────────────────────────────────────── */
+.helplines-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
 }
 
-.she-navbar-inner {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  padding: 0.9rem 1.5rem !important;
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  width: 100% !important;
-}
-
-.she-navbar-nav {
-  display: flex !important;
-  align-items: center !important;
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  gap: 0.25rem !important;
-  flex-direction: row !important;
-}
-
-.she-navbar-nav li {
-  display: block !important;
-}
-
-.she-navbar-nav a {
-  display: block !important;
-  padding: 0.45rem 0.8rem !important;
-  color: var(--text-dark) !important;
-  font-weight: 500 !important;
-  font-size: 0.9rem !important;
-  border-radius: 6px !important;
-  text-decoration: none !important;
-  white-space: nowrap !important;
-}
-
-.she-navbar-nav a:hover {
-  background: rgba(139, 26, 74, 0.07) !important;
-  color: var(--primary) !important;
-}
-
-.nav-cta {
-  background: var(--primary) !important;
-  color: white !important;
-  border-radius: 50px !important;
-  padding: 0.45rem 1.2rem !important;
-}
-
-.nav-cta:hover {
-  background: var(--primary-dark) !important;
-  color: white !important;
-}
-
-.nav-admin {
-  background: var(--navy) !important;
-  color: white !important;
-  border-radius: 50px !important;
-  padding: 0.45rem 1rem !important;
-}
-
-.nav-toggle {
-  display: none !important;
-}
-
-/* Mobile navbar */
+/* ── MOBILE FIXES ───────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .she-navbar-nav {
-    display: none !important;
-    flex-direction: column !important;
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
-    background: white !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
-    padding: 1rem !important;
-    z-index: 999 !important;
-    gap: 0 !important;
+  .hero-inner {
+    grid-template-columns: 1fr;
   }
 
+  .hero-stats {
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .helplines-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+
+  /* Navbar */
+  .navbar-nav,
+  .she-navbar-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    z-index: 999;
+  }
+
+  .navbar-nav.open,
   .she-navbar-nav.open {
-    display: flex !important;
+    display: flex;
   }
 
   .nav-toggle {
-    display: flex !important;
+    display: flex;
   }
-}
 
-/* Pillar/component cards full width in Bootstrap grid */
-.pillar-card,
-.component-card,
-.news-card {
-  width: 100%;
-}
+  /* Emergency bar */
+  .emergency-bar {
+    font-size: 0.72rem;
+    line-height: 1.9;
+    text-align: center;
+    padding: 0.5rem 0.75rem;
+  }
 
-/* Hero stat cards on small mobile */
-@media (max-width: 576px) {
+  /* Hero */
+  .hero {
+    padding: 2rem 0;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero p {
+    font-size: 0.92rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.95rem;
+  }
+
+  .hero-badge {
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .hero-actions a {
+    text-align: center;
+  }
+
+  /* Hero stat cards */
+  .hero-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .hero-stat-card {
+    padding: 1rem 0.75rem;
+  }
+
   .hero-stat-number {
     font-size: 1.5rem;
   }
@@ -1404,27 +1394,106 @@ p {
     font-size: 0.7rem;
   }
 
-  .hero-stat-card {
-    padding: 0.85rem 0.6rem;
+  /* Grids → single column */
+  .pillars-grid,
+  .components-grid,
+  .support-grid,
+  .news-grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
   }
 
-  .helpline-number {
-    font-size: 1.6rem;
-  }
-
-  .helpline-card h3 {
-    font-size: 0.85rem;
+  .helplines-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
   }
 
   .helpline-card {
     padding: 1rem 0.75rem;
   }
 
-  .hero h1 {
-    font-size: 1.75rem;
+  .helpline-number {
+    font-size: 1.8rem;
   }
 
-  .hero p {
+  .helpline-card h3 {
+    font-size: 0.85rem;
+  }
+
+  /* Charts */
+  .charts-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  /* Forms */
+  .form-card {
+    padding: 1.5rem 1rem;
+  }
+
+  /* Table */
+  .data-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Spacing */
+  .section-pad {
+    padding: 2rem 0;
+  }
+
+  .container {
+    padding: 0 0.9rem;
+  }
+
+  #backToTop {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  /* Section headers */
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .section-header p {
     font-size: 0.9rem;
+  }
+
+  /* Page hero */
+  .page-hero {
+    padding: 2rem 0;
+  }
+
+  .page-hero h1 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-stat-number {
+    font-size: 1.3rem;
+  }
+
+  .page-hero h1 {
+    font-size: 1.4rem;
+  }
+
+  .helpline-number {
+    font-size: 1.5rem;
   }
 }
