@@ -8,16 +8,15 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# On Railway: set SECRET_KEY environment variable in dashboard
-# Locally: uses the default below
 SECRET_KEY = os.environ.get(
     'SECRET_KEY', 'django-insecure-she-report-local-2025')
-
-# On Railway: set DEBUG=False in dashboard
-# Locally: always True
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+ALLOWED_HOSTS = ["*"]
 
-ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    "https://shereport-81088d.up.railway.app",
+    "https://*.up.railway.app",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -67,18 +66,42 @@ TEMPLATES = [
 WSGI_APPLICATION = 'she_report.wsgi.application'
 
 # ─── DATABASE ──────────────────────────────────────────────────────────────────
-# Railway sets MYSQL_URL automatically when MySQL service is connected
-# If MYSQL_URL not found, uses your local MySQL
+# Try all possible Railway MySQL variable formats
 
 MYSQL_URL = os.environ.get('MYSQL_URL')
+MYSQL_PRIVATE_URL = os.environ.get('MYSQL_PRIVATE_URL')
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
-if MYSQL_URL:
-    # Railway MySQL
+# Railway sometimes provides individual variables
+MYSQLHOST = os.environ.get('MYSQLHOST')
+MYSQLUSER = os.environ.get('MYSQLUSER')
+MYSQLPASSWORD = os.environ.get('MYSQLPASSWORD')
+MYSQLDATABASE = os.environ.get('MYSQLDATABASE')
+MYSQLPORT = os.environ.get('MYSQLPORT', '3306')
+
+if MYSQL_URL or MYSQL_PRIVATE_URL or DATABASE_URL:
+    # Single URL format
     DATABASES = {
         'default': dj_database_url.config(
-            default=MYSQL_URL,
+            default=MYSQL_URL or MYSQL_PRIVATE_URL or DATABASE_URL,
             conn_max_age=600,
         )
+    }
+elif MYSQLHOST:
+    # Separate variable format (most common on Railway)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': MYSQLDATABASE,
+            'USER': MYSQLUSER,
+            'PASSWORD': MYSQLPASSWORD,
+            'HOST': MYSQLHOST,
+            'PORT': MYSQLPORT,
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
+        }
     }
 else:
     # Local MySQL on your laptop
