@@ -178,7 +178,7 @@ p {
 }
 
 /* ── NAVBAR ───────────────────────────────────────────────────── */
-.navbar {
+.she-navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -188,7 +188,7 @@ p {
   box-shadow: var(--shadow-sm);
 }
 
-.navbar-inner {
+.she-navbar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -197,7 +197,7 @@ p {
   margin: 0 auto;
 }
 
-.navbar-brand {
+.she-navbar-brand {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -236,14 +236,14 @@ p {
   text-transform: uppercase;
 }
 
-.navbar-nav {
+.she-navbar-nav {
   display: flex;
   align-items: center;
   list-style: none;
   gap: 0.25rem;
 }
 
-.navbar-nav a {
+.she-navbar-nav a {
   padding: 0.5rem 0.9rem;
   border-radius: 8px;
   font-weight: 500;
@@ -252,8 +252,8 @@ p {
   transition: var(--transition);
 }
 
-.navbar-nav a:hover,
-.navbar-nav a.active {
+.she-navbar-nav a:hover,
+.she-navbar-nav a.active {
   background: var(--primary);
   color: white;
 }
@@ -1086,7 +1086,7 @@ p {
 @media (max-width: 640px) {
 
   /* ── Navbar ── */
-  .navbar-nav {
+  .she-navbar-nav {
     display: none;
     flex-direction: column;
     position: absolute;
@@ -1099,11 +1099,11 @@ p {
     z-index: 999;
   }
 
-  .navbar-nav.open {
+  .she-navbar-nav.open {
     display: flex;
   }
 
-  .navbar-nav a {
+  .she-navbar-nav a {
     padding: 0.75rem 1rem;
     font-size: 1rem;
   }
@@ -1291,7 +1291,7 @@ p {
 }
 
 /* Fix Bootstrap interfering with our navbar */
-.navbar {
+.she-navbar {
   display: block;
   padding: 0;
 }
@@ -1339,5 +1339,61 @@ p {
 
   .component-number {
     font-size: 1.2rem;
+  }
+}
+
+/* ── BOOTSTRAP NAVBAR CONFLICT FIX ─────────────────────────────── */
+/* Prevent Bootstrap from touching our custom navbar */
+.she-navbar,
+.she-navbar * {
+  box-sizing: border-box;
+}
+
+.she-navbar {
+  display: flex !important;
+  flex-direction: column;
+  padding: 0 !important;
+}
+
+.she-navbar-inner {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 68px;
+}
+
+.she-navbar-nav {
+  display: flex !important;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .she-navbar-nav {
+    display: none !important;
+    flex-direction: column !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    z-index: 999;
+  }
+
+  .she-navbar-nav.open {
+    display: flex !important;
+  }
+
+  .nav-toggle {
+    display: flex !important;
   }
 }
