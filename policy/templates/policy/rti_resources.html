@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+{% block title %}RTI Resources | SHE Report Kerala{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a><span class="breadcrumb-sep">›</span>
+    <a href="{% url 'policy' %}">Policy</a><span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">RTI Resources</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>RTI Resources</h1>
+    <p>Use the Right to Information Act to hold institutions accountable</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container" style="max-width:900px;">
+
+    <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:2.5rem; box-shadow:var(--shadow-md); margin-bottom:2rem;">
+      <h2 style="margin-bottom:1rem;">What is RTI?</h2>
+      <p>The Right to Information Act, 2005 gives every citizen of India the right to request information from any public authority. You can use RTI to track:</p>
+      <ul style="padding-left:1.5rem; color:var(--text-mid); margin-top:0.5rem;">
+        <li style="margin-bottom:0.5rem;">Number of FIRs registered in a district for crimes against women</li>
+        <li style="margin-bottom:0.5rem;">Status of specific cases (e.g. whether charge sheet was filed)</li>
+        <li style="margin-bottom:0.5rem;">Conviction rates and pendency in courts</li>
+        <li style="margin-bottom:0.5rem;">Number of Women Protection Officers appointed</li>
+        <li>Utilisation of funds for victim compensation</li>
+      </ul>
+    </div>
+
+    <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:2.5rem; box-shadow:var(--shadow-md); margin-bottom:2rem;">
+      <h2 style="margin-bottom:1rem;">How to File an RTI</h2>
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <div style="display:flex; gap:1rem; padding:1rem; background:rgba(139,26,74,0.04); border-radius:10px;">
+          <span style="background:var(--primary);color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0;">1</span>
+          <div>Address your application to the <strong>Public Information Officer (PIO)</strong> of the relevant department (e.g., Kerala Police, Judiciary).</div>
+        </div>
+        <div style="display:flex; gap:1rem; padding:1rem; background:rgba(139,26,74,0.04); border-radius:10px;">
+          <span style="background:var(--primary);color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0;">2</span>
+          <div>Pay ₹10 by IPO/DD/cash. <strong>BPL families are exempt</strong> from fee.</div>
+        </div>
+        <div style="display:flex; gap:1rem; padding:1rem; background:rgba(139,26,74,0.04); border-radius:10px;">
+          <span style="background:var(--primary);color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0;">3</span>
+          <div>The PIO must respond within <strong>30 days</strong> (48 hours for life/liberty matters).</div>
+        </div>
+        <div style="display:flex; gap:1rem; padding:1rem; background:rgba(139,26,74,0.04); border-radius:10px;">
+          <span style="background:var(--primary);color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0;">4</span>
+          <div>If refused or delayed, file a <strong>First Appeal</strong> within 30 days to the Appellate Authority, then to the State Information Commission.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:white; border-radius:var(--radius-lg); padding:2.5rem;">
+      <h2 style="color:white; margin-bottom:1rem;">Online RTI Filing</h2>
+      <p style="color:rgba(255,255,255,0.9);">You can file RTI applications online for Central Government departments.</p>
+      <a href="https://rtionline.gov.in" target="_blank" class="btn-primary" style="background:white; color:var(--primary); margin-top:0.5rem; display:inline-block;">rtionline.gov.in →</a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

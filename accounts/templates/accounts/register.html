@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% block title %}Register | SHE Report{% endblock %}
+
+{% block extra_css %}
+<style>
+input[type=text], input[type=password] {
+  width:100%; padding:0.75rem 1rem; border:2px solid var(--border);
+  border-radius:10px; font-size:0.95rem; font-family:inherit;
+}
+input[type=text]:focus, input[type=password]:focus {
+  outline:none; border-color:var(--primary);
+}
+.helptext { font-size:0.78rem; color:var(--text-light); margin-top:0.3rem; }
+ul.errorlist { color:var(--danger); font-size:0.82rem; padding-left:1rem; margin-top:0.3rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="section-pad">
+  <div class="container">
+    <div class="form-card">
+      <h2 style="margin-bottom:0.5rem;">Create Account</h2>
+      <p style="margin-bottom:1.5rem; font-size:0.9rem; color:var(--text-light);">For SHE Report team members only.</p>
+      <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-group">
+            <label>{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<p class="helptext">{{ field.help_text }}</p>{% endif %}
+            {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn-submit">Create Account</button>
+      </form>
+      <p style="text-align:center; margin-top:1rem; font-size:0.88rem;">
+        Already have an account? <a href="{% url 'login' %}">Login</a>
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

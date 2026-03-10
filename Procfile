@@ -1,0 +1,1 @@
+web: gunicorn she_report.wsgi:application

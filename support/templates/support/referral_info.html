@@ -1,0 +1,75 @@
+{% extends 'core/base.html' %}
+{% block title %}Referral Information | SHE Report Kerala{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a><span class="breadcrumb-sep">›</span>
+    <a href="{% url 'get_support' %}">Get Support</a><span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Referral Information</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Referral Information</h1>
+    <p>Key institutions and organisations offering support in Kerala</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+
+    <div class="alert alert-info">ℹ️ Contact details may change. Always verify with the official source or call 181 for up-to-date referrals.</div>
+
+    <div class="support-grid" style="margin-top:2rem;">
+
+      <div class="support-card">
+        <div class="icon">🏥</div>
+        <h3>One Stop Centres (Sakhi)</h3>
+        <p>Integrated support for women affected by violence — medical, police, legal, psychological and temporary shelter services at one location. Present in all 14 districts.</p>
+        <p style="font-weight:700; color:var(--primary);">Call: 181</p>
+      </div>
+
+      <div class="support-card">
+        <div class="icon">📞</div>
+        <h3>Mithra 181 Women Helpline</h3>
+        <p>24×7 women's helpline operated by the Government of Kerala. Crisis intervention, information, referrals and emergency response for women in distress.</p>
+        <p style="font-weight:700; color:var(--primary);">Call: 181</p>
+      </div>
+
+      <div class="support-card">
+        <div class="icon">⚖️</div>
+        <h3>KELSA (Kerala Legal Services Authority)</h3>
+        <p>Free legal aid and advice for women, victims of crime and marginalised communities. District Legal Services Authorities present in every district.</p>
+        <p style="font-weight:700; color:var(--primary);">Call: 15100</p>
+      </div>
+
+      <div class="support-card">
+        <div class="icon">🏛️</div>
+        <h3>Kerala State Women's Commission</h3>
+        <p>Statutory body that takes up complaints related to atrocities and violations of women's rights. Can summon officials and recommend action.</p>
+        <p style="font-weight:700; color:var(--primary);">Thiruvananthapuram: 0471-2322590</p>
+      </div>
+
+      <div class="support-card">
+        <div class="icon">🧑‍⚕️</div>
+        <h3>Women Protection Officers (WPO)</h3>
+        <p>Appointed in every district under the Domestic Violence Act. They help file domestic incident reports, assist with protection orders and facilitate referrals.</p>
+        <p style="font-weight:700; color:var(--primary);">Contact via Sakhi / 181</p>
+      </div>
+
+      <div class="support-card">
+  <div class="icon">🏢</div>
+  <h3>Dept. of Women & Child Development</h3>
+  <p>Nodal government department overseeing welfare schemes, child protection, Anganwadi network and social justice initiatives.</p>
+  <p style="font-weight:700; color:var(--primary);">
+    Website: <a href="https://wcd.kerala.gov.in" target="_blank" style="color:inherit; text-decoration:none;">wcd.kerala.gov.in</a>
+  </p>
+</div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}

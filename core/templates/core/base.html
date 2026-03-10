@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SHE Report — Safety, Help, Evidence Report. Mapping the journey of a victim to survivor. An integrated platform for crimes against women in Kerala.">
+  <title>{% block title %}SHE Report — Safety, Help, Evidence Report{% endblock %}</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- Emergency bar -->
+  <div class="emergency-bar">
+    🆘 Women's Helpline: <strong>181 (Mithra)</strong> &nbsp;|&nbsp; Police Emergency: <strong>112</strong> &nbsp;|&nbsp; One Stop Centre (Sakhi): <a href="tel:181">181</a>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="{% url 'home' %}" class="navbar-brand">
+        <div class="brand-logo">SHE</div>
+        <div class="brand-text">
+          <div class="brand-title">SHE Report</div>
+          <div class="brand-sub">Safety · Help · Evidence</div>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="navbar-nav">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'what_is_she_report' %}">What is SHE Report</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'data_insights' %}">Data & Insights</a></li>
+        <li><a href="{% url 'get_support' %}">Get Support</a></li>
+        <li><a href="{% url 'policy' %}">Policy</a></li>
+        <li><a href="{% url 'publications' %}">Reports</a></li>
+        <li><a href="{% url 'contact' %}" class="nav-cta">Contact</a></li>
+        {% if user.is_staff %}
+        <li><a href="/admin/" class="nav-admin">⚙ Admin</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Django messages -->
+  {% if messages %}
+  <div class="container" style="margin-top:1rem;">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {% if message.tags == 'success' %}✅{% elif message.tags == 'error' %}❌{% else %}ℹ️{% endif %}
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- MAIN CONTENT -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-title">SHE Report</div>
+          <div style="color: rgba(255,255,255,0.5); font-size:0.8rem; font-style:italic; margin-top:0.25rem;">
+            Safety · Help · Evidence Report
+          </div>
+          <p>Mapping the journey of a victim to survivor. An integrated, data-driven platform for crimes against women in Kerala.</p>
+          <p style="font-size:0.8rem; margin-top:1rem; color:rgba(255,255,255,0.4);">
+            Data sourced from Kerala Police, NCRB &amp; judicial records.
+          </p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'what_is_she_report' %}">What is SHE Report</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'data_insights' %}">Data &amp; Insights</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="{% url 'get_support' %}">Get Support</a></li>
+            <li><a href="{% url 'reporting_guidance' %}">Reporting Guidance</a></li>
+            <li><a href="{% url 'legal_literacy' %}">Legal Literacy</a></li>
+            <li><a href="{% url 'referral_info' %}">Referral Information</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="{% url 'policy' %}">Policy &amp; Accountability</a></li>
+            <li><a href="{% url 'rti_resources' %}">RTI Resources</a></li>
+            <li><a href="{% url 'publications' %}">Reports</a></li>
+            <li><a href="{% url 'contact' %}">Contact &amp; Collaborate</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© {% now "Y" %} SHE Report — Public Interest Initiative. Kerala.</span>
+        <span class="footer-tagline">"Mapping the journey of a victim to survivor."</span>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="{% static 'core/js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,66 @@
+{% extends 'core/base.html' %}
+{% block title %}Reporting Guidance | SHE Report Kerala{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a><span class="breadcrumb-sep">›</span>
+    <a href="{% url 'get_support' %}">Get Support</a><span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Reporting Guidance</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Reporting Guidance</h1>
+    <p>Step-by-step: how to report a crime and what to expect.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container" style="max-width:900px;">
+
+    <div style="display:flex; flex-direction:column; gap:1.5rem;">
+      {% for step, title, text in steps %}
+      {% endfor %}
+
+      <div style="background:var(--card-bg); border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow-sm); display:flex; gap:1.5rem;">
+        <div style="background:var(--primary); color:white; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; flex-shrink:0;">1</div>
+        <div><h3 style="margin-bottom:0.5rem;">Ensure Your Safety First</h3><p style="margin:0;">If you are in immediate danger, call <strong>112 (Police Emergency)</strong> or <strong>181 (Mithra Helpline)</strong>. Leave the location if it is safe to do so. Seek help from a trusted person, NGO, or Sakhi One Stop Centre.</p></div>
+      </div>
+
+      <div style="background:var(--card-bg); border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow-sm); display:flex; gap:1.5rem;">
+        <div style="background:var(--teal); color:white; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; flex-shrink:0;">2</div>
+        <div><h3 style="margin-bottom:0.5rem;">Go to the Nearest Police Station</h3><p style="margin:0;">You can go to <strong>any</strong> police station — you have the right to a Zero FIR. Ask to speak to the SHO (Station House Officer) or a female officer if you prefer. You do not need a lawyer to file an FIR.</p></div>
+      </div>
+
+      <div style="background:var(--card-bg); border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow-sm); display:flex; gap:1.5rem;">
+        <div style="background:var(--accent-dark); color:white; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; flex-shrink:0;">3</div>
+        <div><h3 style="margin-bottom:0.5rem;">File the FIR</h3><p style="margin:0;">Give a written or oral statement. The officer will write it and read it back to you — you must sign only when you agree it is accurate. <strong>Demand a free copy of the FIR</strong> — this is your legal right. Note the FIR number.</p></div>
+      </div>
+
+      <div style="background:var(--card-bg); border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow-sm); display:flex; gap:1.5rem;">
+        <div style="background:var(--navy); color:white; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; flex-shrink:0;">4</div>
+        <div><h3 style="margin-bottom:0.5rem;">Medical Examination (if applicable)</h3><p style="margin:0;">For sexual assault cases, a medical examination should be conducted at a government hospital. This preserves evidence. You have the right to have a female doctor and a support person present.</p></div>
+      </div>
+
+      <div style="background:var(--card-bg); border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow-sm); display:flex; gap:1.5rem;">
+        <div style="background:#7B2D8B; color:white; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; flex-shrink:0;">5</div>
+        <div><h3 style="margin-bottom:0.5rem;">Seek Legal Aid</h3><p style="margin:0;">Contact <strong>KELSA (15100)</strong> for free legal representation. Legal aid is your right, not charity. A lawyer can help you navigate courts, understand charges, and protect your rights throughout the process.</p></div>
+      </div>
+
+    </div>
+
+    <div style="background:rgba(139,26,74,0.06); border-radius:var(--radius); padding:2rem; margin-top:2rem;">
+      <h3 style="margin-bottom:1rem;">If Police Refuse to Register Your FIR</h3>
+      <ul style="padding-left:1.5rem; color:var(--text-mid);">
+        <li>Approach the Superintendent of Police (SP) or Deputy SP in writing</li>
+        <li>Send a written complaint by post to the Magistrate — court can direct police to register</li>
+        <li>File a complaint with the Kerala Police Complaints Authority</li>
+        <li>Contact KELSA (15100) or the State Women's Commission for support</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

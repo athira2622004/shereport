@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+{% block title %}Policy & Accountability | SHE Report Kerala{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a><span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Policy & Accountability</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Policy & Accountability</h1>
+    <p>RTI resources, policy briefs and institutional scorecards for public accountability</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-tag">Accountability</span>
+      <h2>Why Accountability Matters</h2>
+      <p>When performance metrics and gaps are publicly visible, institutions are more likely to prioritise responsiveness, efficiency, and survivor-centred practices.</p>
+    </div>
+
+    <div class="components-grid">
+
+      <div class="component-card">
+        <div class="component-number">RTI</div>
+        <h3>RTI Resources</h3>
+        <p>Use the Right to Information Act to track FIR registration, investigation delays, conviction rates and victim support measures. Template RTI applications provided.</p>
+        <a href="{% url 'rti_resources' %}" class="btn-primary" style="display:inline-block; margin-top:1rem;">Access RTI Tools →</a>
+      </div>
+
+      <div class="component-card">
+        <div class="component-number">📋</div>
+        <h3>Annual Scorecards</h3>
+        <p>District and taluk-level scorecards tracking police responsiveness, FIR rates, case outcomes and survivor support quality. Published annually.</p>
+        <span style="display:inline-block; margin-top:1rem; padding:0.4rem 1rem; background:rgba(139,26,74,0.1); color:var(--primary); border-radius:50px; font-size:0.8rem; font-weight:600;">Coming Soon</span>
+      </div>
+
+      <div class="component-card">
+        <div class="component-number">📑</div>
+        <h3>Policy Briefs</h3>
+        <p>Thematic policy briefs translating complex data into actionable recommendations for government departments, police and judicial authorities.</p>
+        <span style="display:inline-block; margin-top:1rem; padding:0.4rem 1rem; background:rgba(139,26,74,0.1); color:var(--primary); border-radius:50px; font-size:0.8rem; font-weight:600;">Coming Soon</span>
+      </div>
+
+      <div class="component-card">
+        <div class="component-number">🔍</div>
+        <h3>Institutional Insights</h3>
+        <p>Analysis of police response times, referral effectiveness, coordination quality among stakeholders and integration of data insights into administrative decisions.</p>
+        <span style="display:inline-block; margin-top:1rem; padding:0.4rem 1rem; background:rgba(139,26,74,0.1); color:var(--primary); border-radius:50px; font-size:0.8rem; font-weight:600;">Coming Soon</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}

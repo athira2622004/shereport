@@ -1,0 +1,173 @@
+{% extends 'core/base.html' %}
+{% block title %}Data & Insights | SHE Report Kerala{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Data & Insights</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Data & Insights</h1>
+    <p>Crime statistics, trends and analysis — Kerala 2020 to {{ latest_year }}</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+
+    <!-- Year-wise + Crime Type Charts -->
+    <div class="charts-row" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
+      <div class="chart-card">
+        <h3 style="margin-bottom:1rem;">Year-wise Crimes Against Women</h3>
+        {% if stats %}
+        <div style="height:280px;position:relative;"><canvas id="crimeTrendChart"></canvas></div>
+        {% else %}
+        <div style="height:280px;display:flex;align-items:center;justify-content:center;color:var(--text-light);">No data available.</div>
+        {% endif %}
+      </div>
+      <div class="chart-card">
+        <h3 style="margin-bottom:1rem;">Crime Type Breakdown ({{ latest_year }})</h3>
+        {% if stats %}
+        <div style="height:280px;position:relative;"><canvas id="crimeTypeChart"></canvas></div>
+        {% else %}
+        <div style="height:280px;display:flex;align-items:center;justify-content:center;color:var(--text-light);">No data available.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- District Section -->
+    {% if has_district_data %}
+    <div class="section-header">
+      <span class="section-tag">District Analysis</span>
+      <h2>District-wise Crimes — Kerala {{ latest_district_year }}</h2>
+    </div>
+
+    <!-- District Bar Chart — full width -->
+    <div class="chart-card" style="margin-bottom:2rem;">
+      <h3 style="margin-bottom:1rem;font-size:1rem;">District-wise Total Crimes ({{ latest_district_year }})</h3>
+      <div style="height:420px;position:relative;"><canvas id="districtChart"></canvas></div>
+    </div>
+
+    <!-- District Table -->
+    <div class="section-header">
+      <span class="section-tag">District Data</span>
+      <h2>District-wise Statistics Table — {{ latest_district_year }}</h2>
+    </div>
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr><th>#</th><th>District</th><th>Total Crimes</th><th>Rape</th><th>Molestation</th><th>Kidnapping</th><th>Cruelty (Husband)</th></tr>
+        </thead>
+        <tbody>
+          {% for d in districts %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><strong>{{ d.district }}</strong></td>
+            <td><strong>{{ d.total_crimes }}</strong></td>
+            <td>{{ d.rape }}</td><td>{{ d.molestation }}</td>
+            <td>{{ d.kidnapping }}</td><td>{{ d.cruelty_by_husband }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.78rem;color:var(--text-light);margin-top:0.75rem;">Source: Kerala Police, NCRB {{ latest_district_year }}.</p>
+
+    {% else %}
+    <div class="alert alert-info" style="margin-bottom:3rem;">
+      No district data yet. Run: <code>python manage.py loaddata core/fixtures/district_data.json</code>
+    </div>
+    {% endif %}
+
+    <!-- Key Findings -->
+    <div class="section-header">
+      <span class="section-tag">Analysis</span>
+      <h2>Key Findings & Inferences</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:3rem;">
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;border-left:4px solid var(--primary);box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:1rem;color:var(--primary);">Overall Crime Trajectory</h3>
+        <p style="font-size:0.88rem;margin:0;">Kerala witnessed a sharp upward trend from 12,659 cases in 2020 to 18,887 in 2024 — a <strong>49% increase</strong> over four years.</p>
+      </div>
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;border-left:4px solid var(--teal);box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:1rem;color:var(--teal);">Peak Year: 2023</h3>
+        <p style="font-size:0.88rem;margin:0;">2023 saw the highest recorded burden at <strong>18,980 cases</strong>, indicating systemic accumulation of unresolved structural factors.</p>
+      </div>
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;border-left:4px solid var(--accent-dark);box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:1rem;color:var(--accent-dark);">Domestic Violence</h3>
+        <p style="font-size:0.88rem;margin:0;">Cruelty by husband declined from <strong>30.8% (2021)</strong> to <strong>23.9% (2024)</strong> — yet still represents nearly 1 in 4 crimes.</p>
+      </div>
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;border-left:4px solid var(--navy);box-shadow:var(--shadow-sm);">
+        <h3 style="font-size:1rem;color:var(--navy);">Dowry Deaths</h3>
+        <p style="font-size:0.88rem;margin:0;">Numerically low but persistent: 6 (2020), 9 (2021), 11 (2022), 8 (2023), 3 (2024). Five-year average of 7.4 per year.</p>
+      </div>
+    </div>
+
+    <!-- Year-wise Stats Table -->
+    <div class="section-header">
+      <span class="section-tag">Raw Data</span>
+      <h2>Year-wise Statistics Table</h2>
+    </div>
+    {% if stats %}
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr><th>Year</th><th>Total Crimes</th><th>Rape</th><th>Molestation</th><th>Kidnapping</th><th>Cruelty (Husband)</th><th>Dowry Deaths</th><th>Harassment</th></tr>
+        </thead>
+        <tbody>
+          {% for s in stats %}
+          <tr>
+            <td><strong>{{ s.year }}</strong></td>
+            <td><strong>{{ s.total_crimes }}</strong></td>
+            <td>{{ s.rape }}</td><td>{{ s.molestation }}</td>
+            <td>{{ s.kidnapping }}</td><td>{{ s.cruelty_by_husband }}</td>
+            <td>{{ s.dowry_deaths }}</td><td>{{ s.harassment }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.78rem;color:var(--text-light);margin-top:0.75rem;">Source: Kerala Police (keralapolice.gov.in), NCRB.</p>
+    {% else %}
+    <div class="alert alert-info">No data yet. Run: <code>python manage.py loaddata core/fixtures/initial_data.json</code></div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% block extra_js %}
+<script>
+{% if stats %}
+new Chart(document.getElementById('crimeTrendChart'), {
+  type: 'bar',
+  data: { labels: {{ chart_years|safe }}, datasets: [{ label:'Total Crimes', data:{{ chart_totals|safe }}, backgroundColor:'rgba(139,26,74,0.8)', borderColor:'#8B1A4A', borderWidth:2, borderRadius:6 }] },
+  options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false}}, y:{beginAtZero:false, ticks:{callback:v=>v.toLocaleString('en-IN')}} } }
+});
+new Chart(document.getElementById('crimeTypeChart'), {
+  type: 'doughnut',
+  data: { labels:{{ crime_labels|safe }}, datasets:[{ data:{{ crime_values|safe }}, backgroundColor:['#8B1A4A','#B5446E','#2A9D8F','#F4A261','#1A2B4A','#E07B30','#6B1238'], borderWidth:2, borderColor:'#fff' }] },
+  options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{font:{size:11}, padding:10}}} }
+});
+{% endif %}
+
+{% if has_district_data %}
+const dTotals = {{ district_totals|safe }};
+const maxV = Math.max(...dTotals);
+new Chart(document.getElementById('districtChart'), {
+  type: 'bar',
+  data: { labels:{{ district_names|safe }}, datasets:[{ label:'Total Crimes', data:dTotals,
+    backgroundColor: dTotals.map(v => { const t=v/maxV; return t>0.8?'#8B1A4A':t>0.6?'#c0306a':t>0.4?'#e0608a':t>0.2?'#f4a0c0':'#fde8f0'; }),
+    borderWidth:1, borderRadius:4 }] },
+  options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+    scales:{ x:{ticks:{callback:v=>v.toLocaleString('en-IN')}}, y:{grid:{display:false}, ticks:{font:{size:11}}} } }
+});
+{% endif %}
+</script>
+{% endblock %}
+
+{% endblock %}

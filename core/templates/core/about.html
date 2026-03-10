@@ -1,0 +1,80 @@
+{% extends 'core/base.html' %}
+{% block title %}About | SHE Report Kerala{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">About</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>About SHE Report</h1>
+    <p>Problem Statement · Objectives · Theory of Change · Ethical Framework</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container" style="max-width:900px;">
+
+    <!-- Problem Statement -->
+    <div style="margin-bottom:3rem;">
+      <span class="section-tag">Problem Statement</span>
+      <h2 style="margin-top:1rem;">The Challenge</h2>
+      <p>Crimes against women in Kerala are not merely individual criminal acts; they reflect deeper systemic and structural failures. Underreporting remains widespread due to fear of stigma, distrust in institutions, and lack of clarity about legal processes.</p>
+      <p>Even when cases are reported, survivors frequently face delays, confusion, and disengagement across fragmented institutions. The absence of reliable, accessible, disaggregated public data further weakens evidence-based policy.</p>
+    </div>
+
+    <!-- Objectives -->
+    <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:2.5rem; box-shadow:var(--shadow-md); margin-bottom:3rem;">
+      <span class="section-tag">Objectives</span>
+      <h2 style="margin-top:1rem; margin-bottom:1.5rem;">What We Aim to Achieve</h2>
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        {% for obj in objectives %}
+        <div style="display:flex; gap:1rem; padding:1rem; background:rgba(139,26,74,0.04); border-radius:10px;">
+          <span style="background:var(--primary);color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;">{{ forloop.counter }}</span>
+          <div style="padding-top:4px;">{{ obj }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Ethical Framework -->
+    <div style="background:linear-gradient(135deg,var(--teal),#1e7a6e); color:white; border-radius:var(--radius-lg); padding:2.5rem; margin-bottom:3rem;">
+      <span class="section-tag" style="background:rgba(255,255,255,0.2);">Ethics</span>
+      <h2 style="color:white; margin-top:1rem; margin-bottom:1rem;">Ethical Framework & Safeguards</h2>
+      <p style="color:rgba(255,255,255,0.9);">The ethical framework is grounded in <strong style="color:white;">do-no-harm principles, trauma-informed design, and data responsibility</strong>. The initiative explicitly prioritises:</p>
+      <ul style="color:rgba(255,255,255,0.9); padding-left:1.5rem; margin-top:0.5rem;">
+        <li style="margin-bottom:0.5rem;">Survivor autonomy, informed consent, and confidentiality at every stage</li>
+        <li style="margin-bottom:0.5rem;">Personal identifiers are minimised; access controls strictly defined</li>
+        <li style="margin-bottom:0.5rem;">Anonymous reports treated as signals for pattern analysis, not evidentiary claims</li>
+        <li>Data retention policies aligned with legal and ethical best practices</li>
+      </ul>
+    </div>
+
+    <!-- Implementation phases -->
+    <div>
+      <span class="section-tag">Implementation</span>
+      <h2 style="margin-top:1rem; margin-bottom:1.5rem;">Phased Approach</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem;">
+        <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem;">
+          <div style="font-weight:800; font-size:1rem; color:var(--primary); margin-bottom:0.75rem;">Phase 1 — Foundation</div>
+          <p style="font-size:0.88rem; margin:0;">Relationship-building with NGOs, legal services, counsellors and community actors. Trust anchors established.</p>
+        </div>
+        <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem;">
+          <div style="font-weight:800; font-size:1rem; color:var(--teal); margin-bottom:0.75rem;">Phase 2 — Expansion</div>
+          <p style="font-size:0.88rem; margin:0;">District-level coverage extended. Standard Operating Procedures for data verification, referrals and coordination.</p>
+        </div>
+        <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem;">
+          <div style="font-weight:800; font-size:1rem; color:var(--accent-dark); margin-bottom:0.75rem;">Phase 3 — Institutionalisation</div>
+          <p style="font-size:0.88rem; margin:0;">Transition to semi-formal public-interest infrastructure. Annual reports, scorecards and formalised policy dialogues.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

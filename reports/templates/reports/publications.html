@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% block title %}Reports & Publications | SHE Report Kerala{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a><span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Reports & Publications</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Reports & Publications</h1>
+    <p>Analytical briefs, annual reports and key documents</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="alert alert-info">📂 The first annual SHE Report publication is being compiled. Check back soon.</div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; margin-top:2rem;">
+
+      <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:2rem; box-shadow:var(--shadow-sm); border:1px solid var(--border);">
+        <div style="font-size:2rem; margin-bottom:1rem;">📄</div>
+        <h3>SHE Report — Full Project Report</h3>
+        <p style="font-size:0.88rem;">Comprehensive project document covering objectives, components, theory of change, ethical framework and implementation strategy.</p>
+        <span style="display:inline-block; margin-top:1rem; padding:0.4rem 1rem; background:rgba(139,26,74,0.1); color:var(--primary); border-radius:50px; font-size:0.8rem; font-weight:600;">Coming Soon</span>
+      </div>
+
+      <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:2rem; box-shadow:var(--shadow-sm); border:1px solid var(--border);">
+        <div style="font-size:2rem; margin-bottom:1rem;">📊</div>
+        <h3>Crime Data Analysis — Kerala 2020–2024</h3>
+        <p style="font-size:0.88rem;">Detailed analytical brief on trends, inferences and district-level patterns in crimes against women in Kerala.</p>
+        <a href="{% url 'data_insights' %}" class="btn-primary" style="display:inline-block; margin-top:1rem; font-size:0.88rem;">View Data →</a>
+      </div>
+
+      <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:2rem; box-shadow:var(--shadow-sm); border:1px solid var(--border);">
+        <div style="font-size:2rem; margin-bottom:1rem;">📝</div>
+        <h3>Annual Reports</h3>
+        <p style="font-size:0.88rem;">Year-wise SHE Report annual summaries capturing data curation, survivor support, stakeholder coordination and policy advocacy activities.</p>
+        <span style="display:inline-block; margin-top:1rem; padding:0.4rem 1rem; background:rgba(139,26,74,0.1); color:var(--primary); border-radius:50px; font-size:0.8rem; font-weight:600;">Coming Soon</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

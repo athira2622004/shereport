@@ -1,0 +1,106 @@
+{% extends 'core/base.html' %}
+{% block title %}Submit a Report | SHE Report Kerala{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a><span class="breadcrumb-sep">›</span>
+    <a href="{% url 'get_support' %}">Get Support</a><span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Submit Report</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Submit a Report</h1>
+    <p>Confidential. Anonymous option available. Your information helps us advocate for change.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="alert alert-warning" style="max-width:600px; margin:0 auto 2rem;">
+      ⚠️ This is <strong>not</strong> a police reporting channel. For emergencies call <strong>112</strong>. This form is for information-sharing and pattern analysis only.
+    </div>
+
+    <div class="form-card">
+      <h2 style="margin-bottom:1.5rem; font-size:1.4rem;">Report Form</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Type of Crime *</label>
+          <select name="crime_type" required>
+            <option value="">— Select —</option>
+            <option value="domestic_violence">Domestic Violence / Cruelty by Husband</option>
+            <option value="rape">Rape / Sexual Assault</option>
+            <option value="molestation">Molestation / Sexual Harassment</option>
+            <option value="stalking">Stalking / Cyberstalking</option>
+            <option value="kidnapping">Kidnapping</option>
+            <option value="dowry">Dowry Harassment / Dowry Death</option>
+            <option value="trafficking">Human Trafficking</option>
+            <option value="workplace">Workplace Harassment</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>District</label>
+          <select name="district">
+            <option value="">— Select District —</option>
+            <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+            <option value="Kollam">Kollam</option>
+            <option value="Pathanamthitta">Pathanamthitta</option>
+            <option value="Alappuzha">Alappuzha</option>
+            <option value="Kottayam">Kottayam</option>
+            <option value="Idukki">Idukki</option>
+            <option value="Ernakulam">Ernakulam</option>
+            <option value="Thrissur">Thrissur</option>
+            <option value="Palakkad">Palakkad</option>
+            <option value="Malappuram">Malappuram</option>
+            <option value="Kozhikode">Kozhikode</option>
+            <option value="Wayanad">Wayanad</option>
+            <option value="Kannur">Kannur</option>
+            <option value="Kasaragod">Kasaragod</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Brief Description *</label>
+          <textarea name="description" rows="5" placeholder="Describe the incident without identifying details if you wish to remain anonymous." required></textarea>
+          <p class="form-note">Do not include personal identifying information if you want to remain anonymous.</p>
+        </div>
+
+        <div class="form-group" style="display:flex; align-items:center; gap:0.75rem;">
+          <input type="checkbox" name="is_anonymous" id="is_anonymous" style="width:18px; height:18px;">
+          <label for="is_anonymous" style="margin:0; font-weight:500;">Submit anonymously</label>
+        </div>
+
+        <div id="identity-fields">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" name="name" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>Contact (Phone / Email)</label>
+            <input type="text" name="contact" placeholder="We will only use this to follow up if needed">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Report Securely</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% block extra_js %}
+<script>
+const anonCheckbox = document.getElementById('is_anonymous');
+const identityFields = document.getElementById('identity-fields');
+
+// On page load — show fields by default (checkbox unchecked)
+identityFields.style.display = 'block';
+
+anonCheckbox.addEventListener('change', function() {
+  identityFields.style.display = this.checked ? 'none' : 'block';
+});
+</script>
+{% endblock %}
+{% endblock %}

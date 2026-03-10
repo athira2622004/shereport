@@ -1,0 +1,82 @@
+[
+  {
+    "model": "core.crimestatistic",
+    "pk": 1,
+    "fields": {
+      "year": 2020,
+      "total_crimes": 12659,
+      "rape": 1416,
+      "molestation": 2340,
+      "kidnapping": 1560,
+      "cruelty_by_husband": 3870,
+      "dowry_deaths": 6,
+      "harassment": 1892,
+      "other": 1575,
+      "note": ""
+    }
+  },
+  {
+    "model": "core.crimestatistic",
+    "pk": 2,
+    "fields": {
+      "year": 2021,
+      "total_crimes": 16198,
+      "rape": 1678,
+      "molestation": 2810,
+      "kidnapping": 1820,
+      "cruelty_by_husband": 4989,
+      "dowry_deaths": 9,
+      "harassment": 2534,
+      "other": 2358,
+      "note": ""
+    }
+  },
+  {
+    "model": "core.crimestatistic",
+    "pk": 3,
+    "fields": {
+      "year": 2022,
+      "total_crimes": 18942,
+      "rape": 1840,
+      "molestation": 3210,
+      "kidnapping": 2451,
+      "cruelty_by_husband": 4999,
+      "dowry_deaths": 11,
+      "harassment": 3201,
+      "other": 3230,
+      "note": ""
+    }
+  },
+  {
+    "model": "core.crimestatistic",
+    "pk": 4,
+    "fields": {
+      "year": 2023,
+      "total_crimes": 18980,
+      "rape": 1889,
+      "molestation": 3180,
+      "kidnapping": 1942,
+      "cruelty_by_husband": 4707,
+      "dowry_deaths": 8,
+      "harassment": 3340,
+      "other": 3914,
+      "note": ""
+    }
+  },
+  {
+    "model": "core.crimestatistic",
+    "pk": 5,
+    "fields": {
+      "year": 2024,
+      "total_crimes": 18887,
+      "rape": 1834,
+      "molestation": 3095,
+      "kidnapping": 1230,
+      "cruelty_by_husband": 4514,
+      "dowry_deaths": 3,
+      "harassment": 3500,
+      "other": 4711,
+      "note": ""
+    }
+  }
+]

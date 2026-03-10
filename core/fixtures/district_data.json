@@ -1,0 +1,184 @@
+[
+    {
+        "model": "core.districtdata",
+        "pk": 1,
+        "fields": {
+            "district": "Thiruvananthapuram",
+            "year": 2024,
+            "total_crimes": 2847,
+            "rape": 268,
+            "molestation": 498,
+            "kidnapping": 189,
+            "cruelty_by_husband": 642
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 2,
+        "fields": {
+            "district": "Kollam",
+            "year": 2024,
+            "total_crimes": 1654,
+            "rape": 156,
+            "molestation": 289,
+            "kidnapping": 110,
+            "cruelty_by_husband": 372
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 3,
+        "fields": {
+            "district": "Pathanamthitta",
+            "year": 2024,
+            "total_crimes": 742,
+            "rape": 68,
+            "molestation": 128,
+            "kidnapping": 48,
+            "cruelty_by_husband": 168
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 4,
+        "fields": {
+            "district": "Alappuzha",
+            "year": 2024,
+            "total_crimes": 1124,
+            "rape": 104,
+            "molestation": 196,
+            "kidnapping": 75,
+            "cruelty_by_husband": 254
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 5,
+        "fields": {
+            "district": "Kottayam",
+            "year": 2024,
+            "total_crimes": 986,
+            "rape": 92,
+            "molestation": 172,
+            "kidnapping": 65,
+            "cruelty_by_husband": 222
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 6,
+        "fields": {
+            "district": "Idukki",
+            "year": 2024,
+            "total_crimes": 612,
+            "rape": 58,
+            "molestation": 106,
+            "kidnapping": 40,
+            "cruelty_by_husband": 138
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 7,
+        "fields": {
+            "district": "Ernakulam",
+            "year": 2024,
+            "total_crimes": 2534,
+            "rape": 238,
+            "molestation": 442,
+            "kidnapping": 168,
+            "cruelty_by_husband": 572
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 8,
+        "fields": {
+            "district": "Thrissur",
+            "year": 2024,
+            "total_crimes": 1876,
+            "rape": 176,
+            "molestation": 328,
+            "kidnapping": 124,
+            "cruelty_by_husband": 424
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 9,
+        "fields": {
+            "district": "Palakkad",
+            "year": 2024,
+            "total_crimes": 1342,
+            "rape": 126,
+            "molestation": 234,
+            "kidnapping": 89,
+            "cruelty_by_husband": 302
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 10,
+        "fields": {
+            "district": "Malappuram",
+            "year": 2024,
+            "total_crimes": 1486,
+            "rape": 140,
+            "molestation": 260,
+            "kidnapping": 98,
+            "cruelty_by_husband": 336
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 11,
+        "fields": {
+            "district": "Kozhikode",
+            "year": 2024,
+            "total_crimes": 1698,
+            "rape": 160,
+            "molestation": 296,
+            "kidnapping": 112,
+            "cruelty_by_husband": 384
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 12,
+        "fields": {
+            "district": "Wayanad",
+            "year": 2024,
+            "total_crimes": 524,
+            "rape": 48,
+            "molestation": 90,
+            "kidnapping": 34,
+            "cruelty_by_husband": 118
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 13,
+        "fields": {
+            "district": "Kannur",
+            "year": 2024,
+            "total_crimes": 1124,
+            "rape": 106,
+            "molestation": 196,
+            "kidnapping": 74,
+            "cruelty_by_husband": 254
+        }
+    },
+    {
+        "model": "core.districtdata",
+        "pk": 14,
+        "fields": {
+            "district": "Kasaragod",
+            "year": 2024,
+            "total_crimes": 648,
+            "rape": 62,
+            "molestation": 112,
+            "kidnapping": 42,
+            "cruelty_by_husband": 146
+        }
+    }
+]

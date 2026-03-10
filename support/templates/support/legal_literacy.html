@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+{% block title %}Legal Literacy | SHE Report Kerala{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a><span class="breadcrumb-sep">›</span>
+    <a href="{% url 'get_support' %}">Get Support</a><span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Legal Literacy</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Legal Literacy</h1>
+    <p>Know your rights. Key laws that protect women in India — explained simply.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container" style="max-width:900px;">
+
+    <div class="alert alert-info">ℹ️ This is general information only. For specific legal advice, contact a lawyer or KELSA (15100).</div>
+
+    <div style="display:flex; flex-direction:column; gap:1.5rem; margin-top:2rem;">
+
+      <div style="background:var(--card-bg); border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow-sm); border-left:4px solid var(--primary);">
+        <h3 style="color:var(--primary);">Protection of Women from Domestic Violence Act, 2005</h3>
+        <p>Covers physical, emotional, sexual and economic abuse by a husband or family member. You can apply for a <strong>protection order</strong>, residence order, and monetary relief without filing a criminal case.</p>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-light);">Contact: Women Protection Officer in your district or Sakhi One Stop Centre (181)</p>
+      </div>
+
+      <div style="background:var(--card-bg); border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow-sm); border-left:4px solid var(--teal);">
+        <h3 style="color:var(--teal);">Section 498A, IPC — Cruelty by Husband/Relatives</h3>
+        <p>A cognisable, non-bailable offence. Covers harassment for dowry and any wilful conduct that causes grave injury or danger to life. The police must register an FIR and investigate.</p>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-light);">Punishment: up to 3 years imprisonment + fine.</p>
+      </div>
+
+      <div style="background:var(--card-bg); border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow-sm); border-left:4px solid var(--accent-dark);">
+        <h3 style="color:var(--accent-dark);">POCSO Act, 2012 — Protection of Children</h3>
+        <p>Protects children under 18 from sexual assault, harassment and pornography. Reporting is <strong>mandatory</strong> for any person who has knowledge of an offence. Special Courts handle POCSO cases for fast-track justice.</p>
+      </div>
+
+      <div style="background:var(--card-bg); border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow-sm); border-left:4px solid var(--navy);">
+        <h3 style="color:var(--navy);">Section 354 IPC — Assault on Modesty</h3>
+        <p>Covers assault or criminal force against a woman with intent to outrage her modesty. Section 354A covers sexual harassment, 354B disrobing, 354C voyeurism, and 354D stalking.</p>
+      </div>
+
+      <div style="background:var(--card-bg); border-radius:var(--radius); padding:2rem; box-shadow:var(--shadow-sm); border-left:4px solid #7B2D8B;">
+        <h3 style="color:#7B2D8B;">Right to Zero FIR</h3>
+        <p>You can file an FIR at <strong>any</strong> police station regardless of where the crime occurred. The station must register the FIR and transfer it to the appropriate jurisdiction. They cannot refuse.</p>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-light);">If refused: contact the SP/DSP or file a complaint with the State Human Rights Commission.</p>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top:3rem;">
+      <a href="{% url 'get_support' %}" class="btn-primary">← Back to Support</a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

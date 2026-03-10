@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+{% block title %}Get Support | SHE Report Kerala{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Get Support</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Get Support</h1>
+    <p>You are not alone. Information, guidance and referrals — confidential and non-judgmental.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+
+    <div class="alert alert-info" style="max-width:700px; margin:0 auto 3rem;">
+      ℹ️ <strong>Important:</strong> SHE Report is an <em>informational and referral platform</em>. We do not directly provide police or legal services. For emergencies, call <strong>112</strong> or <strong>181</strong> immediately.
+    </div>
+
+    <!-- Helplines -->
+    <div class="section-header">
+      <span class="section-tag">Emergency Help</span>
+      <h2>Helplines & Support Centres</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; margin-bottom:4rem;">
+      <div class="helpline-card"><div style="font-size:1.5rem;margin-bottom:0.5rem">📞</div><h3>Mithra Helpline</h3><div class="helpline-number">181</div><div class="helpline-label">Women's Helpline Kerala — 24×7</div></div>
+      <div class="helpline-card" style="background:linear-gradient(135deg,#C0392B,#E74C3C)"><div style="font-size:1.5rem;margin-bottom:0.5rem">🚨</div><h3>Police Emergency</h3><div class="helpline-number">112</div><div class="helpline-label">National Emergency Number</div></div>
+      <div class="helpline-card" style="background:linear-gradient(135deg,var(--teal),#1e7a6e)"><div style="font-size:1.5rem;margin-bottom:0.5rem">🏥</div><h3>One Stop Centre (Sakhi)</h3><div class="helpline-number">181</div><div class="helpline-label">Medical, Legal & Counselling</div></div>
+      <div class="helpline-card" style="background:linear-gradient(135deg,#7B2D8B,#9B3DAB)"><div style="font-size:1.5rem;margin-bottom:0.5rem">⚖️</div><h3>KELSA (Legal Aid)</h3><div class="helpline-number">15100</div><div class="helpline-label">Free Legal Services</div></div>
+    </div>
+
+    <!-- Support options -->
+    <div class="section-header">
+      <span class="section-tag">Resources</span>
+      <h2>How We Can Help</h2>
+    </div>
+    <div class="support-grid">
+      <div class="support-card">
+        <div class="icon">📋</div>
+        <h3>Reporting Guidance</h3>
+        <p>Step-by-step guide on how to file an FIR, what to expect, complaint templates in Malayalam and English.</p>
+        <a href="{% url 'reporting_guidance' %}" class="btn-primary" style="margin-top:1rem; display:inline-block;">Learn More →</a>
+      </div>
+      <div class="support-card">
+        <div class="icon">⚖️</div>
+        <h3>Legal Literacy</h3>
+        <p>Know your rights. Key laws that protect you including POCSO, DV Act, IPC sections, and more explained simply.</p>
+        <a href="{% url 'legal_literacy' %}" class="btn-primary" style="margin-top:1rem; display:inline-block;">Learn More →</a>
+      </div>
+      <div class="support-card">
+        <div class="icon">🔗</div>
+        <h3>Referral Information</h3>
+        <p>Find NGOs, counsellors, legal aid, Sakhi centres, and Women Protection Officers near you in Kerala.</p>
+        <a href="{% url 'referral_info' %}" class="btn-primary" style="margin-top:1rem; display:inline-block;">Find Support →</a>
+      </div>
+    </div>
+
+    <!-- Anonymous report -->
+    <div style="background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:white; border-radius:var(--radius-lg); padding:3rem; text-align:center; margin-top:3rem;">
+      <h2 style="color:white; margin-bottom:1rem;">Submit an Anonymous Report</h2>
+      <p style="color:rgba(255,255,255,0.85); max-width:500px; margin:0 auto 2rem;">Share information about a crime — anonymously. Your report helps us identify patterns and advocate for better responses. No personal details required.</p>
+      <a href="{% url 'submit_report' %}" class="btn-primary" style="background:white; color:var(--primary); font-weight:700;">Submit Report →</a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
