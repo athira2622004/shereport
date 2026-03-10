@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<!-- ── TICKER ─────────────────────────────────────────────────── -->
+<!-- TICKER -->
 <div class="ticker-bar">
   <div class="ticker-content">
     <span class="ticker-item"><span class="ticker-dot"></span> Kerala recorded 18,887 crimes against women in 2024</span>
@@ -13,7 +13,6 @@
     <span class="ticker-item"><span class="ticker-dot"></span> Cruelty by husband/relatives = 23.9% of all crimes (2024)</span>
     <span class="ticker-item"><span class="ticker-dot"></span> Women's Helpline Mithra: 181 — Free, 24×7</span>
     <span class="ticker-item"><span class="ticker-dot"></span> SHE Report: Integrated data, support & accountability for Kerala</span>
-    <!-- duplicate for seamless loop -->
     <span class="ticker-item"><span class="ticker-dot"></span> Kerala recorded 18,887 crimes against women in 2024</span>
     <span class="ticker-item"><span class="ticker-dot"></span> 49% rise in crimes reported from 2020 to 2024</span>
     <span class="ticker-item"><span class="ticker-dot"></span> Cruelty by husband/relatives = 23.9% of all crimes (2024)</span>
@@ -22,44 +21,53 @@
   </div>
 </div>
 
-<!-- ── HERO ───────────────────────────────────────────────────── -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <span class="hero-badge">🌸 Kerala's Public Interest Platform</span>
-      <h1>SHE Report</h1>
-      <p class="hero-tagline">Safety · Help · Evidence Report</p>
-      <p>
-        An integrated, data-driven and survivor-centred platform addressing crimes against women in Kerala.
-        From data curation to survivor support, policy accountability to public awareness — we map the full journey.
-      </p>
-      <div class="hero-actions">
-        <a href="{% url 'get_support' %}" class="btn-primary">🤝 Get Support</a>
-        <a href="{% url 'data_insights' %}" class="btn-secondary">📊 Explore Data</a>
+  <div class="container">
+    <div class="row align-items-center gy-4">
+      <div class="col-12 col-lg-6">
+        <span class="hero-badge">🌸 Kerala's Public Interest Platform</span>
+        <h1>SHE Report</h1>
+        <p class="hero-tagline">Safety · Help · Evidence Report</p>
+        <p>An integrated, data-driven and survivor-centred platform addressing crimes against women in Kerala. From data curation to survivor support, policy accountability to public awareness — we map the full journey.</p>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          <a href="{% url 'get_support' %}" class="btn-primary">🤝 Get Support</a>
+          <a href="{% url 'data_insights' %}" class="btn-secondary">📊 Explore Data</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat-card">
-        <div class="hero-stat-number" data-count="18887">0</div>
-        <div class="hero-stat-label">Crimes recorded in 2024</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-number" data-count="49">0</div>
-        <div class="hero-stat-label">% Rise (2020–2024)</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-number" data-count="14">0</div>
-        <div class="hero-stat-label">Districts covered</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-number" data-count="5">0</div>
-        <div class="hero-stat-label">Programme Components</div>
+      <div class="col-12 col-lg-6">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="hero-stat-card">
+              <div class="hero-stat-number" data-count="18887">0</div>
+              <div class="hero-stat-label">Crimes recorded in 2024</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="hero-stat-card">
+              <div class="hero-stat-number" data-count="49">0</div>
+              <div class="hero-stat-label">% Rise (2020–2024)</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="hero-stat-card">
+              <div class="hero-stat-number" data-count="14">0</div>
+              <div class="hero-stat-label">Districts covered</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="hero-stat-card">
+              <div class="hero-stat-number" data-count="5">0</div>
+              <div class="hero-stat-label">Programme Components</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── KEY PILLARS ────────────────────────────────────────────── -->
+<!-- KEY PILLARS -->
 <section class="section-pad" style="background:#fff;">
   <div class="container">
     <div class="section-header">
@@ -67,37 +75,47 @@
       <h2>Five Pillars of SHE Report</h2>
       <p>An integrated ecosystem addressing every dimension of crimes against women in Kerala</p>
     </div>
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pillar-icon">📊</div>
-        <h3>Data Curation & Mapping</h3>
-        <p>Daily systematic curation from police, courts & news. District-level crime maps.</p>
+    <div class="row g-3">
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="pillar-card h-100">
+          <div class="pillar-icon">📊</div>
+          <h3>Data Curation & Mapping</h3>
+          <p>Daily systematic curation from police, courts & news. District-level crime maps.</p>
+        </div>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">🤝</div>
-        <h3>Survivor Support</h3>
-        <p>Anonymous reporting, FIR guidance, legal literacy and counselling referrals.</p>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="pillar-card h-100">
+          <div class="pillar-icon">🤝</div>
+          <h3>Survivor Support</h3>
+          <p>Anonymous reporting, FIR guidance, legal literacy and counselling referrals.</p>
+        </div>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">🔗</div>
-        <h3>Multi-Stakeholder Coordination</h3>
-        <p>Police, legal aid, NGOs, counsellors and media working as one coordinated network.</p>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="pillar-card h-100">
+          <div class="pillar-icon">🔗</div>
+          <h3>Multi-Stakeholder Coordination</h3>
+          <p>Police, legal aid, NGOs, counsellors and media working as one coordinated network.</p>
+        </div>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">📣</div>
-        <h3>Awareness & Prevention</h3>
-        <p>Digital campaigns, school modules on consent, community workshops on allyship.</p>
+      <div class="col-12 col-sm-6 col-lg-6">
+        <div class="pillar-card h-100">
+          <div class="pillar-icon">📣</div>
+          <h3>Awareness & Prevention</h3>
+          <p>Digital campaigns, school modules on consent, community workshops on allyship.</p>
+        </div>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-icon">⚖️</div>
-        <h3>Policy & Accountability</h3>
-        <p>RTI resources, annual scorecards, district-level accountability for institutions.</p>
+      <div class="col-12 col-sm-12 col-lg-6">
+        <div class="pillar-card h-100">
+          <div class="pillar-icon">⚖️</div>
+          <h3>Policy & Accountability</h3>
+          <p>RTI resources, annual scorecards, district-level accountability for institutions.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CRIME TREND CHART ───────────────────────────────────────── -->
+<!-- CRIME TREND CHART -->
 <section class="section-pad">
   <div class="container">
     <div class="section-header">
@@ -105,27 +123,27 @@
       <h2>Crime Trend in Kerala (2020–2024)</h2>
       <p>Year-wise reported crimes against women from Kerala Police records</p>
     </div>
-    <div class="charts-row" style="display:grid; grid-template-columns: 2fr 1fr; gap:2rem; align-items:start;">
-      <div class="chart-card">
-        <h3 style="color:var(--primary); margin-bottom:1rem;">Crimes Against Women — Kerala Trend</h3>
-        {% if has_data %}
-        <div style="height:320px; position:relative;">
-          <canvas id="crimeTrendChart"></canvas>
+    <div class="row g-4 align-items-start">
+      <div class="col-12 col-lg-8">
+        <div class="chart-card">
+          <h3 style="color:var(--primary); margin-bottom:1rem;">Crimes Against Women — Kerala Trend</h3>
+          {% if has_data %}
+          <div style="height:300px; position:relative;">
+            <canvas id="crimeTrendChart"></canvas>
+          </div>
+          {% else %}
+          <div style="height:300px; display:flex; align-items:center; justify-content:center; color:var(--text-light); flex-direction:column; gap:1rem;">
+            <span style="font-size:2rem;">📊</span>
+            <span>No data loaded yet.</span>
+          </div>
+          {% endif %}
+          <p style="font-size:0.78rem; color:var(--text-light); margin-top:1rem; margin-bottom:0;">Source: Kerala Police, NCRB.</p>
         </div>
-        {% else %}
-        <div style="height:320px; display:flex; align-items:center; justify-content:center; color:var(--text-light); flex-direction:column; gap:1rem;">
-          <span style="font-size:2rem;">📊</span>
-          <span>No data loaded yet. Run loaddata command.</span>
-        </div>
-        {% endif %}
-        <p style="font-size:0.78rem; color:var(--text-light); margin-top:1rem; margin-bottom:0;">
-          Source: Kerala Police, NCRB.
-        </p>
       </div>
-      <div>
-        <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:2rem; border:1px solid var(--border);">
+      <div class="col-12 col-lg-4">
+        <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:1.5rem; border:1px solid var(--border);">
           <h3 style="color:var(--primary); margin-bottom:1.5rem; font-size:1.1rem;">Key Findings</h3>
-          <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div class="d-flex flex-column gap-3">
             <div style="padding:1rem; background:rgba(139,26,74,0.05); border-radius:10px; border-left:3px solid var(--primary);">
               <div style="font-weight:700; font-size:1.4rem; color:var(--primary);">+27.96%</div>
               <div style="font-size:0.82rem; color:var(--text-mid);">Growth 2020→2021 (highest)</div>
@@ -139,16 +157,14 @@
               <div style="font-size:0.82rem; color:var(--text-mid);">Domestic cruelty share (2024)</div>
             </div>
           </div>
-          <a href="{% url 'data_insights' %}" class="btn-primary" style="margin-top:1.5rem; display:block; text-align:center;">
-            View Full Data →
-          </a>
+          <a href="{% url 'data_insights' %}" class="btn-primary mt-3 d-block text-center">View Full Data →</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── LATEST NEWS ─────────────────────────────────────────────── -->
+<!-- LATEST NEWS -->
 {% if news %}
 <section class="section-pad" style="background:#fff;">
   <div class="container">
@@ -156,18 +172,20 @@
       <span class="section-tag">Latest</span>
       <h2>Recent Updates</h2>
     </div>
-    <div class="news-grid">
+    <div class="row g-4">
       {% for item in news %}
-      <div class="news-card">
-        {% if item.image %}
-        <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
-        {% else %}
-        <div style="width:100%; height:180px; background:linear-gradient(135deg,var(--primary),var(--teal)); border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; font-size:2.5rem;">📰</div>
-        {% endif %}
-        <div class="news-date">{{ item.date_published|date:"d M Y" }}</div>
-        <h4>{{ item.title }}</h4>
-        <p>{{ item.summary|truncatewords:25 }}</p>
-        <a href="{% url 'news_detail' item.pk %}" class="news-tag">Read More →</a>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="news-card h-100">
+          {% if item.image %}
+          <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+          {% else %}
+          <div style="width:100%; height:180px; background:linear-gradient(135deg,var(--primary),var(--teal)); border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; font-size:2.5rem;">📰</div>
+          {% endif %}
+          <div class="news-date">{{ item.date_published|date:"d M Y" }}</div>
+          <h4>{{ item.title }}</h4>
+          <p>{{ item.summary|truncatewords:25 }}</p>
+          <a href="{% url 'news_detail' item.pk %}" class="news-tag">Read More →</a>
+        </div>
       </div>
       {% endfor %}
     </div>
@@ -175,7 +193,7 @@
 </section>
 {% endif %}
 
-<!-- ── PROJECT COMPONENTS ─────────────────────────────────────── -->
+<!-- PROJECT COMPONENTS -->
 <section class="section-pad">
   <div class="container">
     <div class="section-header">
@@ -183,80 +201,98 @@
       <h2>Project Components</h2>
       <p>Five interconnected components that form the SHE Report ecosystem</p>
     </div>
-    <div class="components-grid">
-      <div class="component-card">
-        <div class="component-number">1</div>
-        <h3>Data Curation & Mapping</h3>
-        <p>Daily curation of crime reports from news, police portals and court records. Categorisation by crime type, district, and stage — from incident to FIR to trial outcome. District and ward-level crime mapping.</p>
+    <div class="row g-4">
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="component-card h-100">
+          <div class="component-number">1</div>
+          <h3>Data Curation & Mapping</h3>
+          <p>Daily curation of crime reports from news, police portals and court records. Categorisation by crime type, district, and stage — from incident to FIR to trial outcome. District and ward-level crime mapping.</p>
+        </div>
       </div>
-      <div class="component-card">
-        <div class="component-number">2</div>
-        <h3>Reporting & Survivor Support</h3>
-        <p>Anonymous and verified reporting (web/WhatsApp). FIR drafting guidance in Malayalam. Legal aid and counselling referrals. Survivor-centred, trauma-informed pathways to reduce secondary victimisation.</p>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="component-card h-100">
+          <div class="component-number">2</div>
+          <h3>Reporting & Survivor Support</h3>
+          <p>Anonymous and verified reporting (web/WhatsApp). FIR drafting guidance in Malayalam. Legal aid and counselling referrals. Survivor-centred, trauma-informed pathways.</p>
+        </div>
       </div>
-      <div class="component-card">
-        <div class="component-number">3</div>
-        <h3>Multi-Stakeholder Coordination</h3>
-        <p>Coordination with Kerala Police, KELSA, Women's Commission, One Stop Centres, Mithra 181, WCD, NGOs, media and academia. Standard operating protocols for effective referrals.</p>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="component-card h-100">
+          <div class="component-number">3</div>
+          <h3>Multi-Stakeholder Coordination</h3>
+          <p>Coordination with Kerala Police, KELSA, Women's Commission, One Stop Centres, Mithra 181, WCD, NGOs, media and academia.</p>
+        </div>
       </div>
-      <div class="component-card">
-        <div class="component-number">4</div>
-        <h3>Awareness & Prevention</h3>
-        <p>Digital campaigns targeting youth on consent and reporting. School and college education modules. Community workshops on allyship and legal rights. Evidence-based targeted prevention.</p>
+      <div class="col-12 col-sm-6 col-lg-6">
+        <div class="component-card h-100">
+          <div class="component-number">4</div>
+          <h3>Awareness & Prevention</h3>
+          <p>Digital campaigns targeting youth on consent and reporting. School and college education modules. Community workshops on allyship and legal rights.</p>
+        </div>
       </div>
-      <div class="component-card">
-        <div class="component-number">5</div>
-        <h3>Policy & Accountability</h3>
-        <p>Annual state, district and taluk scorecards. RTI resources for tracking FIR registration and investigation progress. Policy briefs translating data into actionable recommendations for reform.</p>
+      <div class="col-12 col-sm-12 col-lg-6">
+        <div class="component-card h-100">
+          <div class="component-number">5</div>
+          <h3>Policy & Accountability</h3>
+          <p>Annual state, district and taluk scorecards. RTI resources for tracking FIR registration and investigation progress. Policy briefs translating data into actionable recommendations.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── HELPLINES ───────────────────────────────────────────────── -->
+<!-- HELPLINES -->
 <section class="section-pad stats-section">
   <div class="container">
-    <div class="section-header" style="margin-bottom:2.5rem;">
+    <div class="section-header mb-4">
       <span class="section-tag" style="background:rgba(255,255,255,0.2);">Emergency Help</span>
       <h2 style="color:white;">Key Helplines & Support</h2>
       <p style="color:rgba(255,255,255,0.7);">Available 24×7 — free and confidential</p>
     </div>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1.5rem;">
-      <div class="helpline-card">
-        <div style="font-size:1.5rem; margin-bottom:0.5rem;">📞</div>
-        <h3>Mithra Helpline</h3>
-        <div class="helpline-number">181</div>
-        <div class="helpline-label">Women's Helpline, Kerala</div>
+    <div class="row g-3">
+      <div class="col-6 col-md-3">
+        <div class="helpline-card">
+          <div style="font-size:1.5rem; margin-bottom:0.5rem;">📞</div>
+          <h3>Mithra Helpline</h3>
+          <div class="helpline-number">181</div>
+          <div class="helpline-label">Women's Helpline, Kerala</div>
+        </div>
       </div>
-      <div class="helpline-card" style="background:linear-gradient(135deg,var(--teal),#1e7a6e);">
-        <div style="font-size:1.5rem; margin-bottom:0.5rem;">🚨</div>
-        <h3>Police Emergency</h3>
-        <div class="helpline-number">112</div>
-        <div class="helpline-label">National Emergency Number</div>
+      <div class="col-6 col-md-3">
+        <div class="helpline-card" style="background:linear-gradient(135deg,var(--teal),#1e7a6e);">
+          <div style="font-size:1.5rem; margin-bottom:0.5rem;">🚨</div>
+          <h3>Police Emergency</h3>
+          <div class="helpline-number">112</div>
+          <div class="helpline-label">National Emergency Number</div>
+        </div>
       </div>
-      <div class="helpline-card" style="background:linear-gradient(135deg,var(--navy),#2a3a5a);">
-        <div style="font-size:1.5rem; margin-bottom:0.5rem;">🏥</div>
-        <h3>One Stop Centre</h3>
-        <div class="helpline-number">181</div>
-        <div class="helpline-label">Sakhi — Integrated Support</div>
+      <div class="col-6 col-md-3">
+        <div class="helpline-card" style="background:linear-gradient(135deg,var(--navy),#2a3a5a);">
+          <div style="font-size:1.5rem; margin-bottom:0.5rem;">🏥</div>
+          <h3>One Stop Centre</h3>
+          <div class="helpline-number">181</div>
+          <div class="helpline-label">Sakhi — Integrated Support</div>
+        </div>
       </div>
-      <div class="helpline-card" style="background:linear-gradient(135deg,#7B2D8B,#9B3DAB);">
-        <div style="font-size:1.5rem; margin-bottom:0.5rem;">⚖️</div>
-        <h3>Legal Services (KELSA)</h3>
-        <div class="helpline-number">15100</div>
-        <div class="helpline-label">Free Legal Aid</div>
+      <div class="col-6 col-md-3">
+        <div class="helpline-card" style="background:linear-gradient(135deg,#7B2D8B,#9B3DAB);">
+          <div style="font-size:1.5rem; margin-bottom:0.5rem;">⚖️</div>
+          <h3>Legal Services (KELSA)</h3>
+          <div class="helpline-number">15100</div>
+          <div class="helpline-label">Free Legal Aid</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CALL TO ACTION ──────────────────────────────────────────── -->
-<section class="section-pad" style="background:#fff; text-align:center;">
+<!-- CALL TO ACTION -->
+<section class="section-pad text-center" style="background:#fff;">
   <div class="container" style="max-width:700px;">
     <span class="section-tag">Get Involved</span>
     <h2>Join the Movement for Change</h2>
     <p>Whether you need support, want to collaborate, or are a researcher/journalist/NGO — SHE Report is a shared public resource.</p>
-    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem;">
+    <div class="d-flex flex-wrap gap-2 justify-content-center mt-4">
       <a href="{% url 'get_support' %}" class="btn-primary">Get Support</a>
       <a href="{% url 'contact' %}" class="btn-primary" style="background:var(--teal);">Collaborate with Us</a>
       <a href="{% url 'data_insights' %}" class="btn-secondary" style="color:var(--primary); border-color:var(--primary);">Explore Data</a>

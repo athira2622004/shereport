@@ -1281,3 +1281,63 @@ p {
     font-size: 0.65rem;
   }
 }
+
+/* ── BOOTSTRAP OVERRIDES & INTEGRATION ─────────────────────────── */
+/* Keep our custom colors, fonts, and component styles */
+/* Bootstrap handles the grid/responsive layout */
+
+.hero .container {
+  max-width: 1200px;
+}
+
+/* Fix Bootstrap interfering with our navbar */
+.navbar {
+  display: block;
+  padding: 0;
+}
+
+/* Pillar cards full height in Bootstrap grid */
+.pillar-card,
+.component-card,
+.news-card {
+  width: 100%;
+}
+
+/* Hero stat cards responsive text */
+@media (max-width: 576px) {
+  .hero-stat-number {
+    font-size: 1.5rem;
+  }
+
+  .hero-stat-label {
+    font-size: 0.7rem;
+  }
+
+  .hero-stat-card {
+    padding: 0.85rem 0.6rem;
+  }
+
+  .helpline-number {
+    font-size: 1.6rem;
+  }
+
+  .helpline-card h3 {
+    font-size: 0.85rem;
+  }
+
+  .helpline-card {
+    padding: 1rem 0.75rem;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .component-number {
+    font-size: 1.2rem;
+  }
+}
