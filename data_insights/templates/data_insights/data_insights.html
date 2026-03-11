@@ -20,7 +20,6 @@
 <section class="section-pad">
   <div class="container">
 
-    <!-- Year-wise + Crime Type Charts -->
     <div class="charts-row" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
       <div class="chart-card">
         <h3 style="margin-bottom:1rem;">Year-wise Crimes Against Women</h3>
@@ -40,25 +39,21 @@
       </div>
     </div>
 
-    <!-- District Section -->
     {% if has_district_data %}
     <div class="section-header">
       <span class="section-tag">District Analysis</span>
       <h2>District-wise Crimes — Kerala {{ latest_district_year }}</h2>
     </div>
 
-    <!-- Kerala Map + Legend -->
     <div class="chart-card" style="margin-bottom:2rem;">
       <h3 style="margin-bottom:0.5rem;font-size:1rem;">Kerala District Crime Heat Map — {{ latest_district_year }}</h3>
       <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:1.5rem;">Hover / tap a district to see details. Darker red = higher crimes.</p>
       <div style="display:grid;grid-template-columns:1fr 200px;gap:2rem;align-items:start;">
 
-        <!-- D3 Map rendered here -->
-        <div style="display:flex;justify-content:center;">
-          <svg id="keralaMap" style="width:100%;max-width:320px;height:auto;"></svg>
+        <div style="display:flex;justify-content:center; background: #fdfdfd; border-radius: 8px;">
+          <svg id="keralaMap" style="width:100%;max-width:350px;height:auto;"></svg>
         </div>
 
-        <!-- Legend + Tooltip -->
         <div>
           <div style="font-size:0.82rem;font-weight:600;color:var(--text-dark);margin-bottom:0.75rem;">Crime Rate</div>
           <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
@@ -68,8 +63,8 @@
             <div style="display:flex;align-items:center;gap:0.5rem;"><div style="width:18px;height:12px;background:#f4a0c0;border-radius:2px;"></div><span style="font-size:0.75rem;">Low (500–1000)</span></div>
             <div style="display:flex;align-items:center;gap:0.5rem;"><div style="width:18px;height:12px;background:#fde8f0;border-radius:2px;"></div><span style="font-size:0.75rem;">Very Low (&lt;500)</span></div>
           </div>
-          <div id="mapTooltip" style="background:var(--navy);color:white;border-radius:10px;padding:1rem;font-size:0.82rem;display:none;">
-            <div id="ttDistrict" style="font-weight:700;font-size:0.95rem;margin-bottom:0.5rem;color:#f4a0c0;"></div>
+          <div id="mapTooltip" style="background:var(--navy);color:white;border-radius:10px;padding:1rem;font-size:0.82rem;display:none;box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+            <div id="ttDistrict" style="font-weight:700;font-size:0.95rem;margin-bottom:0.5rem;color:#f4a0c0;text-transform: uppercase;"></div>
             <div style="margin-bottom:0.2rem;">Total: <strong id="ttTotal"></strong></div>
             <div style="margin-bottom:0.2rem;">Rape: <span id="ttRape"></span></div>
             <div style="margin-bottom:0.2rem;">Molestation: <span id="ttMol"></span></div>
@@ -80,13 +75,11 @@
       </div>
     </div>
 
-    <!-- District Bar Chart -->
     <div class="chart-card" style="margin-bottom:2rem;">
       <h3 style="margin-bottom:1rem;font-size:1rem;">District-wise Total Crimes Ranking ({{ latest_district_year }})</h3>
       <div style="height:420px;position:relative;"><canvas id="districtChart"></canvas></div>
     </div>
 
-    <!-- District Table -->
     <div class="section-header">
       <span class="section-tag">District Data</span>
       <h2>District-wise Statistics Table — {{ latest_district_year }}</h2>
@@ -117,7 +110,6 @@
     </div>
     {% endif %}
 
-    <!-- Key Findings -->
     <div class="section-header">
       <span class="section-tag">Analysis</span>
       <h2>Key Findings & Inferences</h2>
@@ -141,7 +133,6 @@
       </div>
     </div>
 
-    <!-- Year-wise Stats Table -->
     <div class="section-header">
       <span class="section-tag">Raw Data</span>
       <h2>Year-wise Statistics Table</h2>
@@ -176,22 +167,28 @@
 {% endblock %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
 {% if has_district_data %}
-// Build district data lookup from Django
-const districtData = {};
-{% for d in districts %}
-districtData["{{ d.district }}"] = {
-  total: {{ d.total_crimes }},
-  rape: {{ d.rape }},
-  molestation: {{ d.molestation }},
-  cruelty: {{ d.cruelty_by_husband }}
+// 1. Data Object from Django
+const districtData = {
+  {% for d in districts %}
+  "{{ d.district }}": { 
+      total: {{ d.total_crimes }}, 
+      rape: {{ d.rape }}, 
+      molestation: {{ d.molestation }}, 
+      cruelty: {{ d.cruelty_by_husband }} 
+  },
+  {% endfor %}
 };
-{% endfor %}
 
+// 2. Heatmap Color Logic
 function getCrimeColor(name) {
-  const d = districtData[name];
-  if (!d) return '#ddd';
+  if (!name) return '#eee';
+  // Try matching directly or Uppercase
+  const d = districtData[name] || districtData[name.toUpperCase()];
+  if (!d) return '#eee';
   const t = d.total;
   if (t >= 2000) return '#8B1A4A';
   if (t >= 1500) return '#c0306a';
@@ -200,41 +197,42 @@ function getCrimeColor(name) {
   return '#fde8f0';
 }
 
-// Fetch real Kerala GeoJSON and render with D3
-const GEOJSON_URL = 'https://raw.githubusercontent.com/geohacker/kerala/master/geojsons/district.geojson';
+// 3. Render High-Accuracy Kerala Map
+const GEOJSON_URL = 'https://raw.githubusercontent.com/Hitesh-Vemula/Kerala-GeoJSON/master/Kerala.geojson';
 
 fetch(GEOJSON_URL)
   .then(r => r.json())
   .then(geojson => {
     const svgEl = document.getElementById('keralaMap');
-    const W = 300, H = 580;
+    const W = 350, H = 650; // Optimized aspect ratio for Kerala
     svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`);
 
     const projection = d3.geoMercator().fitSize([W, H], geojson);
     const path = d3.geoPath().projection(projection);
     const svg = d3.select(svgEl);
 
+    // Draw Districts
     svg.selectAll('path')
       .data(geojson.features)
       .enter()
       .append('path')
       .attr('d', path)
-      .attr('fill', d => getCrimeColor(d.properties.DISTRICT))
-      .attr('stroke', 'white')
-      .attr('stroke-width', 1)
+      .attr('fill', d => getCrimeColor(d.properties.DISTRICT || d.properties.district))
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 0.8)
       .style('cursor', 'pointer')
       .on('mouseover', function(event, d) {
-        d3.select(this).attr('opacity', 0.75);
-        showTooltip(d.properties.DISTRICT);
+        d3.select(this).attr('opacity', 0.75).attr('stroke-width', 1.5);
+        showTooltip(d.properties.DISTRICT || d.properties.district);
       })
       .on('mouseout', function() {
-        d3.select(this).attr('opacity', 1);
+        d3.select(this).attr('opacity', 1).attr('stroke-width', 0.8);
       })
       .on('click', function(event, d) {
-        showTooltip(d.properties.DISTRICT);
+        showTooltip(d.properties.DISTRICT || d.properties.district);
       });
 
-    // District name labels
+    // District Labels
     svg.selectAll('text')
       .data(geojson.features)
       .enter()
@@ -242,20 +240,19 @@ fetch(GEOJSON_URL)
       .attr('x', d => path.centroid(d)[0])
       .attr('y', d => path.centroid(d)[1])
       .attr('text-anchor', 'middle')
-      .attr('font-size', '6.5')
-      .attr('font-family', 'Arial')
+      .attr('font-size', '7px')
       .attr('font-weight', '600')
-      .attr('fill', '#111')
+      .attr('fill', 'rgba(0,0,0,0.5)')
       .attr('pointer-events', 'none')
-      .text(d => d.properties.DISTRICT);
+      .text(d => d.properties.DISTRICT || d.properties.district);
   })
   .catch(err => {
-    console.error('Map load failed:', err);
-    document.getElementById('keralaMap').innerHTML = '<text x="50%" y="50%" text-anchor="middle" font-size="12" fill="#999">Map unavailable</text>';
+    console.error('Map failed:', err);
+    document.getElementById('keralaMap').innerHTML = '<text x="50%" y="50%" text-anchor="middle">Error loading map</text>';
   });
 
 function showTooltip(name) {
-  const data = districtData[name];
+  const data = districtData[name] || districtData[name.toUpperCase()];
   if (!data) return;
   document.getElementById('mapTooltip').style.display = 'block';
   document.getElementById('mapHint').style.display = 'none';
@@ -265,82 +262,82 @@ function showTooltip(name) {
   document.getElementById('ttMol').textContent = data.molestation;
   document.getElementById('ttCruelty').textContent = data.cruelty;
 }
-{% endif %}
-</script>
 
-{% block extra_js %}
-<script>
-{% if stats %}
-new Chart(document.getElementById('crimeTrendChart'), {
-  type: 'bar',
-  data: { labels: {{ chart_years|safe }}, datasets: [{ label:'Total Crimes', data:{{ chart_totals|safe }}, backgroundColor:'rgba(139,26,74,0.8)', borderColor:'#8B1A4A', borderWidth:2, borderRadius:6 }] },
-  options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false}}, y:{beginAtZero:false, ticks:{callback:v=>v.toLocaleString('en-IN')}} } }
-});
-new Chart(document.getElementById('crimeTypeChart'), {
-  type: 'doughnut',
-  data: { labels:{{ crime_labels|safe }}, datasets:[{ data:{{ crime_values|safe }}, backgroundColor:['#8B1A4A','#B5446E','#2A9D8F','#F4A261','#1A2B4A','#E07B30','#6B1238'], borderWidth:2, borderColor:'#fff' }] },
-  options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{font:{size:11}, padding:10}}} }
-});
-{% endif %}
-
-{% if has_district_data %}
-// District data from Django
-const districtData = {
-  {% for d in districts %}
-  "{{ d.district }}": { total: {{ d.total_crimes }}, rape: {{ d.rape }}, molestation: {{ d.molestation }}, cruelty: {{ d.cruelty_by_husband }} },
-  {% endfor %}
-};
-
-// Color function based on crime count
-function getCrimeColor(total) {
-  if (total >= 2000) return '#8B1A4A';
-  if (total >= 1500) return '#c0306a';
-  if (total >= 1000) return '#e0608a';
-  if (total >= 500)  return '#f4a0c0';
-  return '#fde8f0';
-}
-
-// Color all districts on map
-document.querySelectorAll('#keralaMap path').forEach(path => {
-  const name = path.getAttribute('data-name');
-  const data = districtData[name];
-  if (data) {
-    path.style.fill = getCrimeColor(data.total);
-  } else {
-    path.style.fill = '#ddd';
-  }
-
-  // Hover / tap interaction
-  path.addEventListener('mouseenter', () => showTooltip(name, data, path));
-  path.addEventListener('mouseleave', () => {
-    path.style.opacity = '1';
-  });
-  path.addEventListener('click', () => showTooltip(name, data, path));
-});
-
-function showTooltip(name, data, path) {
-  if (!data) return;
-  path.style.opacity = '0.75';
-  document.getElementById('mapTooltip').style.display = 'block';
-  document.getElementById('mapHint').style.display = 'none';
-  document.getElementById('ttDistrict').textContent = name;
-  document.getElementById('ttTotal').textContent = data.total.toLocaleString('en-IN');
-  document.getElementById('ttRape').textContent = data.rape;
-  document.getElementById('ttMol').textContent = data.molestation;
-  document.getElementById('ttCruelty').textContent = data.cruelty;
-}
-
-// District bar chart
+// 4. District Horizontal Bar Chart
 const dTotals = {{ district_totals|safe }};
-const maxV = Math.max(...dTotals);
 new Chart(document.getElementById('districtChart'), {
   type: 'bar',
-  data: { labels:{{ district_names|safe }}, datasets:[{ label:'Total Crimes', data:dTotals,
-    backgroundColor: dTotals.map(v => getCrimeColor(v)),
-    borderWidth:1, borderRadius:4 }] },
-  options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
-    scales:{ x:{ticks:{callback:v=>v.toLocaleString('en-IN')}}, y:{grid:{display:false}, ticks:{font:{size:11}}} } }
+  data: { 
+    labels: {{ district_names|safe }}, 
+    datasets: [{ 
+      label: 'Total Crimes', 
+      data: dTotals,
+      backgroundColor: dTotals.map(v => {
+        if (v >= 2000) return '#8B1A4A';
+        if (v >= 1500) return '#c0306a';
+        if (v >= 1000) return '#e0608a';
+        if (v >= 500)  return '#f4a0c0';
+        return '#fde8f0';
+      }),
+      borderWidth: 1, 
+      borderRadius: 4 
+    }] 
+  },
+  options: { 
+    indexAxis: 'y', 
+    responsive: true, 
+    maintainAspectRatio: false, 
+    plugins: { legend: { display: false } },
+    scales: { 
+      x: { ticks: { callback: v => v.toLocaleString('en-IN') } }, 
+      y: { grid: { display: false }, ticks: { font: { size: 11 } } } 
+    } 
+  }
+});
+{% endif %}
+
+{% if stats %}
+// 5. General Trend Charts
+new Chart(document.getElementById('crimeTrendChart'), {
+  type: 'bar',
+  data: { 
+    labels: {{ chart_years|safe }}, 
+    datasets: [{ 
+      label: 'Total Crimes', 
+      data: {{ chart_totals|safe }}, 
+      backgroundColor: 'rgba(139,26,74,0.8)', 
+      borderColor: '#8B1A4A', 
+      borderWidth: 2, 
+      borderRadius: 6 
+    }] 
+  },
+  options: { 
+    responsive: true, 
+    maintainAspectRatio: false, 
+    plugins: { legend: { display: false } }, 
+    scales: { 
+      x: { grid: { display: false } }, 
+      y: { beginAtZero: false, ticks: { callback: v => v.toLocaleString('en-IN') } } 
+    } 
+  }
+});
+
+new Chart(document.getElementById('crimeTypeChart'), {
+  type: 'doughnut',
+  data: { 
+    labels: {{ crime_labels|safe }}, 
+    datasets: [{ 
+      data: {{ crime_values|safe }}, 
+      backgroundColor: ['#8B1A4A', '#B5446E', '#2A9D8F', '#F4A261', '#1A2B4A', '#E07B30', '#6B1238'], 
+      borderWidth: 2, 
+      borderColor: '#fff' 
+    }] 
+  },
+  options: { 
+    responsive: true, 
+    maintainAspectRatio: false, 
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 10 } } } 
+  }
 });
 {% endif %}
 </script>
-{% endblock %}
