@@ -2,6 +2,26 @@
 {% block title %}Data & Insights | SHE Report Kerala{% endblock %}
 
 {% block content %}
+<style>
+  .map-layout { grid-template-columns: 1fr 200px; }
+  @media (max-width: 640px) {
+    .map-layout {
+      grid-template-columns: 1fr !important;
+    }
+    .map-layout svg {
+      width: 100% !important;
+      max-height: 420px !important;
+    }
+    .map-layout > div:last-child {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .map-layout > div:last-child > div:first-child { flex: 1; min-width: 160px; }
+    #mapTooltip { flex: 1; min-width: 180px; margin-top: 0 !important; }
+  }
+</style>
 <div class="breadcrumb">
   <div class="breadcrumb-inner">
     <a href="{% url 'home' %}">Home</a>
@@ -51,7 +71,7 @@
     <div class="chart-card" style="margin-bottom:2rem;">
       <h3 style="margin-bottom:0.5rem;font-size:1rem;">Kerala District Crime Heat Map — {{ latest_district_year }}</h3>
       <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:1.5rem;">Hover / tap a district to see details. Darker red = higher crimes.</p>
-      <div style="display:grid;grid-template-columns:1fr 200px;gap:2rem;align-items:start;">
+      <div style="display:grid;grid-template-columns:1fr 200px;gap:2rem;align-items:start;" class="map-layout">
 
         <svg id="keralaMap" viewBox="170 80 340 560" xmlns="http://www.w3.org/2000/svg"
              style="width:100%;height:auto;display:block;max-height:520px;">
