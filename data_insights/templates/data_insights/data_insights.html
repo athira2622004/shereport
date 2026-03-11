@@ -47,9 +47,118 @@
       <h2>District-wise Crimes — Kerala {{ latest_district_year }}</h2>
     </div>
 
-    <!-- District Bar Chart — full width -->
+    <!-- Kerala Map + Legend -->
     <div class="chart-card" style="margin-bottom:2rem;">
-      <h3 style="margin-bottom:1rem;font-size:1rem;">District-wise Total Crimes ({{ latest_district_year }})</h3>
+      <h3 style="margin-bottom:0.5rem;font-size:1rem;">Kerala District Crime Heat Map — {{ latest_district_year }}</h3>
+      <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:1.5rem;">Hover / tap a district to see details. Darker red = higher crimes.</p>
+      <div style="display:grid;grid-template-columns:1fr 200px;gap:2rem;align-items:start;">
+
+        <!-- SVG Map -->
+        <div style="display:flex;justify-content:center;">
+          <svg id="keralaMap" viewBox="0 0 310 750" style="width:100%;max-width:320px;height:auto;cursor:pointer;">
+
+            <!-- Kasaragod -->
+            <path id="dist-Kasaragod" data-name="Kasaragod"
+              d="M60,10 L120,8 L140,20 L145,40 L130,55 L110,60 L90,55 L65,45 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Kannur -->
+            <path id="dist-Kannur" data-name="Kannur"
+              d="M65,45 L110,60 L130,55 L145,40 L155,65 L150,90 L130,105 L100,100 L70,85 L60,65 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Wayanad -->
+            <path id="dist-Wayanad" data-name="Wayanad"
+              d="M130,55 L170,50 L195,65 L200,90 L185,110 L160,115 L145,100 L130,105 L150,90 L155,65 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Kozhikode -->
+            <path id="dist-Kozhikode" data-name="Kozhikode"
+              d="M70,85 L100,100 L130,105 L145,100 L155,120 L150,145 L130,155 L105,150 L75,135 L65,110 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Malappuram -->
+            <path id="dist-Malappuram" data-name="Malappuram"
+              d="M105,150 L130,155 L150,145 L160,115 L185,110 L200,130 L205,155 L190,175 L165,185 L140,180 L115,170 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Palakkad -->
+            <path id="dist-Palakkad" data-name="Palakkad"
+              d="M140,180 L165,185 L190,175 L215,180 L230,200 L225,230 L205,245 L185,240 L160,225 L145,205 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Thrissur -->
+            <path id="dist-Thrissur" data-name="Thrissur"
+              d="M115,170 L140,180 L145,205 L140,230 L125,245 L100,240 L85,220 L90,195 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Ernakulam -->
+            <path id="dist-Ernakulam" data-name="Ernakulam"
+              d="M85,220 L100,240 L125,245 L140,230 L145,205 L160,225 L165,255 L155,275 L135,285 L110,280 L85,260 L75,240 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Idukki -->
+            <path id="dist-Idukki" data-name="Idukki"
+              d="M160,225 L185,240 L205,245 L225,260 L230,290 L215,315 L195,325 L175,315 L160,295 L155,275 L165,255 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Kottayam -->
+            <path id="dist-Kottayam" data-name="Kottayam"
+              d="M85,260 L110,280 L135,285 L155,275 L160,295 L155,320 L135,335 L110,330 L88,315 L80,290 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Alappuzha -->
+            <path id="dist-Alappuzha" data-name="Alappuzha"
+              d="M65,290 L85,260 L80,290 L88,315 L80,340 L65,355 L50,340 L48,315 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Pathanamthitta -->
+            <path id="dist-Pathanamthitta" data-name="Pathanamthitta"
+              d="M110,330 L135,335 L155,320 L175,315 L195,325 L200,355 L185,375 L160,380 L135,370 L115,355 L105,335 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Kollam -->
+            <path id="dist-Kollam" data-name="Kollam"
+              d="M65,355 L80,340 L88,315 L110,330 L105,335 L115,355 L110,385 L100,410 L80,420 L60,405 L52,380 Z"
+              stroke="#fff" stroke-width="1.5"/>
+            <!-- Thiruvananthapuram -->
+            <path id="dist-Thiruvananthapuram" data-name="Thiruvananthapuram"
+              d="M60,405 L80,420 L100,410 L115,425 L120,455 L110,480 L90,495 L68,490 L50,470 L45,445 L52,420 Z"
+              stroke="#fff" stroke-width="1.5"/>
+
+          </svg>
+        </div>
+
+        <!-- Legend + Tooltip -->
+        <div>
+          <div style="font-size:0.82rem;font-weight:600;color:var(--text-dark);margin-bottom:0.75rem;">Crime Rate</div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1.5rem;">
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <div style="width:18px;height:12px;background:#8B1A4A;border-radius:2px;"></div>
+              <span style="font-size:0.75rem;">Very High (2000+)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <div style="width:18px;height:12px;background:#c0306a;border-radius:2px;"></div>
+              <span style="font-size:0.75rem;">High (1500–2000)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <div style="width:18px;height:12px;background:#e0608a;border-radius:2px;"></div>
+              <span style="font-size:0.75rem;">Medium (1000–1500)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <div style="width:18px;height:12px;background:#f4a0c0;border-radius:2px;"></div>
+              <span style="font-size:0.75rem;">Low (500–1000)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <div style="width:18px;height:12px;background:#fde8f0;border-radius:2px;"></div>
+              <span style="font-size:0.75rem;">Very Low (&lt;500)</span>
+            </div>
+          </div>
+
+          <div id="mapTooltip" style="background:var(--navy);color:white;border-radius:10px;padding:1rem;font-size:0.82rem;display:none;">
+            <div id="ttDistrict" style="font-weight:700;font-size:0.95rem;margin-bottom:0.5rem;color:var(--accent);"></div>
+            <div style="margin-bottom:0.2rem;">Total: <strong id="ttTotal"></strong></div>
+            <div style="margin-bottom:0.2rem;">Rape: <span id="ttRape"></span></div>
+            <div style="margin-bottom:0.2rem;">Molestation: <span id="ttMol"></span></div>
+            <div>Cruelty: <span id="ttCruelty"></span></div>
+          </div>
+          <div id="mapHint" style="font-size:0.75rem;color:var(--text-light);margin-top:0.5rem;">👆 Tap a district</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- District Bar Chart -->
+    <div class="chart-card" style="margin-bottom:2rem;">
+      <h3 style="margin-bottom:1rem;font-size:1rem;">District-wise Total Crimes Ranking ({{ latest_district_year }})</h3>
       <div style="height:420px;position:relative;"><canvas id="districtChart"></canvas></div>
     </div>
 
@@ -140,6 +249,8 @@
   </div>
 </section>
 
+{% endblock %}
+
 {% block extra_js %}
 <script>
 {% if stats %}
@@ -156,18 +267,63 @@ new Chart(document.getElementById('crimeTypeChart'), {
 {% endif %}
 
 {% if has_district_data %}
+// District data from Django
+const districtData = {
+  {% for d in districts %}
+  "{{ d.district }}": { total: {{ d.total_crimes }}, rape: {{ d.rape }}, molestation: {{ d.molestation }}, cruelty: {{ d.cruelty_by_husband }} },
+  {% endfor %}
+};
+
+// Color function based on crime count
+function getCrimeColor(total) {
+  if (total >= 2000) return '#8B1A4A';
+  if (total >= 1500) return '#c0306a';
+  if (total >= 1000) return '#e0608a';
+  if (total >= 500)  return '#f4a0c0';
+  return '#fde8f0';
+}
+
+// Color all districts on map
+document.querySelectorAll('#keralaMap path').forEach(path => {
+  const name = path.getAttribute('data-name');
+  const data = districtData[name];
+  if (data) {
+    path.style.fill = getCrimeColor(data.total);
+  } else {
+    path.style.fill = '#ddd';
+  }
+
+  // Hover / tap interaction
+  path.addEventListener('mouseenter', () => showTooltip(name, data, path));
+  path.addEventListener('mouseleave', () => {
+    path.style.opacity = '1';
+  });
+  path.addEventListener('click', () => showTooltip(name, data, path));
+});
+
+function showTooltip(name, data, path) {
+  if (!data) return;
+  path.style.opacity = '0.75';
+  document.getElementById('mapTooltip').style.display = 'block';
+  document.getElementById('mapHint').style.display = 'none';
+  document.getElementById('ttDistrict').textContent = name;
+  document.getElementById('ttTotal').textContent = data.total.toLocaleString('en-IN');
+  document.getElementById('ttRape').textContent = data.rape;
+  document.getElementById('ttMol').textContent = data.molestation;
+  document.getElementById('ttCruelty').textContent = data.cruelty;
+}
+
+// District bar chart
 const dTotals = {{ district_totals|safe }};
 const maxV = Math.max(...dTotals);
 new Chart(document.getElementById('districtChart'), {
   type: 'bar',
   data: { labels:{{ district_names|safe }}, datasets:[{ label:'Total Crimes', data:dTotals,
-    backgroundColor: dTotals.map(v => { const t=v/maxV; return t>0.8?'#8B1A4A':t>0.6?'#c0306a':t>0.4?'#e0608a':t>0.2?'#f4a0c0':'#fde8f0'; }),
+    backgroundColor: dTotals.map(v => getCrimeColor(v)),
     borderWidth:1, borderRadius:4 }] },
   options: { indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
     scales:{ x:{ticks:{callback:v=>v.toLocaleString('en-IN')}}, y:{grid:{display:false}, ticks:{font:{size:11}}} } }
 });
 {% endif %}
 </script>
-{% endblock %}
-
 {% endblock %}
