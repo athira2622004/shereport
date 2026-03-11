@@ -2,11 +2,11 @@
    SHE REPORT — Main JavaScript
    ================================================================ */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
   // ── Mobile Nav Toggle ────────────────────────────────────────
   const toggle = document.querySelector('.nav-toggle');
-  const nav    = document.querySelector('.navbar-nav');
+  const nav = document.querySelector('.she-navbar-nav') || document.querySelector('.navbar-nav');
   if (toggle && nav) {
     toggle.addEventListener('click', () => {
       nav.classList.toggle('open');
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── Active Nav Link ──────────────────────────────────────────
   const currentPath = window.location.pathname;
-  document.querySelectorAll('.navbar-nav a').forEach(link => {
+  document.querySelectorAll('.she-navbar-nav a, .navbar-nav a').forEach(link => {
     if (link.getAttribute('href') === currentPath ||
-        (currentPath !== '/' && link.getAttribute('href') !== '/' && currentPath.startsWith(link.getAttribute('href')))) {
+      (currentPath !== '/' && link.getAttribute('href') !== '/' && currentPath.startsWith(link.getAttribute('href')))) {
       link.classList.add('active');
     }
   });
@@ -63,9 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function animateCounter(el) {
-    const target  = parseInt(el.getAttribute('data-count'));
+    const target = parseInt(el.getAttribute('data-count'));
     const duration = 1800;
-    const step     = 16;
+    const step = 16;
     const increment = target / (duration / step);
     let current = 0;
     const timer = setInterval(() => {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // ── Crime Trend Chart ────────────────────────────────────────
   const chartEl = document.getElementById('crimeTrendChart');
   if (chartEl && typeof Chart !== 'undefined') {
-    const years  = JSON.parse(chartEl.getAttribute('data-years')  || '[]');
+    const years = JSON.parse(chartEl.getAttribute('data-years') || '[]');
     const totals = JSON.parse(chartEl.getAttribute('data-totals') || '[]');
     new Chart(chartEl, {
       type: 'bar',
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         datasets: [{
           data: values,
           backgroundColor: [
-            '#8B1A4A','#B5446E','#2A9D8F','#F4A261','#1A2B4A','#E07B30','#6B1238'
+            '#8B1A4A', '#B5446E', '#2A9D8F', '#F4A261', '#1A2B4A', '#E07B30', '#6B1238'
           ],
           borderWidth: 2,
           borderColor: '#fff',
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── Smooth scroll for anchor links ───────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
         e.preventDefault();
