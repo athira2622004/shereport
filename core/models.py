@@ -23,7 +23,23 @@ class CrimeStatistic(models.Model):
 
 class DistrictData(models.Model):
     """District-wise crime data."""
-    district = models.CharField(max_length=100)
+    DISTRICT_CHOICES = [
+        ('Thiruvananthapuram', 'Thiruvananthapuram'),
+        ('Kollam', 'Kollam'),
+        ('Pathanamthitta', 'Pathanamthitta'),
+        ('Alappuzha', 'Alappuzha'),
+        ('Kottayam', 'Kottayam'),
+        ('Idukki', 'Idukki'),
+        ('Ernakulam', 'Ernakulam'),
+        ('Thrissur', 'Thrissur'),
+        ('Palakkad', 'Palakkad'),
+        ('Malappuram', 'Malappuram'),
+        ('Kozhikode', 'Kozhikode'),
+        ('Wayanad', 'Wayanad'),
+        ('Kannur', 'Kannur'),
+        ('Kasaragod', 'Kasaragod'),
+    ]
+    district = models.CharField(max_length=100, choices=DISTRICT_CHOICES)
     year = models.IntegerField()
     total_crimes = models.IntegerField()
     rape = models.IntegerField(default=0)
