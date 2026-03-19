@@ -292,7 +292,7 @@ p {
 
 /* ── HERO SECTION ─────────────────────────────────────────────── */
 .hero {
-  background: linear-gradient(135deg, #1a0800 0%, #3d0e00 50%, #6b1a00 100%);
+  background: linear-gradient(135deg, #7a1e00 0%, #c43800 50%, #E8401A 100%);
   color: white;
   padding: 6rem 0 5rem;
   position: relative;
@@ -547,7 +547,7 @@ p {
 
 /* ── STATS SECTION ────────────────────────────────────────────── */
 .stats-section {
-  background: linear-gradient(135deg, #1a0800, #3d0e00);
+  background: linear-gradient(135deg, #7a1e00, #c43800);
 }
 
 .stats-grid {
@@ -916,7 +916,7 @@ p {
 
 /* ── PAGE HERO ────────────────────────────────────────────────── */
 .page-hero {
-  background: linear-gradient(135deg, #1a0800, #3d0e00);
+  background: linear-gradient(135deg, #7a1e00, #c43800);
   color: white;
   padding: 4rem 0;
   text-align: center;
@@ -936,7 +936,7 @@ p {
 
 /* ── FOOTER ───────────────────────────────────────────────────── */
 .footer {
-  background: #1a0800;
+  background: #0d1b2a;
   color: rgba(255, 255, 255, 0.8);
   padding: 4rem 0 0;
 }
@@ -1007,7 +1007,7 @@ p {
 }
 
 .emergency-bar {
-  background: #1a0800;
+  background: #0d1b2a;
   color: #ffb89a;
   text-align: center;
   padding: 0.6rem;
