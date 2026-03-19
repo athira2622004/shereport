@@ -25,7 +25,7 @@
 
     <div class="form-card">
       <h2 style="margin-bottom:1.5rem; font-size:1.4rem;">Report Form</h2>
-      <form method="post">
+      <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
           <label>Type of Crime *</label>
@@ -62,10 +62,90 @@
             <option value="Kasaragod">Kasaragod</option>
           </select>
         </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label>Date of Incident</label>
+            <input type="date" name="incident_date">
+          </div>
+          <div class="form-group">
+            <label>Approximate Time</label>
+            <input type="time" name="incident_time">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Institution Involved <span style="font-weight:400; color:#888;">(if relevant — e.g. school, workplace, hospital)</span></label>
+          <input type="text" name="institution" placeholder="Name of institution (optional)">
+        </div>
+
         <div class="form-group">
           <label>Brief Description *</label>
           <textarea name="description" rows="5" placeholder="Describe the incident without identifying details if you wish to remain anonymous." required></textarea>
           <p class="form-note">Do not include personal identifying information if you want to remain anonymous.</p>
+        </div>
+
+        <div class="form-group" style="display:flex; align-items:center; gap:0.75rem;">
+          <input type="checkbox" name="reported_to_police" id="reported_to_police" style="width:18px; height:18px;">
+          <label for="reported_to_police" style="margin:0; font-weight:500;">This incident was reported to the police</label>
+        </div>
+
+        <div class="form-group" style="display:flex; align-items:center; gap:0.75rem;">
+          <input type="checkbox" name="needs_legal_help" id="needs_legal_help" style="width:18px; height:18px;">
+          <label for="needs_legal_help" style="margin:0; font-weight:500;">I would like legal assistance</label>
+        </div>
+
+        <div class="form-group">
+          <label>Upload Documents / Evidence <span style="font-weight:400; color:#888;">(optional)</span></label>
+          <input type="file" name="evidence_file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+          <p class="form-note">Accepted: PDF, JPG, PNG, Word documents. Max 10MB.</p>
+        </div>
+
+        <!-- What help do you need -->
+        <div class="form-group">
+          <label style="font-size:1rem; font-weight:600;">What help do you need from us?</label>
+          <p class="form-note" style="margin-bottom:1rem;">Select all that apply</p>
+          <div style="display:flex; flex-direction:column; gap:0.5rem;">
+
+            <label style="display:flex; align-items:flex-start; gap:0.75rem; padding:0.75rem 1rem; border:1px solid var(--border-color,#e0d6d6); border-radius:8px; cursor:pointer;" class="help-opt-label">
+              <input type="checkbox" name="help_filing_complaint" style="width:16px;height:16px;margin-top:3px;flex-shrink:0;">
+              <div><div style="font-weight:500;">Filing a Complaint</div><div style="font-size:0.8rem;color:#888;">Help with FIR, police complaint, written statements</div></div>
+            </label>
+
+            <label style="display:flex; align-items:flex-start; gap:0.75rem; padding:0.75rem 1rem; border:1px solid var(--border-color,#e0d6d6); border-radius:8px; cursor:pointer;" class="help-opt-label">
+              <input type="checkbox" name="help_legal_support" style="width:16px;height:16px;margin-top:3px;flex-shrink:0;">
+              <div><div style="font-weight:500;">Legal Support</div><div style="font-size:0.8rem;color:#888;">Connect with a lawyer or legal aid organisation</div></div>
+            </label>
+
+            <label style="display:flex; align-items:flex-start; gap:0.75rem; padding:0.75rem 1rem; border:1px solid var(--border-color,#e0d6d6); border-radius:8px; cursor:pointer;" class="help-opt-label">
+              <input type="checkbox" name="help_court_support" style="width:16px;height:16px;margin-top:3px;flex-shrink:0;">
+              <div><div style="font-weight:500;">Court Support</div><div style="font-size:0.8rem;color:#888;">Guidance and accompaniment through court proceedings</div></div>
+            </label>
+
+            <label style="display:flex; align-items:flex-start; gap:0.75rem; padding:0.75rem 1rem; border:1px solid var(--border-color,#e0d6d6); border-radius:8px; cursor:pointer;" class="help-opt-label">
+              <input type="checkbox" name="help_recovery" style="width:16px;height:16px;margin-top:3px;flex-shrink:0;">
+              <div><div style="font-weight:500;">Recovery &amp; Counselling</div><div style="font-size:0.8rem;color:#888;">Trauma support, counsellors, peer groups</div></div>
+            </label>
+
+            <label style="display:flex; align-items:flex-start; gap:0.75rem; padding:0.75rem 1rem; border:1px solid var(--border-color,#e0d6d6); border-radius:8px; cursor:pointer;" class="help-opt-label">
+              <input type="checkbox" name="help_safety_planning" style="width:16px;height:16px;margin-top:3px;flex-shrink:0;">
+              <div><div style="font-weight:500;">Safety Planning</div><div style="font-size:0.8rem;color:#888;">Help with immediate safety, shelter, or relocation</div></div>
+            </label>
+
+            <label style="display:flex; align-items:flex-start; gap:0.75rem; padding:0.75rem 1rem; border:1px solid var(--border-color,#e0d6d6); border-radius:8px; cursor:pointer;" class="help-opt-label">
+              <input type="checkbox" name="help_ngo_referral" style="width:16px;height:16px;margin-top:3px;flex-shrink:0;">
+              <div><div style="font-weight:500;">NGO / Referral</div><div style="font-size:0.8rem;color:#888;">Connect with NGOs, Sakhi centres, or support organisations</div></div>
+            </label>
+
+            <label style="display:flex; align-items:flex-start; gap:0.75rem; padding:0.75rem 1rem; border:1px solid var(--border-color,#e0d6d6); border-radius:8px; cursor:pointer;" class="help-opt-label">
+              <input type="checkbox" name="help_other" id="help_other_cb" style="width:16px;height:16px;margin-top:3px;flex-shrink:0;">
+              <div><div style="font-weight:500;">Other</div><div style="font-size:0.8rem;color:#888;">Describe what you need in your own words</div></div>
+            </label>
+
+          </div>
+          <div id="help-other-box" style="display:none; margin-top:0.75rem;">
+            <textarea name="help_other_text" rows="3" placeholder="Please describe what help you need..."></textarea>
+          </div>
         </div>
 
         <div class="form-group" style="display:flex; align-items:center; gap:0.75rem;">
@@ -94,12 +174,22 @@
 <script>
 const anonCheckbox = document.getElementById('is_anonymous');
 const identityFields = document.getElementById('identity-fields');
-
-// On page load — show fields by default (checkbox unchecked)
 identityFields.style.display = 'block';
-
 anonCheckbox.addEventListener('change', function() {
   identityFields.style.display = this.checked ? 'none' : 'block';
+});
+
+// Other help text box toggle
+document.getElementById('help_other_cb').addEventListener('change', function() {
+  document.getElementById('help-other-box').style.display = this.checked ? 'block' : 'none';
+});
+
+// Highlight selected help options
+document.querySelectorAll('.help-opt-label input[type=checkbox]').forEach(cb => {
+  cb.addEventListener('change', function() {
+    this.closest('.help-opt-label').style.borderColor = this.checked ? 'var(--primary,#8B1A4A)' : 'var(--border-color,#e0d6d6)';
+    this.closest('.help-opt-label').style.background = this.checked ? '#FBEAF0' : '';
+  });
 });
 </script>
 {% endblock %}

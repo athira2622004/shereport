@@ -292,7 +292,7 @@ p {
 
 /* ── HERO SECTION ─────────────────────────────────────────────── */
 .hero {
-  background: linear-gradient(135deg, var(--navy) 0%, var(--primary-dark) 50%, var(--primary) 100%);
+  background: linear-gradient(135deg, #1a0800 0%, #3d0e00 50%, #6b1a00 100%);
   color: white;
   padding: 6rem 0 5rem;
   position: relative;
@@ -547,7 +547,7 @@ p {
 
 /* ── STATS SECTION ────────────────────────────────────────────── */
 .stats-section {
-  background: linear-gradient(135deg, var(--navy), var(--primary-dark));
+  background: linear-gradient(135deg, #1a0800, #3d0e00);
 }
 
 .stats-grid {
@@ -916,7 +916,7 @@ p {
 
 /* ── PAGE HERO ────────────────────────────────────────────────── */
 .page-hero {
-  background: linear-gradient(135deg, var(--navy), var(--primary-dark));
+  background: linear-gradient(135deg, #1a0800, #3d0e00);
   color: white;
   padding: 4rem 0;
   text-align: center;
@@ -936,7 +936,7 @@ p {
 
 /* ── FOOTER ───────────────────────────────────────────────────── */
 .footer {
-  background: var(--navy);
+  background: #1a0800;
   color: rgba(255, 255, 255, 0.8);
   padding: 4rem 0 0;
 }
@@ -1007,8 +1007,8 @@ p {
 }
 
 .emergency-bar {
-  background: var(--danger);
-  color: white;
+  background: #1a0800;
+  color: #ffb89a;
   text-align: center;
   padding: 0.6rem;
   font-size: 0.85rem;
@@ -1016,7 +1016,7 @@ p {
 }
 
 .emergency-bar a {
-  color: white;
+  color: #ffb89a;
   text-decoration: underline;
 }
 

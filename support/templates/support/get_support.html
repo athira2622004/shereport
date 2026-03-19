@@ -36,6 +36,13 @@
       <div class="helpline-card" style="background:linear-gradient(135deg,#7B2D8B,#9B3DAB)"><div style="font-size:1.5rem;margin-bottom:0.5rem">⚖️</div><h3>KELSA (Legal Aid)</h3><div class="helpline-number">15100</div><div class="helpline-label">Free Legal Services</div></div>
     </div>
 
+    <!-- Anonymous report -->
+    <div style="background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:white; border-radius:var(--radius-lg); padding:3rem; text-align:center; margin-bottom:3rem;">
+      <h2 style="color:white; margin-bottom:1rem;">Submit an Anonymous Report</h2>
+      <p style="color:rgba(255,255,255,0.85); max-width:500px; margin:0 auto 2rem;">Share information about a crime — anonymously. Your report helps us identify patterns and advocate for better responses. No personal details required.</p>
+      <a href="{% url 'submit_report' %}" class="btn-primary" style="background:white; color:var(--primary); font-weight:700;">Submit Report →</a>
+    </div>
+
     <!-- Support options -->
     <div class="section-header">
       <span class="section-tag">Resources</span>
@@ -62,11 +69,147 @@
       </div>
     </div>
 
-    <!-- Anonymous report -->
-    <div style="background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:white; border-radius:var(--radius-lg); padding:3rem; text-align:center; margin-top:3rem;">
-      <h2 style="color:white; margin-bottom:1rem;">Submit an Anonymous Report</h2>
-      <p style="color:rgba(255,255,255,0.85); max-width:500px; margin:0 auto 2rem;">Share information about a crime — anonymously. Your report helps us identify patterns and advocate for better responses. No personal details required.</p>
-      <a href="{% url 'submit_report' %}" class="btn-primary" style="background:white; color:var(--primary); font-weight:700;">Submit Report →</a>
+    <!-- Survivor Journey -->
+    <div class="section-header" style="margin-top:4rem;">
+      <span class="section-tag">Survivor Support</span>
+      <h2>Your Journey — We Are With You at Every Stage</h2>
+    </div>
+    <p style="text-align:center; color:var(--text-muted); max-width:600px; margin:0 auto 2.5rem;">Every survivor's path is different. Find the right support and volunteers for wherever you are right now.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; margin-bottom:4rem;">
+
+      <!-- Stage 1 -->
+      <div class="support-card" style="border-top:4px solid #D4537E;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+          <span style="background:#FBEAF0;color:#993556;font-size:0.75rem;font-weight:700;padding:4px 10px;border-radius:20px;">Stage 01</span>
+          <h3 style="margin:0;">Seeking Help</h3>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">You don't have to face this alone. Reach out to a counsellor or support worker confidentially.</p>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Volunteers available:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;">
+          <span style="background:#FBEAF0;color:#993556;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Counsellors</span>
+          <span style="background:#FBEAF0;color:#993556;font-size:0.75rem;padding:3px 10px;border-radius:12px;">NGO Support Workers</span>
+          <span style="background:#FBEAF0;color:#993556;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Crisis Intervention</span>
+        </div>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Kerala Helplines:</p>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;line-height:1.8;">
+          📞 Mithra Helpline — <strong>181</strong><br>
+          📞 iCall — <strong>9152987821</strong><br>
+          📞 Vandrevala Foundation — <strong>1860-2662-345</strong>
+        </div>
+        <a href="{% url 'submit_report' %}" class="btn-primary" style="display:inline-block;font-size:0.85rem;">Request Help →</a>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="support-card" style="border-top:4px solid #185FA5;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+          <span style="background:#E6F1FB;color:#185FA5;font-size:0.75rem;font-weight:700;padding:4px 10px;border-radius:20px;">Stage 02</span>
+          <h3 style="margin:0;">Filing Complaint</h3>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Know your rights and get help filing an FIR or complaint with proper legal guidance.</p>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Volunteers available:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;">
+          <span style="background:#E6F1FB;color:#185FA5;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Paralegal Volunteers</span>
+          <span style="background:#E6F1FB;color:#185FA5;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Legal Awareness</span>
+          <span style="background:#E6F1FB;color:#185FA5;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Women's Rights Advocates</span>
+        </div>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Kerala Helplines:</p>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;line-height:1.8;">
+          📞 Women's Helpline — <strong>1091</strong><br>
+          📞 Kerala Police — <strong>100</strong><br>
+          📞 Sakhi One Stop Centre — <strong>181</strong>
+        </div>
+        <a href="{% url 'submit_report' %}" class="btn-primary" style="display:inline-block;font-size:0.85rem;">Request Help →</a>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="support-card" style="border-top:4px solid #3B6D11;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+          <span style="background:#EAF3DE;color:#3B6D11;font-size:0.75rem;font-weight:700;padding:4px 10px;border-radius:20px;">Stage 03</span>
+          <h3 style="margin:0;">Police Investigation</h3>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Support through the investigation process with victim advocates and documentation help.</p>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Volunteers available:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;">
+          <span style="background:#EAF3DE;color:#3B6D11;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Victim Advocates</span>
+          <span style="background:#EAF3DE;color:#3B6D11;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Case Support</span>
+          <span style="background:#EAF3DE;color:#3B6D11;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Documentation</span>
+        </div>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Kerala Helplines:</p>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;line-height:1.8;">
+          📞 Kerala Police Women's Cell — <strong>0471-2721547</strong><br>
+          📞 Anti-Human Trafficking — <strong>1800-425-1900</strong><br>
+          📞 CHILDLINE — <strong>1098</strong>
+        </div>
+        <a href="{% url 'submit_report' %}" class="btn-primary" style="display:inline-block;font-size:0.85rem;">Request Help →</a>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="support-card" style="border-top:4px solid #854F0B;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+          <span style="background:#FAEEDA;color:#854F0B;font-size:0.75rem;font-weight:700;padding:4px 10px;border-radius:20px;">Stage 04</span>
+          <h3 style="margin:0;">Legal Support</h3>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Connect with lawyer volunteers and legal aid organisations for free legal assistance.</p>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Volunteers available:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;">
+          <span style="background:#FAEEDA;color:#854F0B;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Lawyer Volunteers</span>
+          <span style="background:#FAEEDA;color:#854F0B;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Legal Aid Organisations</span>
+        </div>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Kerala Helplines:</p>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;line-height:1.8;">
+          📞 KELSA Legal Aid — <strong>15100</strong><br>
+          📞 District Legal Services — <strong>0471-2725226</strong><br>
+          📞 Kerala High Court Legal Aid — <strong>0484-2562235</strong>
+        </div>
+        <a href="{% url 'lawyer_list' %}" class="btn-primary" style="display:inline-block;font-size:0.85rem;">Request Help →</a>
+      </div>
+
+      <!-- Stage 5 -->
+      <div class="support-card" style="border-top:4px solid #3C3489;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+          <span style="background:#EEEDFE;color:#3C3489;font-size:0.75rem;font-weight:700;padding:4px 10px;border-radius:20px;">Stage 05</span>
+          <h3 style="margin:0;">Court Process</h3>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Navigate court proceedings with dedicated court support volunteers and legal assistants.</p>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Volunteers available:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;">
+          <span style="background:#EEEDFE;color:#3C3489;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Court Support Volunteers</span>
+          <span style="background:#EEEDFE;color:#3C3489;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Legal Assistants</span>
+          <span style="background:#EEEDFE;color:#3C3489;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Advocacy Organisations</span>
+        </div>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Kerala Helplines:</p>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;line-height:1.8;">
+          📞 KELSA — <strong>15100</strong><br>
+          📞 Nirbhaya Scheme Helpline — <strong>181</strong><br>
+          📞 Kerala Women's Commission — <strong>0471-2322590</strong>
+        </div>
+        <a href="{% url 'lawyer_list' %}" class="btn-primary" style="display:inline-block;font-size:0.85rem;">Request Help →</a>
+      </div>
+
+      <!-- Stage 6 -->
+      <div class="support-card" style="border-top:4px solid #0F6E56;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+          <span style="background:#E1F5EE;color:#0F6E56;font-size:0.75rem;font-weight:700;padding:4px 10px;border-radius:20px;">Stage 06</span>
+          <h3 style="margin:0;">Recovery Support</h3>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem;">Healing takes time. Access trauma counsellors, peer groups, and livelihood support.</p>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Volunteers available:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;">
+          <span style="background:#E1F5EE;color:#0F6E56;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Trauma Counsellors</span>
+          <span style="background:#E1F5EE;color:#0F6E56;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Peer Support Groups</span>
+          <span style="background:#E1F5EE;color:#0F6E56;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Rehabilitation NGOs</span>
+          <span style="background:#E1F5EE;color:#0F6E56;font-size:0.75rem;padding:3px 10px;border-radius:12px;">Livelihood Support</span>
+        </div>
+        <p style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.5rem;">Kerala Helplines:</p>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;line-height:1.8;">
+          📞 iCall Counselling — <strong>9152987821</strong><br>
+          📞 Snehi — <strong>044-24640050</strong><br>
+          📞 Kerala Social Justice Dept — <strong>0471-2518930</strong>
+        </div>
+        <a href="{% url 'submit_report' %}" class="btn-primary" style="display:inline-block;font-size:0.85rem;">Request Help →</a>
+      </div>
+
     </div>
 
   </div>

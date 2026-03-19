@@ -8,15 +8,16 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# On Railway: set SECRET_KEY environment variable in dashboard
+# Locally: uses the default below
 SECRET_KEY = os.environ.get(
     'SECRET_KEY', 'django-insecure-she-report-local-2025')
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://shereport-81088d.up.railway.app",
-    "https://*.up.railway.app",
-]
+# On Railway: set DEBUG=False in dashboard
+# Locally: always True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
     'reports',
     'contact',
     'accounts',
+    'volunteers',
 ]
 
 MIDDLEWARE = [
@@ -66,42 +68,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'she_report.wsgi.application'
 
 # ─── DATABASE ──────────────────────────────────────────────────────────────────
-# Try all possible Railway MySQL variable formats
+# Railway sets MYSQL_URL automatically when MySQL service is connected
+# If MYSQL_URL not found, uses your local MySQL
 
 MYSQL_URL = os.environ.get('MYSQL_URL')
-MYSQL_PRIVATE_URL = os.environ.get('MYSQL_PRIVATE_URL')
-DATABASE_URL = os.environ.get('DATABASE_URL')
 
-# Railway sometimes provides individual variables
-MYSQLHOST = os.environ.get('MYSQLHOST')
-MYSQLUSER = os.environ.get('MYSQLUSER')
-MYSQLPASSWORD = os.environ.get('MYSQLPASSWORD')
-MYSQLDATABASE = os.environ.get('MYSQLDATABASE')
-MYSQLPORT = os.environ.get('MYSQLPORT', '3306')
-
-if MYSQL_URL or MYSQL_PRIVATE_URL or DATABASE_URL:
-    # Single URL format
+if MYSQL_URL:
+    # Railway MySQL
     DATABASES = {
         'default': dj_database_url.config(
-            default=MYSQL_URL or MYSQL_PRIVATE_URL or DATABASE_URL,
+            default=MYSQL_URL,
             conn_max_age=600,
         )
-    }
-elif MYSQLHOST:
-    # Separate variable format (most common on Railway)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': MYSQLDATABASE,
-            'USER': MYSQLUSER,
-            'PASSWORD': MYSQLPASSWORD,
-            'HOST': MYSQLHOST,
-            'PORT': MYSQLPORT,
-            'OPTIONS': {
-                'charset': 'utf8mb4',
-                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            },
-        }
     }
 else:
     # Local MySQL on your laptop
@@ -139,6 +117,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'core' / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+# Change this line in she_report/settings.py
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'

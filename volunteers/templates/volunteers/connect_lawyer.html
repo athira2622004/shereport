@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+{% block title %}Connect with {{ lawyer.name }} | SHE Report{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a><span class="breadcrumb-sep">›</span>
+    <a href="{% url 'get_support' %}">Get Support</a><span class="breadcrumb-sep">›</span>
+    <a href="{% url 'lawyer_list' %}">Legal Volunteers</a><span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Connect</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Request Connection</h1>
+    <p>Our team will review your request and connect you with {{ lawyer.name }} confidentially.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <div style="max-width:650px; margin:0 auto;">
+
+      <!-- Lawyer summary card -->
+      <div style="background:#FBEAF0; border-radius:12px; padding:1.5rem; margin-bottom:2rem; display:flex; align-items:center; gap:1rem;">
+        <div style="width:56px; height:56px; border-radius:50%; background:#993556; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; color:white; flex-shrink:0;">
+          {{ lawyer.name|first|upper }}
+        </div>
+        <div>
+          <h3 style="margin:0 0 0.25rem;">{{ lawyer.name }}</h3>
+          <div style="font-size:0.85rem; color:#993556; font-weight:500;">{{ lawyer.get_specialization_display }}</div>
+          <div style="font-size:0.85rem; color:var(--text-muted);">📍 {{ lawyer.district }} &nbsp;|&nbsp; 🗣 {{ lawyer.languages }}</div>
+        </div>
+      </div>
+
+      <div class="alert alert-warning" style="margin-bottom:2rem;">
+        🔒 Your contact details will only be shared with {{ lawyer.name }} after our team reviews your request. You may also submit anonymously.
+      </div>
+
+      <div class="form-card">
+        <h2 style="font-size:1.3rem; margin-bottom:1.5rem;">Connection Request</h2>
+        <form method="post">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label>Your Message <span style="font-weight:400; color:#888;">(optional)</span></label>
+            <textarea name="message" rows="4" placeholder="Briefly describe what legal help you need. Do not include sensitive personal details here."></textarea>
+          </div>
+
+          <div class="form-group" style="display:flex; align-items:center; gap:0.75rem;">
+            <input type="checkbox" name="is_anonymous" id="is_anonymous" style="width:18px; height:18px;">
+            <label for="is_anonymous" style="margin:0; font-weight:500;">Submit anonymously</label>
+          </div>
+
+          <div id="identity-fields">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" name="survivor_name" placeholder="Full name">
+            </div>
+            <div class="form-group">
+              <label>Contact (Phone / Email)</label>
+              <input type="text" name="contact" placeholder="How should we reach you?">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit">Send Connection Request</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% block extra_js %}
+<script>
+const anonCb = document.getElementById('is_anonymous');
+const fields  = document.getElementById('identity-fields');
+fields.style.display = 'block';
+anonCb.addEventListener('change', function() {
+  fields.style.display = this.checked ? 'none' : 'block';
+});
+</script>
+{% endblock %}
+{% endblock %}
