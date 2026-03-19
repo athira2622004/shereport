@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from core.models import CrimeStatistic, DistrictData
+from support.models import SupportRequest
 import json
 
 
@@ -49,3 +50,59 @@ def data_insights(request):
         'has_district_data':   len(districts) > 0,
     }
     return render(request, 'data_insights/data_insights.html', context)
+
+
+def incident_map(request):
+    """Live incident pin map from support requests."""
+    import random
+    DISTRICT_COORDS = {
+        'Thiruvananthapuram': [8.5241, 76.9366],
+        'Kollam':             [8.8932, 76.6141],
+        'Pathanamthitta':     [9.2648, 76.7870],
+        'Alappuzha':          [9.4981, 76.3388],
+        'Kottayam':           [9.5916, 76.5222],
+        'Idukki':             [9.9189, 77.1025],
+        'Ernakulam':          [10.0159, 76.3419],
+        'Thrissur':           [10.5276, 76.2144],
+        'Palakkad':           [10.7867, 76.6548],
+        'Malappuram':         [11.0730, 76.0740],
+        'Kozhikode':          [11.2588, 75.7804],
+        'Wayanad':            [11.6854, 76.1320],
+        'Kannur':             [11.8745, 75.3704],
+        'Kasaragod':          [12.4996, 74.9869],
+    }
+    CRIME_COLORS = {
+        'domestic_violence': '#E8401A',
+        'rape':              '#7B2D8B',
+        'molestation':       '#185FA5',
+        'stalking':          '#BA7517',
+        'kidnapping':        '#444441',
+        'dowry':             '#993C1D',
+        'trafficking':       '#0F6E56',
+        'workplace':         '#3B6D11',
+        'other':             '#888780',
+    }
+    requests = SupportRequest.objects.filter(
+        district__isnull=False).exclude(district='')
+    incidents = []
+    for r in requests:
+        coords = DISTRICT_COORDS.get(r.district)
+        if not coords:
+            continue
+        lat = coords[0] + random.uniform(-0.05, 0.05)
+        lng = coords[1] + random.uniform(-0.05, 0.05)
+        incidents.append({
+            'lat':      round(lat, 4),
+            'lng':      round(lng, 4),
+            'district': r.district,
+            'type':     r.crime_type,
+            'label':    r.get_crime_type_display(),
+            'color':    CRIME_COLORS.get(r.crime_type, '#888780'),
+            'month':    r.created_at.strftime('%B %Y'),
+            'police':   'Yes' if r.reported_to_police else 'No',
+        })
+    return render(request, 'data_insights/incident_map.html', {
+        'incidents_json': json.dumps(incidents),
+        'total_count':    len(incidents),
+        'crime_colors':   json.dumps(CRIME_COLORS),
+    })

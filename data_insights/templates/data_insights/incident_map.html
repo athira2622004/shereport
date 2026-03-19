@@ -1,0 +1,188 @@
+{% extends 'core/base.html' %}
+{% block title %}Live Incident Map | SHE Report Kerala{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+#map { height: 580px; width: 100%; border-radius: 12px; z-index: 1; }
+.filter-bar { background: #fff; border: 1px solid #e0d6d6; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end; }
+.filter-bar select { padding: 0.6rem 1rem; border: 1px solid #e0d6d6; border-radius: 8px; font-size: 0.9rem; min-width: 180px; }
+.filter-bar label { font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.3rem; color: #4A4A6A; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: #4A4A6A; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.stat-pill { background: #FBEAF0; color: #8B1A4A; font-size: 0.85rem; font-weight: 600; padding: 0.4rem 1rem; border-radius: 20px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a><span class="breadcrumb-sep">›</span>
+    <a href="{% url 'data_insights' %}">Data & Insights</a><span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Live Incident Map</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Live Reported Incidents Map</h1>
+    <p>Geographic visualization of reported incidents across Kerala. All data is anonymized — district level only.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+
+    <div class="alert alert-warning" style="margin-bottom:2rem;">
+      🔒 All incidents are shown at <strong>district level only</strong>. No personal details, names or exact locations are ever displayed.
+    </div>
+
+    <!-- Stats row -->
+    <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem; align-items:center;">
+      <span class="stat-pill">📍 {{ total_count }} incident{{ total_count|pluralize }} reported</span>
+      <span style="font-size:0.85rem; color:#888;">Pins are approximate within district boundaries</span>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar">
+      <div>
+        <label>Crime Type</label>
+        <select id="typeFilter">
+          <option value="all">All Crime Types</option>
+          <option value="domestic_violence">Domestic Violence</option>
+          <option value="rape">Rape / Sexual Assault</option>
+          <option value="molestation">Molestation / Harassment</option>
+          <option value="stalking">Stalking / Cyberstalking</option>
+          <option value="kidnapping">Kidnapping</option>
+          <option value="dowry">Dowry Harassment</option>
+          <option value="trafficking">Human Trafficking</option>
+          <option value="workplace">Workplace Harassment</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label>District</label>
+        <select id="districtFilter">
+          <option value="all">All Districts</option>
+          <option>Thiruvananthapuram</option>
+          <option>Kollam</option>
+          <option>Pathanamthitta</option>
+          <option>Alappuzha</option>
+          <option>Kottayam</option>
+          <option>Idukki</option>
+          <option>Ernakulam</option>
+          <option>Thrissur</option>
+          <option>Palakkad</option>
+          <option>Malappuram</option>
+          <option>Kozhikode</option>
+          <option>Wayanad</option>
+          <option>Kannur</option>
+          <option>Kasaragod</option>
+        </select>
+      </div>
+      <div>
+        <label>Police Reported</label>
+        <select id="policeFilter">
+          <option value="all">All</option>
+          <option value="Yes">Reported to Police</option>
+          <option value="No">Not Reported</option>
+        </select>
+      </div>
+      <div style="display:flex; align-items:flex-end;">
+        <button onclick="resetFilters()" style="padding:0.6rem 1.2rem; background:#8B1A4A; color:white; border:none; border-radius:8px; font-size:0.9rem; cursor:pointer;">Reset</button>
+      </div>
+      <div style="margin-left:auto; display:flex; align-items:flex-end;">
+        <span id="countLabel" style="font-size:0.9rem; font-weight:600; color:#8B1A4A;"></span>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div id="map"></div>
+
+    <!-- Legend -->
+    <div style="background:#fff; border:1px solid #e0d6d6; border-radius:12px; padding:1.25rem 1.5rem; margin-top:1.5rem;">
+      <p style="font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#1A1A2E;">Legend</p>
+      <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+        <div class="legend-item"><div class="legend-dot" style="background:#E8401A;"></div>Domestic Violence</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7B2D8B;"></div>Rape / Sexual Assault</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#185FA5;"></div>Molestation / Harassment</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#BA7517;"></div>Stalking / Cyberstalking</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#444441;"></div>Kidnapping</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#993C1D;"></div>Dowry Harassment</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#0F6E56;"></div>Human Trafficking</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#3B6D11;"></div>Workplace Harassment</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#888780;"></div>Other</div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="{% url 'data_insights' %}" class="btn-primary">← Back to Data & Insights</a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const allIncidents = {{ incidents_json|safe }};
+
+const map = L.map('map').setView([10.2, 76.5], 7);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+let markers = [];
+
+function makeIcon(color) {
+  return L.divIcon({
+    html: `<div style="width:14px;height:14px;border-radius:50%;background:${color};border:2.5px solid white;box-shadow:0 1px 5px rgba(0,0,0,0.4);"></div>`,
+    iconSize: [14, 14], iconAnchor: [7, 7], className: ''
+  });
+}
+
+function renderMarkers() {
+  markers.forEach(m => map.removeLayer(m));
+  markers = [];
+  const type = document.getElementById('typeFilter').value;
+  const dist = document.getElementById('districtFilter').value;
+  const police = document.getElementById('policeFilter').value;
+
+  const filtered = allIncidents.filter(i =>
+    (type === 'all' || i.type === type) &&
+    (dist === 'all' || i.district === dist) &&
+    (police === 'all' || i.police === police)
+  );
+
+  document.getElementById('countLabel').textContent = `Showing ${filtered.length} incident${filtered.length !== 1 ? 's' : ''}`;
+
+  filtered.forEach(i => {
+    const m = L.marker([i.lat, i.lng], { icon: makeIcon(i.color) })
+      .bindPopup(`
+        <div style="min-width:180px;">
+          <div style="font-weight:700;font-size:0.95rem;margin-bottom:4px;">${i.label}</div>
+          <div style="font-size:0.82rem;color:#555;">📍 ${i.district}</div>
+          <div style="font-size:0.82rem;color:#555;">📅 ${i.month}</div>
+          <div style="font-size:0.82rem;color:#555;">🚔 Police: ${i.police}</div>
+          <div style="font-size:0.75rem;color:#aaa;margin-top:6px;">Anonymous report</div>
+        </div>
+      `)
+      .addTo(map);
+    markers.push(m);
+  });
+}
+
+function resetFilters() {
+  document.getElementById('typeFilter').value = 'all';
+  document.getElementById('districtFilter').value = 'all';
+  document.getElementById('policeFilter').value = 'all';
+  renderMarkers();
+}
+
+renderMarkers();
+document.getElementById('typeFilter').onchange = renderMarkers;
+document.getElementById('districtFilter').onchange = renderMarkers;
+document.getElementById('policeFilter').onchange = renderMarkers;
+</script>
+{% endblock %}

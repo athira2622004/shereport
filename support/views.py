@@ -44,9 +44,8 @@ def submit_report(request):
         help_other = 'help_other' in request.POST
         help_other_text = request.POST.get('help_other_text', '')
 
-        if not crime_type or not description:
-            messages.error(
-                request, 'Please fill in the crime type and description.')
+        if not crime_type:
+            messages.error(request, 'Please select the crime type.')
             return render(request, 'support/submit_report.html')
 
         try:
