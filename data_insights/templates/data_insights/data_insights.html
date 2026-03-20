@@ -59,6 +59,24 @@
   </div>
 </section>
 
+<!-- Live Incident Map Banner -->
+<section style="padding:2rem 0; background:#FBEAF0;">
+  <div class="container">
+    <div style="background:linear-gradient(135deg,#7a1e00,#c43800); border-radius:16px; padding:2.5rem 3rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; color:white;">
+      <div style="display:flex; align-items:center; gap:1.5rem;">
+        <div style="font-size:2.5rem;">📍</div>
+        <div>
+          <h2 style="color:white; margin:0 0 0.5rem; font-size:1.4rem;">View Live Reported Incidents</h2>
+          <p style="color:rgba(255,255,255,0.85); margin:0; font-size:0.9rem;">Interactive pin map of reported incidents — anonymized, district level only.</p>
+        </div>
+      </div>
+      <a href="{% url 'incident_map' %}" class="btn-primary" style="background:white; color:#8B1A4A; font-weight:700; font-size:1rem; white-space:nowrap;">
+        Open Incident Map →
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="section-pad">
   <div class="container">
 
@@ -226,53 +244,6 @@
 
   </div>
 </section>
-
-{% if has_district_data %}
-<section class="section-pad" style="background:var(--light-bg);">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Incident Mapping</span>
-      <h2>Interactive Crime Map — Kerala {{ latest_district_year }}</h2>
-      <p>Explore district-wise crime concentration across Kerala. Filter by crime type to reveal patterns.</p>
-    </div>
-
-    <!-- Filters -->
-    <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:2rem;">
-      <button class="map-filter-btn active" data-type="total" onclick="updateMap('total')">Total Crimes</button>
-      <button class="map-filter-btn" data-type="rape" onclick="updateMap('rape')">Rape</button>
-      <button class="map-filter-btn" data-type="molestation" onclick="updateMap('molestation')">Molestation</button>
-      <button class="map-filter-btn" data-type="kidnapping" onclick="updateMap('kidnapping')">Kidnapping</button>
-      <button class="map-filter-btn" data-type="cruelty" onclick="updateMap('cruelty')">Cruelty by Husband</button>
-    </div>
-
-    <!-- Map -->
-    <div style="border-radius:16px;overflow:hidden;box-shadow:var(--shadow-md);margin-bottom:1.5rem;">
-      <div id="kerala-leaflet-map" style="height:520px;width:100%;"></div>
-    </div>
-
-    <!-- Legend -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem;">
-      <span style="font-size:0.85rem;font-weight:600;color:var(--text-dark);">Crime Intensity:</span>
-      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;color:var(--text-mid);">
-        <span style="display:inline-block;width:16px;height:16px;background:#fde8f0;border:1px solid #ccc;border-radius:3px;"></span> Very Low
-      </div>
-      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;color:var(--text-mid);">
-        <span style="display:inline-block;width:16px;height:16px;background:#f4a0c0;border:1px solid #ccc;border-radius:3px;"></span> Low
-      </div>
-      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;color:var(--text-mid);">
-        <span style="display:inline-block;width:16px;height:16px;background:#d4537e;border:1px solid #ccc;border-radius:3px;"></span> Medium
-      </div>
-      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;color:var(--text-mid);">
-        <span style="display:inline-block;width:16px;height:16px;background:#8B1A4A;border:1px solid #ccc;border-radius:3px;"></span> High
-      </div>
-      <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;color:var(--text-mid);">
-        <span style="display:inline-block;width:16px;height:16px;background:#4a0a28;border:1px solid #ccc;border-radius:3px;"></span> Very High
-      </div>
-    </div>
-    <p style="text-align:center;font-size:0.78rem;color:var(--text-light);">Click on any district to see detailed crime statistics.</p>
-  </div>
-</section>
-{% endif %}
 
 {% endblock %}
 
@@ -489,22 +460,4 @@ window.addEventListener('load', function() {
 });
 </script>
 {% endif %}
-
-<!-- Live Incident Map Banner -->
-<section style="padding:3rem 0; background:#FBEAF0;">
-  <div class="container">
-    <div style="background:linear-gradient(135deg,#7a1e00,#c43800); border-radius:16px; padding:3rem; text-align:center; color:white;">
-      <div style="font-size:2.5rem; margin-bottom:1rem;">📍</div>
-      <h2 style="color:white; margin-bottom:1rem;">View Live Reported Incidents</h2>
-      <p style="color:rgba(255,255,255,0.85); max-width:550px; margin:0 auto 2rem;">
-        Explore an interactive pin map of reported incidents across Kerala districts.
-        All data is fully anonymized — district level only, no personal details shown.
-      </p>
-      <a href="{% url 'incident_map' %}" class="btn-primary" style="background:white; color:#8B1A4A; font-weight:700; font-size:1rem;">
-        Open Incident Map →
-      </a>
-    </div>
-  </div>
-</section>
-
 {% endblock %}

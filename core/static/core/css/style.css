@@ -9,10 +9,10 @@
 
 /* ── CSS Variables ────────────────────────────────────────────── */
 :root {
-  --primary: #8B1A4A;
-  /* Deep rose — justice, strength */
-  --primary-dark: #6B1238;
-  --primary-light: #B5446E;
+  --primary: #E8401A;
+  /* Orange-red — matches logo */
+  --primary-dark: #C43800;
+  --primary-light: #FF6B3D;
   --accent: #F4A261;
   /* Warm amber — hope */
   --accent-dark: #E07B30;
@@ -226,7 +226,7 @@ p {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
   font-size: 1.2rem;
-  color: var(--primary);
+  color: #E8401A;
 }
 
 .brand-sub {

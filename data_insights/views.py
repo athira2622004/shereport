@@ -54,7 +54,6 @@ def data_insights(request):
 
 def incident_map(request):
     """Live incident pin map from support requests."""
-    import random
     DISTRICT_COORDS = {
         'Thiruvananthapuram': [8.5241, 76.9366],
         'Kollam':             [8.8932, 76.6141],
@@ -71,6 +70,7 @@ def incident_map(request):
         'Kannur':             [11.8745, 75.3704],
         'Kasaragod':          [12.4996, 74.9869],
     }
+
     CRIME_COLORS = {
         'domestic_violence': '#E8401A',
         'rape':              '#7B2D8B',
@@ -82,13 +82,17 @@ def incident_map(request):
         'workplace':         '#3B6D11',
         'other':             '#888780',
     }
+
     requests = SupportRequest.objects.filter(
         district__isnull=False).exclude(district='')
+
     incidents = []
     for r in requests:
         coords = DISTRICT_COORDS.get(r.district)
         if not coords:
             continue
+        # Slightly randomize pin position within district for privacy
+        import random
         lat = coords[0] + random.uniform(-0.05, 0.05)
         lng = coords[1] + random.uniform(-0.05, 0.05)
         incidents.append({
@@ -101,8 +105,26 @@ def incident_map(request):
             'month':    r.created_at.strftime('%B %Y'),
             'police':   'Yes' if r.reported_to_police else 'No',
         })
+
+    total_count = len(incidents)
+    police_reported = sum(1 for i in incidents if i['police'] == 'Yes')
+    not_reported = total_count - police_reported
+    anonymous_count = sum(1 for r in requests if r.is_anonymous)
+
+    # District counts
+    from collections import Counter
+    district_counts = Counter(i['district'] for i in incidents)
+    top_districts = sorted(district_counts.items(),
+                           key=lambda x: x[1], reverse=True)[:5]
+    max_district_count = top_districts[0][1] if top_districts else 1
+
     return render(request, 'data_insights/incident_map.html', {
         'incidents_json': json.dumps(incidents),
-        'total_count':    len(incidents),
+        'total_count':    total_count,
+        'police_reported': police_reported,
+        'not_reported':   not_reported,
+        'anonymous_count': anonymous_count,
+        'top_districts':  top_districts,
+        'max_district_count': max_district_count,
         'crime_colors':   json.dumps(CRIME_COLORS),
     })

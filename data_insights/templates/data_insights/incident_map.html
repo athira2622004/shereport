@@ -37,11 +37,41 @@
       🔒 All incidents are shown at <strong>district level only</strong>. No personal details, names or exact locations are ever displayed.
     </div>
 
-    <!-- Stats row -->
-    <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem; align-items:center;">
-      <span class="stat-pill">📍 {{ total_count }} incident{{ total_count|pluralize }} reported</span>
-      <span style="font-size:0.85rem; color:#888;">Pins are approximate within district boundaries</span>
+    <!-- Stats Cards -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; margin-bottom:1.5rem;">
+      <div style="background:#fff; border:1px solid #e0d6d6; border-radius:12px; padding:1rem 1.5rem; text-align:center;">
+        <div style="font-size:2rem; font-weight:700; color:#E8401A; line-height:1;">{{ total_count }}</div>
+        <div style="font-size:0.78rem; color:#888; margin-top:6px;">Total Incidents Reported</div>
+      </div>
+      <div style="background:#fff; border:1px solid #e0d6d6; border-radius:12px; padding:1rem 1.5rem; text-align:center;">
+        <div style="font-size:2rem; font-weight:700; color:#185FA5; line-height:1;">{{ police_reported }}</div>
+        <div style="font-size:0.78rem; color:#888; margin-top:6px;">Reported to Police</div>
+      </div>
+      <div style="background:#fff; border:1px solid #e0d6d6; border-radius:12px; padding:1rem 1.5rem; text-align:center;">
+        <div style="font-size:2rem; font-weight:700; color:#3B6D11; line-height:1;">{{ not_reported }}</div>
+        <div style="font-size:0.78rem; color:#888; margin-top:6px;">Not Reported to Police</div>
+      </div>
+      <div style="background:#fff; border:1px solid #e0d6d6; border-radius:12px; padding:1rem 1.5rem; text-align:center;">
+        <div style="font-size:2rem; font-weight:700; color:#7B2D8B; line-height:1;">{{ anonymous_count }}</div>
+        <div style="font-size:0.78rem; color:#888; margin-top:6px;">Anonymous Submissions</div>
+      </div>
     </div>
+
+    <!-- Top Districts -->
+    {% if top_districts %}
+    <div style="background:#fff; border:1px solid #e0d6d6; border-radius:12px; padding:1.25rem 1.5rem; margin-bottom:1.5rem;">
+      <p style="font-size:0.9rem; font-weight:600; margin-bottom:1rem; color:#1A1A2E;">Districts with Highest Reported Incidents</p>
+      {% for district, count in top_districts %}
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+        <div style="width:140px; font-size:0.78rem; color:#666; text-align:right; flex-shrink:0;">{{ district }}</div>
+        <div style="flex:1; background:#f5f0f3; border-radius:5px; height:10px;">
+          <div style="width:{% widthratio count max_district_count 100 %}%; height:10px; border-radius:5px; background:#E8401A;"></div>
+        </div>
+        <div style="font-size:0.82rem; font-weight:600; min-width:20px; color:#1A1A2E;">{{ count }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
 
     <!-- Filters -->
     <div class="filter-bar">
