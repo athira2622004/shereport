@@ -134,11 +134,11 @@
         <div>
           <div style="font-weight:600;font-size:0.85rem;color:var(--text-dark);margin-bottom:10px;">Crime Rate</div>
           <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:18px;">
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;"><div style="width:18px;height:12px;background:#8B1A4A;border-radius:2px;"></div>Very High (2000+)</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;"><div style="width:18px;height:12px;background:#c0306a;border-radius:2px;"></div>High (1500–2000)</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;"><div style="width:18px;height:12px;background:#e0608a;border-radius:2px;"></div>Medium (1000–1500)</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;"><div style="width:18px;height:12px;background:#f4a0c0;border-radius:2px;"></div>Low (500–1000)</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;"><div style="width:18px;height:12px;background:#fde8f0;border:1px solid #ecc;border-radius:2px;"></div>Very Low (&lt;500)</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;"><div style="width:18px;height:12px;background:#7F1D1D;border-radius:2px;"></div>Very High (2000+)</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;"><div style="width:18px;height:12px;background:#B91C1C;border-radius:2px;"></div>High (1500–2000)</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;"><div style="width:18px;height:12px;background:#EF4444;border-radius:2px;"></div>Medium (1000–1500)</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;"><div style="width:18px;height:12px;background:#FCA5A5;border-radius:2px;"></div>Low (500–1000)</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.75rem;"><div style="width:18px;height:12px;background:#fff5f5;border:1px solid #ecc;border-radius:2px;"></div>Very Low (&lt;500)</div>
           </div>
           <div id="mapTooltip" style="background:var(--navy);color:white;border-radius:10px;padding:1rem;font-size:0.82rem;display:none;">
             <div id="ttDistrict" style="font-weight:700;font-size:0.95rem;margin-bottom:0.5rem;color:#f4a0c0;"></div>
@@ -253,7 +253,7 @@
 {% if stats %}
 new Chart(document.getElementById('crimeTrendChart'), {
   type: 'bar',
-  data: { labels: {{ chart_years|safe }}, datasets: [{ label:'Total Crimes', data:{{ chart_totals|safe }}, backgroundColor:'rgba(139,26,74,0.8)', borderColor:'#8B1A4A', borderWidth:2, borderRadius:6 }] },
+  data: { labels: {{ chart_years|safe }}, datasets: [{ label:'Total Crimes', data:{{ chart_totals|safe }}, backgroundColor:'rgba(185,28,28,0.85)', borderColor:'#B91C1C', borderWidth:2, borderRadius:6 }] },
   options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false}}, y:{beginAtZero:false, ticks:{callback:v=>v.toLocaleString('en-IN')}} } }
 });
 new Chart(document.getElementById('crimeTypeChart'), {
@@ -273,11 +273,11 @@ const districtData = {
 
 // Color function based on crime count
 function getCrimeColor(total) {
-  if (total >= 2000) return '#8B1A4A';
-  if (total >= 1500) return '#c0306a';
-  if (total >= 1000) return '#e0608a';
-  if (total >= 500)  return '#f4a0c0';
-  return '#fde8f0';
+  if (total >= 2000) return '#7F1D1D';
+  if (total >= 1500) return '#B91C1C';
+  if (total >= 1000) return '#EF4444';
+  if (total >= 500)  return '#FCA5A5';
+  return '#fff5f5';
 }
 
 // Color SVG districts + hover
@@ -382,7 +382,7 @@ function getColor(value, max) {
   if (pct > 0.6) return '#8B1A4A';
   if (pct > 0.4) return '#d4537e';
   if (pct > 0.2) return '#f4a0c0';
-  return '#fde8f0';
+  return '#fff5f5';
 }
 
 function getRadius(value, max) {

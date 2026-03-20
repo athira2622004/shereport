@@ -22,36 +22,43 @@
 </div>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <span class="hero-badge">🌸 Kerala's Public Interest Platform</span>
-      <h1>SHE Report</h1>
-      <p class="hero-tagline">Safety · Help · Evidence Report</p>
-      <p>An integrated, data-driven and survivor-centred platform addressing crimes against women in Kerala. From data curation to survivor support, policy accountability to public awareness — we map the full journey.</p>
+<section class="hero" style="background:none; padding:0;">
+  <div style="display:grid; grid-template-columns:1fr 1fr; min-height:480px;">
+
+    <!-- Left — white side -->
+    <div style="background:#fff; padding:4rem 3rem; display:flex; flex-direction:column; justify-content:center;">
+      <span class="hero-badge" style="background:#FEE8DF; color:#E8401A; border:none; margin-bottom:1.5rem; display:inline-block; width:fit-content;">🌸 Kerala's Public Interest Platform</span>
+      <h1 style="color:#1a1a1a; font-size:clamp(2rem,4vw,3.2rem); margin-bottom:0.5rem;">SHE Report</h1>
+      <p style="color:#E8401A; font-style:italic; font-size:1.1rem; margin-bottom:1.5rem;">Safety · Help · Evidence Report</p>
+      <p style="color:#555; font-size:1rem; line-height:1.7; margin-bottom:2rem;">An integrated, data-driven and survivor-centred platform addressing crimes against women in Kerala. From data curation to survivor support, policy accountability to public awareness — we map the full journey.</p>
       <div class="hero-actions">
         <a href="{% url 'get_support' %}" class="btn-primary">🤝 Get Support</a>
-        <a href="{% url 'data_insights' %}" class="btn-secondary">📊 Explore Data</a>
+        <a href="{% url 'data_insights' %}" class="btn-secondary" style="border-color:#E8401A; color:#E8401A;">📊 Explore Data</a>
       </div>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat-card">
-        <div class="hero-stat-number" data-count="18887">0</div>
-        <div class="hero-stat-label">Crimes recorded in 2024</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-number" data-count="49">0</div>
-        <div class="hero-stat-label">% Rise (2020–2024)</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-number" data-count="14">0</div>
-        <div class="hero-stat-label">Districts covered</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-number" data-count="5">0</div>
-        <div class="hero-stat-label">Programme Components</div>
+
+    <!-- Right — orange side -->
+    <div style="background:linear-gradient(135deg,#E8401A,#7a1e00); padding:4rem 3rem; display:flex; align-items:center; justify-content:center;">
+      <div class="hero-stats">
+        <div class="hero-stat-card">
+          <div class="hero-stat-number" data-count="18887" style="color:#fff;">0</div>
+          <div class="hero-stat-label">Crimes recorded in 2024</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-number" data-count="49" style="color:#fff;">0</div>
+          <div class="hero-stat-label">% Rise (2020–2024)</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-number" data-count="14" style="color:#fff;">0</div>
+          <div class="hero-stat-label">Districts covered</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="hero-stat-number" data-count="5" style="color:#fff;">0</div>
+          <div class="hero-stat-label">Programme Components</div>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -154,7 +161,7 @@
         {% if item.image %}
         <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
         {% else %}
-        <div style="width:100%; height:180px; background:linear-gradient(135deg,var(--primary),var(--teal)); border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; font-size:2.5rem;">📰</div>
+        <div style="width:100%; height:180px; background:linear-gradient(135deg,#E8401A,#FFA040); border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; font-size:2.5rem;">📰</div>
         {% endif %}
         <div class="news-date">{{ item.date_published|date:"d M Y" }}</div>
         <h4>{{ item.title }}</h4>

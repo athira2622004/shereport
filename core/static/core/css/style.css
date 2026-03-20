@@ -1007,8 +1007,8 @@ p {
 }
 
 .emergency-bar {
-  background: #0d1b2a;
-  color: #ffb89a;
+  background: #B91C1C;
+  color: white;
   text-align: center;
   padding: 0.6rem;
   font-size: 0.85rem;
@@ -1016,7 +1016,7 @@ p {
 }
 
 .emergency-bar a {
-  color: #ffb89a;
+  color: white;
   text-decoration: underline;
 }
 
@@ -1121,8 +1121,12 @@ p {
   }
 
   /* ── Hero ── */
+  .hero>div {
+    grid-template-columns: 1fr !important;
+  }
+
   .hero {
-    padding: 2rem 0 2rem;
+    padding: 0;
   }
 
   .hero h1 {
