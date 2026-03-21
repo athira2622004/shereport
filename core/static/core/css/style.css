@@ -916,7 +916,7 @@ p {
 
 /* ── PAGE HERO ────────────────────────────────────────────────── */
 .page-hero {
-  background: linear-gradient(135deg, #7a1e00, #c43800);
+  background: #E8401A;
   color: white;
   padding: 4rem 0;
   text-align: center;

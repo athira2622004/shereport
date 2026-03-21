@@ -253,7 +253,7 @@
 {% if stats %}
 new Chart(document.getElementById('crimeTrendChart'), {
   type: 'bar',
-  data: { labels: {{ chart_years|safe }}, datasets: [{ label:'Total Crimes', data:{{ chart_totals|safe }}, backgroundColor:'rgba(185,28,28,0.85)', borderColor:'#B91C1C', borderWidth:2, borderRadius:6 }] },
+  data: { labels: {{ chart_years|safe }}, datasets: [{ label:'Total Crimes', data:{{ chart_totals|safe }}, backgroundColor:'rgba(196,56,0,0.85)', borderColor:'#C43800', borderWidth:2, borderRadius:6 }] },
   options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false}}, y:{beginAtZero:false, ticks:{callback:v=>v.toLocaleString('en-IN')}} } }
 });
 new Chart(document.getElementById('crimeTypeChart'), {
