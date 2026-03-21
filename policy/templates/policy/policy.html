@@ -25,37 +25,79 @@
       <p>When performance metrics and gaps are publicly visible, institutions are more likely to prioritise responsiveness, efficiency, and survivor-centred practices.</p>
     </div>
 
-    <div class="components-grid">
-
+    <!-- RTI Resources -->
+    <div style="max-width:500px; margin-bottom:3rem;">
       <div class="component-card">
         <div class="component-number">RTI</div>
         <h3>RTI Resources</h3>
         <p>Use the Right to Information Act to track FIR registration, investigation delays, conviction rates and victim support measures. Template RTI applications provided.</p>
         <a href="{% url 'rti_resources' %}" class="btn-primary" style="display:inline-block; margin-top:1rem;">Access RTI Tools →</a>
       </div>
-
-      <div class="component-card">
-        <div class="component-number">📋</div>
-        <h3>Annual Scorecards</h3>
-        <p>District and taluk-level scorecards tracking police responsiveness, FIR rates, case outcomes and survivor support quality. Published annually.</p>
-        <span style="display:inline-block; margin-top:1rem; padding:0.4rem 1rem; background:rgba(139,26,74,0.1); color:var(--primary); border-radius:50px; font-size:0.8rem; font-weight:600;">Coming Soon</span>
-      </div>
-
-      <div class="component-card">
-        <div class="component-number">📑</div>
-        <h3>Policy Briefs</h3>
-        <p>Thematic policy briefs translating complex data into actionable recommendations for government departments, police and judicial authorities.</p>
-        <span style="display:inline-block; margin-top:1rem; padding:0.4rem 1rem; background:rgba(139,26,74,0.1); color:var(--primary); border-radius:50px; font-size:0.8rem; font-weight:600;">Coming Soon</span>
-      </div>
-
-      <div class="component-card">
-        <div class="component-number">🔍</div>
-        <h3>Institutional Insights</h3>
-        <p>Analysis of police response times, referral effectiveness, coordination quality among stakeholders and integration of data insights into administrative decisions.</p>
-        <span style="display:inline-block; margin-top:1rem; padding:0.4rem 1rem; background:rgba(139,26,74,0.1); color:var(--primary); border-radius:50px; font-size:0.8rem; font-weight:600;">Coming Soon</span>
-      </div>
-
     </div>
+
+    <!-- Policy Tracker -->
+    <div class="section-header">
+      <span class="section-tag">Reform Tracker</span>
+      <h2>Policy Change & Reform Tracker</h2>
+      <p>Tracking legal and policy developments related to crimes against women in Kerala</p>
+    </div>
+
+    <!-- Filters -->
+    <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-bottom:2rem; justify-content:center;">
+      <a href="?category=all" style="display:inline-block; padding:0.4rem 1.2rem; border-radius:50px; font-size:0.85rem; font-weight:600; text-decoration:none; {% if selected_category == 'all' %}background:var(--primary); color:white;{% else %}background:rgba(232,64,26,0.1); color:var(--primary);{% endif %}">All</a>
+      {% for val, label in categories %}
+      <a href="?category={{ val }}" style="display:inline-block; padding:0.4rem 1.2rem; border-radius:50px; font-size:0.85rem; font-weight:600; text-decoration:none; {% if selected_category == val %}background:var(--primary); color:white;{% else %}background:rgba(232,64,26,0.1); color:var(--primary);{% endif %}">{{ label }}</a>
+      {% endfor %}
+    </div>
+
+    {% if updates %}
+    <div style="max-width:800px; margin:0 auto;">
+      {% for update in updates %}
+      <div style="background:#fff; border:1px solid #e0d6d6; border-radius:12px; padding:1.25rem 1.5rem; margin-bottom:1rem; display:flex; gap:1rem;"
+           onmouseover="this.style.borderColor='#E8401A'" onmouseout="this.style.borderColor='#e0d6d6'">
+
+        <!-- Colour dot -->
+        <div style="width:10px; height:10px; border-radius:50%; flex-shrink:0; margin-top:6px;
+          {% if update.category == 'new_law' %}background:#E8401A;
+          {% elif update.category == 'court_ruling' %}background:#185FA5;
+          {% elif update.category == 'policy_gap' %}background:#BA7517;
+          {% elif update.category == 'recommendation' %}background:#3B6D11;
+          {% else %}background:#7B2D8B;{% endif %}"></div>
+
+        <div style="flex:1;">
+          <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.5rem;">
+
+            <!-- Category tag -->
+            <span style="font-size:0.75rem; font-weight:600; padding:3px 10px; border-radius:20px;
+              {% if update.category == 'new_law' %}background:#FEE8DF; color:#E8401A;
+              {% elif update.category == 'court_ruling' %}background:#E6F1FB; color:#185FA5;
+              {% elif update.category == 'policy_gap' %}background:#FAEEDA; color:#BA7517;
+              {% elif update.category == 'recommendation' %}background:#EAF3DE; color:#3B6D11;
+              {% else %}background:#EEEDFE; color:#7B2D8B;{% endif %}">
+              {{ update.get_category_display }}
+            </span>
+
+            <span style="font-size:0.8rem; color:#888;">{{ update.date|date:"F Y" }}</span>
+          </div>
+
+          <h3 style="font-size:1rem; margin-bottom:0.5rem; color:#1A1A2E;">{{ update.title }}</h3>
+          <p style="font-size:0.88rem; color:#4A4A6A; margin:0; line-height:1.6;">{{ update.description }}</p>
+
+          {% if update.source %}
+          <a href="{{ update.source }}" target="_blank" style="font-size:0.78rem; color:var(--primary); margin-top:0.5rem; display:inline-block;">View Source →</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <div style="text-align:center; padding:3rem; color:#888;">
+      <div style="font-size:3rem; margin-bottom:1rem;">📋</div>
+      <h3>No updates yet</h3>
+      <p>Policy updates will appear here as they are added by the admin team.</p>
+    </div>
+    {% endif %}
 
   </div>
 </section>
