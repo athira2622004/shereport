@@ -161,7 +161,7 @@
         {% if item.image %}
         <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
         {% else %}
-        <div style="width:100%; height:180px; background:linear-gradient(135deg,#E8401A,#FFA040); border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; font-size:2.5rem;">📰</div>
+        <div style="width:100%; height:180px; background:linear-gradient(135deg,#FDDCB5,#FFF0E0); border-radius:8px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; font-size:2.5rem;">📰</div>
         {% endif %}
         <div class="news-date">{{ item.date_published|date:"d M Y" }}</div>
         <h4>{{ item.title }}</h4>
@@ -241,8 +241,8 @@ if (homeCtx) {
       datasets: [{
         label: 'Total Crimes Against Women',
         data: homeTotals,
-        backgroundColor: 'rgba(139,26,74,0.8)',
-        borderColor: '#8B1A4A',
+        backgroundColor: 'rgba(196,56,0,0.85)',
+        borderColor: '#C43800',
         borderWidth: 2,
         borderRadius: 6,
       }]

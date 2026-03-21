@@ -86,45 +86,60 @@ def incident_map(request):
     requests = SupportRequest.objects.filter(
         district__isnull=False).exclude(district='')
 
-    incidents = []
+    # Build district summary data
+    from collections import defaultdict
+    district_data = defaultdict(lambda: {
+        'total': 0, 'police': 0, 'anonymous': 0, 'crimes': defaultdict(int)
+    })
+
     for r in requests:
-        coords = DISTRICT_COORDS.get(r.district)
-        if not coords:
+        d = r.district
+        if d not in DISTRICT_COORDS:
             continue
-        # Slightly randomize pin position within district for privacy
-        import random
-        lat = coords[0] + random.uniform(-0.05, 0.05)
-        lng = coords[1] + random.uniform(-0.05, 0.05)
-        incidents.append({
-            'lat':      round(lat, 4),
-            'lng':      round(lng, 4),
-            'district': r.district,
-            'type':     r.crime_type,
-            'label':    r.get_crime_type_display(),
-            'color':    CRIME_COLORS.get(r.crime_type, '#888780'),
-            'month':    r.created_at.strftime('%B %Y'),
-            'police':   'Yes' if r.reported_to_police else 'No',
+        district_data[d]['total'] += 1
+        if r.reported_to_police:
+            district_data[d]['police'] += 1
+        if r.is_anonymous:
+            district_data[d]['anonymous'] += 1
+        crime_label = r.get_crime_type_display()
+        district_data[d]['crimes'][crime_label] += 1
+
+    # Build map pins — one per district
+    district_pins = []
+    for district, data in district_data.items():
+        coords = DISTRICT_COORDS[district]
+        crimes_sorted = sorted(
+            data['crimes'].items(), key=lambda x: x[1], reverse=True)
+        max_crime = crimes_sorted[0][1] if crimes_sorted else 1
+        district_pins.append({
+            'lat':       coords[0],
+            'lng':       coords[1],
+            'district':  district,
+            'total':     data['total'],
+            'police':    data['police'],
+            'anonymous': data['anonymous'],
+            'crimes':    crimes_sorted,
+            'max_crime': max_crime,
         })
 
-    total_count = len(incidents)
-    police_reported = sum(1 for i in incidents if i['police'] == 'Yes')
+    total_count = sum(r['total'] for r in district_pins)
+    police_reported = sum(r['police'] for r in district_pins)
     not_reported = total_count - police_reported
-    anonymous_count = sum(1 for r in requests if r.is_anonymous)
+    anonymous_count = sum(r['anonymous'] for r in district_pins)
 
-    # District counts
     from collections import Counter
-    district_counts = Counter(i['district'] for i in incidents)
+    district_counts = {r['district']: r['total'] for r in district_pins}
     top_districts = sorted(district_counts.items(),
                            key=lambda x: x[1], reverse=True)[:5]
     max_district_count = top_districts[0][1] if top_districts else 1
 
     return render(request, 'data_insights/incident_map.html', {
-        'incidents_json': json.dumps(incidents),
-        'total_count':    total_count,
-        'police_reported': police_reported,
-        'not_reported':   not_reported,
-        'anonymous_count': anonymous_count,
-        'top_districts':  top_districts,
+        'district_pins_json': json.dumps(district_pins),
+        'total_count':        total_count,
+        'police_reported':    police_reported,
+        'not_reported':       not_reported,
+        'anonymous_count':    anonymous_count,
+        'top_districts':      top_districts,
         'max_district_count': max_district_count,
-        'crime_colors':   json.dumps(CRIME_COLORS),
+        'crime_colors':       json.dumps(CRIME_COLORS),
     })
