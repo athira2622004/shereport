@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>നിയമ അവകാശങ്ങളും നടപടിക്രമങ്ങളും — SHE Report Kerala</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Noto Sans Malayalam', 'Manjari', Arial, sans-serif; font-size: 15px; color: #1a1a1a; background: #fff; line-height: 1.9; }
+
+    .cover { background: #E8401A; color: white; padding: 60px 0 48px; }
+    .cover-inner { max-width: 960px; margin: 0 auto; padding: 0 48px; }
+    .cover .logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+    .cover .logo-circle { width: 44px; height: 44px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #E8401A; }
+    .cover .org { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; opacity: 0.9; }
+    .cover h1 { font-size: 38px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; }
+    .cover .subtitle { font-size: 16px; opacity: 0.85; margin-bottom: 32px; }
+    .cover .lang-badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; padding: 5px 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; }
+    .cover .disclaimer { margin-top: 36px; padding: 16px 20px; background: rgba(0,0,0,0.2); border-radius: 8px; font-size: 13px; line-height: 1.7; max-width: 700px; }
+
+    .content { max-width: 960px; margin: 0 auto; padding: 48px 48px 80px; }
+
+    .footer { background: #E8401A; color: white; padding: 32px 48px; text-align: center; font-size: 13px; line-height: 1.8; }
+
+    .print-btn { position: fixed; bottom: 28px; right: 28px; background: #E8401A; color: white; border: none; padding: 13px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .print-btn:hover { background: #E8401A; }
+    @media print {
+      .print-btn { display: none; }
+      .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .chapter { page-break-inside: avoid; }
+    }
+    @media (max-width: 768px) {
+      .cover-inner { padding: 0 20px; }
+      .cover h1 { font-size: 26px; }
+      .content { padding: 28px 20px 60px; }
+      .rights-grid { grid-template-columns: 1fr; }
+      .helpline-grid { grid-template-columns: 1fr; }
+    }
+
+    .toc { background: #fdf4f7; border: 1px solid #e8c8d4; border-radius: 10px; padding: 24px 28px; margin-bottom: 40px; }
+    .toc h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #E8401A; margin-bottom: 14px; }
+    .toc ol { padding-left: 20px; }
+    .toc li { font-size: 14px; color: #4a1a2e; margin-bottom: 7px; }
+
+    .chapter { margin-bottom: 44px; page-break-inside: avoid; }
+    .chapter-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #E8401A; }
+    .chapter-num { width: 36px; height: 36px; border-radius: 50%; background: #E8401A; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+    .chapter h2 { font-size: 18px; font-weight: 700; color: #E8401A; }
+
+    .chapter p { margin-bottom: 12px; color: #222; }
+    .chapter ul, .chapter ol { padding-left: 22px; margin-bottom: 14px; }
+    .chapter li { margin-bottom: 7px; color: #222; }
+
+    .box { border-radius: 8px; padding: 16px 20px; margin: 18px 0; }
+    .box-pink { background: #fdf4f7; border-left: 4px solid #E8401A; }
+    .box-green { background: #f0faf4; border-left: 4px solid #1a7a4a; }
+    .box-amber { background: #fffbf0; border-left: 4px solid #c47a00; }
+    .box-blue { background: #f0f6ff; border-left: 4px solid #1a5fa5; }
+    .box-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .box-pink .box-title { color: #E8401A; }
+    .box-green .box-title { color: #1a7a4a; }
+    .box-amber .box-title { color: #c47a00; }
+    .box-blue .box-title { color: #1a5fa5; }
+
+    .steps { counter-reset: step; list-style: none; padding: 0; }
+    .steps li { counter-increment: step; display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+    .steps li::before { content: counter(step); width: 26px; height: 26px; border-radius: 50%; background: #E8401A; color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
+
+    .rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+    .right-item { background: #fdf4f7; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #4a1a2e; }
+    .right-item strong { display: block; font-size: 12px; color: #E8401A; margin-bottom: 3px; }
+
+    .helpline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+    .helpline-item { background: #f0faf4; border-radius: 6px; padding: 10px 14px; }
+    .helpline-item .num { font-size: 22px; font-weight: 700; color: #1a7a4a; }
+    .helpline-item .label { font-size: 13px; color: #555; margin-top: 2px; }
+
+
+  </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">PDF ആയി സേവ് ചെയ്യുക</button>
+
+<!-- Cover -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="logo-row">
+      <div class="org">SHE Report Kerala &nbsp;|&nbsp; Safety · Help · Evidence</div>
+    </div>
+    <h1>നിയമ അവകാശങ്ങളും<br>നടപടിക്രമങ്ങളും</h1>
+    <div class="subtitle">കേരളത്തിലെ അതിജീവിതകൾക്കുള്ള നിയമ സഹായ മാർഗ്ഗദർശി</div>
+    <div class="lang-badge">മലയാളം</div>
+    <div class="disclaimer">
+      <strong>പ്രധാന അറിയിപ്പ്:</strong> ഈ ഗൈഡ് നിങ്ങളുടെ അവകാശങ്ങൾ മനസ്സിലാക്കാൻ സഹായിക്കുന്ന പൊതുവായ നിയമ വിവരങ്ങൾ നൽകുന്നു. ഇത് നിയമ ഉപദേശത്തിന് പകരമല്ല. വ്യക്തിഗത സഹായത്തിന് SHE Report-ലെ ഒരു നിയമ സ്വമേധ്യ സേവകനെ ബന്ധപ്പെടുക അല്ലെങ്കിൽ KELSA-യെ ബന്ധപ്പെടുക.
+    </div>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="content">
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>ഉള്ളടക്കം</h2>
+    <ol>
+      <li>FIR എങ്ങനെ ഫയൽ ചെയ്യാം</li>
+      <li>പോലീസ് സ്റ്റേഷനിൽ നിങ്ങളുടെ അവകാശങ്ങൾ</li>
+      <li>POCSO നിയമം മനസ്സിലാക്കൽ</li>
+      <li>ഗാർഹിക പീഡന നിയമം (DV Act)</li>
+      <li>ജോലിസ്ഥലത്തെ ലൈംഗിക പീഡനം (POSH Act)</li>
+      <li>സൗജന്യ നിയമ സഹായം — ആർക്ക് ലഭിക്കും</li>
+      <li>പ്രധാനപ്പെട്ട ഹെൽപ്‌ലൈൻ നമ്പറുകൾ</li>
+    </ol>
+  </div>
+
+  <!-- Chapter 1 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">1</div>
+      <h2>FIR എങ്ങനെ ഫയൽ ചെയ്യാം</h2>
+    </div>
+
+    <p>ഒരു ക്രിമിനൽ കേസ് ആരംഭിക്കുന്നതിനുള്ള ആദ്യ പടിയാണ് ഫസ്റ്റ് ഇൻഫർമേഷൻ റിപ്പോർട്ട് (FIR). നിങ്ങളുടെ പരാതിയുടെ അടിസ്ഥാനത്തിൽ പോലീസ് തയ്യാറാക്കുന്ന ഒരു രേഖയാണ് ഇത്. FIR ഫയൽ ചെയ്യുന്നത് നിങ്ങളുടെ അവകാശമാണ് — പോലീസിന് ഇത് നിരസിക്കാൻ അധികാരമില്ല.</p>
+
+    <div class="box box-pink">
+      <div class="box-title">FIR എന്താണ്?</div>
+      അറസ്റ്റ് വാറന്റ് ഇല്ലാതെ പോലീസിന് അറസ്റ്റ് ചെയ്യാൻ കഴിയുന്ന ഗുരുതരമായ കുറ്റകൃത്യങ്ങൾ (cognizable offences) സംബന്ധിച്ച് വിവരം ലഭിക്കുമ്പോൾ പോലീസ് രജിസ്റ്റർ ചെയ്യുന്ന രേഖയാണ് FIR. ബലാത്സംഗം, ഗാർഹിക പീഡനം, പിന്തുടരൽ, ലൈംഗിക ആക്രമണം — ഇവ എല്ലാം cognizable offences ആണ്.
+    </div>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">FIR ഫയൽ ചെയ്യാനുള്ള ഘട്ടങ്ങൾ</h3>
+    <ul class="steps">
+      <li>അടുത്തുള്ള ഏതെങ്കിലും പോലീസ് സ്റ്റേഷനിൽ പോകുക. സംഭവം നടന്ന സ്ഥലത്തെ സ്റ്റേഷനിൽ തന്നെ പോകണമെന്നില്ല.</li>
+      <li>സ്റ്റേഷൻ ഹൗസ് ഓഫീസർ (SHO) അല്ലെങ്കിൽ ഡ്യൂട്ടിയിലുള്ള ഓഫീസറോട് സംസാരിക്കുക. ലൈംഗിക കുറ്റകൃത്യങ്ങളിൽ, ലഭ്യമെങ്കിൽ, ഒരു വനിതാ ഓഫീസറെ ആവശ്യപ്പെടുക.</li>
+      <li>നിങ്ങളുടെ പരാതി വാക്കാലോ എഴുതിയോ നൽകുക. ഓഫീസർ അത് എഴുതി നിങ്ങൾക്ക് വായിച്ചു തരണം. എല്ലാ വിവരങ്ങളും ശരിയാണെന്ന് ഉറപ്പ് വരുത്തുക.</li>
+      <li>ഉള്ളടക്കം ശരിയാണെന്ന് ഉറപ്പ് വരുത്തിയ ശേഷം മാത്രം FIR-ൽ ഒപ്പിടുക. നിങ്ങൾക്ക് വായിക്കാൻ കഴിയില്ലെങ്കിൽ, FIR ഉച്ചത്തിൽ വായിച്ചു തരണം.</li>
+      <li>FIR-ന്റെ <strong>സൗജന്യ പകർപ്പ്</strong> ലഭിക്കാൻ നിങ്ങൾക്ക് അർഹതയുണ്ട്. പോകുന്നതിന് മുൻപ് ചോദിക്കുക. അത് സൂക്ഷിക്കുക.</li>
+    </ul>
+
+    <div class="box box-amber">
+      <div class="box-title">പോലീസ് FIR ഫയൽ ചെയ്യാൻ വിസമ്മതിച്ചാൽ</div>
+      <ul style="padding-left:18px; margin:0;">
+        <li>ജില്ലയിലെ സൂപ്രണ്ടന്റ് ഓഫ് പോലീസ് (SP)-ന് തപാലിൽ ലിഖിത പരാതി അയക്കുക.</li>
+        <li>ജില്ലാ മജിസ്‌ട്രേറ്റ് (DM)-ന് പരാതി സമർപ്പിക്കുക.</li>
+        <li>കേരള സ്റ്റേറ്റ് വിമൻസ് കമ്മീഷനെ സമീപിക്കുക.</li>
+        <li>സൈബർ/ഓൺലൈൻ കുറ്റകൃത്യങ്ങൾക്ക് <strong>cybercrime.gov.in</strong>-ൽ ഓൺലൈൻ പരാതി നൽകുക.</li>
+      </ul>
+    </div>
+
+    <div class="box box-green">
+      <div class="box-title">സീറോ FIR</div>
+      ഏത് പോലീസ് സ്റ്റേഷനിലും "Zero FIR" ഫയൽ ചെയ്യാം — അധികാരപരിധി പ്രശ്നമല്ല. പോലീസ് അത് രജിസ്റ്റർ ചെയ്ത് ശരിയായ സ്റ്റേഷനിലേക്ക് കൈമാറണം. നിങ്ങൾ വീടിൽ നിന്ന് ദൂരെ ആയിരിക്കുമ്പോൾ ഇത് വളരെ ഉപകാരപ്രദമാണ്.
+    </div>
+  </div>
+
+  <!-- Chapter 2 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">2</div>
+      <h2>പോലീസ് സ്റ്റേഷനിൽ നിങ്ങളുടെ അവകാശങ്ങൾ</h2>
+    </div>
+
+    <p>ഒരു അതിജീവിത എന്ന നിലയിൽ, പോലീസ് സ്റ്റേഷൻ സന്ദർശിക്കുമ്പോൾ അല്ലെങ്കിൽ കൊണ്ടുപോകുമ്പോൾ നിങ്ങൾക്ക് നിർദ്ദിഷ്ട നിയമ അവകാശങ്ങളുണ്ട്. ഇവ ഭരണഘടനയും ക്രിമിനൽ നടപടി ചട്ടവും (CrPC) ഉറപ്പ് നൽകുന്നതാണ്.</p>
+
+    <div class="rights-grid">
+      <div class="right-item"><strong>കേൾക്കപ്പെടാനുള്ള അവകാശം</strong>നിങ്ങളെ തിരിച്ചയക്കാൻ കഴിയില്ല. പരാതി കേൾക്കൽ പോലീസിന്റെ ബാധ്യതയാണ്.</div>
+      <div class="right-item"><strong>വനിതാ ഓഫീസർ</strong>ലൈംഗിക കുറ്റകൃത്യങ്ങളിൽ, ഒരു വനിതാ ഓഫീസർ തന്നെ മൊഴി രേഖപ്പെടുത്തണം.</div>
+      <div class="right-item"><strong>FIR പകർപ്പ് സൗജന്യം</strong>ഒരു ചെലവും ഇല്ലാതെ FIR-ന്റെ പകർപ്പ് ലഭിക്കണം.</div>
+      <div class="right-item"><strong>നിയമ സഹായം</strong>അഭിഭാഷകനെ വഹിക്കാൻ കഴിയില്ലെങ്കിൽ സൗജന്യ സഹായം ലഭിക്കും.</div>
+      <div class="right-item"><strong>ചികിത്സ ലഭിക്കാനുള്ള അവകാശം</strong>ആവശ്യമെങ്കിൽ വൈദ്യ പരിശോധനക്ക് കൊണ്ടുപോകണം. സർക്കാർ ആശുപത്രി നിരസിക്കാൻ കഴിയില്ല.</div>
+      <div class="right-item"><strong>സ്വകാര്യതയ്ക്കുള്ള അവകാശം</strong>പ്രസ്താവന പ്രൈവറ്റ് ആയി രേഖപ്പെടുത്തണം — പരസ്യ സ്ഥലത്തല്ല.</div>
+      <div class="right-item"><strong>രാത്രി അറസ്റ്റ് ഇല്ല</strong>സൂര്യാസ്തമയത്തിനു ശേഷവും ഉദിക്കുന്നതിന് മുൻപും ഒരു സ്ത്രീയെ അറസ്റ്റ് ചെയ്യാൻ കഴിയില്ല — അസാധാരണ സന്ദർഭങ്ങൾ ഒഴികെ.</div>
+      <div class="right-item"><strong>കുടുംബത്തെ അറിയിക്കൽ</strong>തടഞ്ഞുവെച്ചാൽ, ഒരു കുടുംബാംഗത്തെ അല്ലെങ്കിൽ സുഹൃത്തിനെ അറിയിക്കാനുള്ള അവകാശം ഉണ്ട്.</div>
+    </div>
+
+    <div class="box box-pink">
+      <div class="box-title">Section 164 CrPC പ്രകാരം മൊഴി</div>
+      ലൈംഗിക അതിക്രമ കേസുകളിൽ, Section 164 CrPC പ്രകാരം മജിസ്‌ട്രേറ്റിന്റെ മുൻപിൽ മൊഴി രേഖപ്പെടുത്താം. ഇത് കോടതിയിൽ ശക്തമായ തെളിവ് ആകും — പോലീസിന് ഇത് പിന്നീട് മാറ്റാൻ കഴിയില്ല.
+    </div>
+  </div>
+
+  <!-- Chapter 3 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">3</div>
+      <h2>POCSO നിയമം മനസ്സിലാക്കൽ</h2>
+    </div>
+
+    <p>18 വയസ്സിൽ താഴെ പ്രായമുള്ള കുട്ടികളെ ലൈംഗിക ദുരുപയോഗം, ശല്യം, ചൂഷണം എന്നിവയിൽ നിന്ന് സംരക്ഷിക്കുന്ന പ്രത്യേക നിയമമാണ് Protection of Children from Sexual Offences (POCSO) Act, 2012.</p>
+
+    <div class="box box-blue">
+      <div class="box-title">POCSO ആരെ സംരക്ഷിക്കുന്നു?</div>
+      ലിംഗഭേദമില്ലാതെ 18 വയസ്സിൽ കുറഞ്ഞ എല്ലാ കുട്ടികളെയും. പ്രതി ആരുമാകാം — അപരിചിതൻ, കുടുംബാംഗം, അദ്ധ്യാപകൻ, അല്ലെങ്കിൽ പരിചയക്കാരൻ.
+    </div>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">പ്രധാന വ്യവസ്ഥകൾ</h3>
+    <ul style="padding-left:20px; margin-bottom:14px;">
+      <li><strong>നിർബന്ധ റിപ്പോർട്ടിങ്:</strong> ഒരു കുട്ടി ലൈംഗിക ദുരുപയോഗത്തിന് വിധേയമാകുന്നതായി അറിയുന്ന ആർക്കും അത് പോലീസിൽ അറിയിക്കൽ നിയമ ബാധ്യതയാണ്. റിപ്പോർട്ട് ചെയ്യാതിരിക്കുന്നത് ശിക്ഷാർഹമായ കുറ്റമാണ്.</li>
+      <li><strong>കുട്ടി-സൗഹൃദ നടപടിക്രമങ്ങൾ:</strong> കുട്ടിയുടെ മൊഴി അവരുടെ വീട്ടിൽ അല്ലെങ്കിൽ അവർ തിരഞ്ഞെടുക്കുന്ന സ്ഥലത്ത് രേഖപ്പെടുത്തണം — പോലീസ് സ്റ്റേഷനിൽ അല്ല.</li>
+      <li><strong>പ്രത്യേക കോടതികൾ:</strong> POCSO കേസുകൾ വേഗത്തിൽ തീർപ്പ് കൽപ്പിക്കാൻ നിർദ്ദിഷ്ട Special Courts-ൽ കേൾക്കും.</li>
+      <li><strong>ഐഡന്റിറ്റി സംരക്ഷണം:</strong> കുട്ടിയുടെ പേരും വിവരങ്ങളും മാധ്യമങ്ങളിൽ പരസ്യമാക്കാൻ കഴിയില്ല.</li>
+      <li><strong>പ്രതിക്ക് നിരപരാധിത്വം തെളിയിക്കണം:</strong> ഭൂരിഭാഗം POCSO കേസുകളിലും, കുട്ടി കുറ്റം തെളിയിക്കേണ്ടതില്ല — പ്രതി തന്നെ നിരപരാധിയാണെന്ന് തെളിയിക്കണം.</li>
+      <li><strong>നഷ്ടപരിഹാരം:</strong> കേസ് അവസാനിക്കുന്നതിന് മുൻപ് തന്നെ ഇടക്കാല നഷ്ടപരിഹാരം ആവശ്യപ്പെടാം.</li>
+    </ul>
+
+    <div class="box box-amber">
+      <div class="box-title">POCSO ദുരുപയോഗം റിപ്പോർട്ട് ചെയ്യുന്നതെങ്ങനെ</div>
+      <ol style="padding-left:18px; margin:0;">
+        <li>ചൈൽഡ്‌ലൈൻ: <strong>1098</strong> (സൗജന്യം, 24/7)</li>
+        <li>അടുത്ത പോലീസ് സ്റ്റേഷൻ — ഉടൻ FIR ഫയൽ ചെയ്യണം</li>
+        <li>ജില്ലാ ശിശു സംരക്ഷണ ഓഫീസർ (DCPO)-നെ ബന്ധപ്പെടുക</li>
+        <li>ചൈൽഡ് വെൽഫെയർ കമ്മിറ്റി (CWC)-നെ സമീപിക്കുക</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Chapter 4 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">4</div>
+      <h2>ഗാർഹിക പീഡന നിയമം (DV Act)</h2>
+    </div>
+
+    <p>Protection of Women from Domestic Violence Act, 2005 (DV Act) ഗാർഹിക പീഡനത്തിന് ഇരകളാകുന്ന സ്ത്രീകൾക്ക് സിവിൽ പരിഹാരം നൽകുന്നു. ശാരീരിക പീഡനം മാത്രമല്ല, വൈകാരിക, വാക്ക്, ലൈംഗിക, സാമ്പത്തിക ദുരുപയോഗവും ഇതിൽ ഉൾപ്പെടും.</p>
+
+    <div class="box box-pink">
+      <div class="box-title">DV Act-ന്റെ ഗുണഭോക്താക്കൾ ആരൊക്കെ?</div>
+      ദുരുപയോഗം ചെയ്യുന്നയാളുടെ കൂടെ ജീവിക്കുന്ന അല്ലെങ്കിൽ ജീവിച്ചിരുന്ന ഏതൊരു സ്ത്രീക്കും — ഭാര്യ, മരുമകൾ, സഹോദരി, അമ്മ, അല്ലെങ്കിൽ live-in ബന്ധത്തിൽ ഉള്ളവർ.
+    </div>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">ലഭ്യമായ ആശ്വാസ മാർഗ്ഗങ്ങൾ</h3>
+    <ul style="padding-left:20px; margin-bottom:14px;">
+      <li><strong>സംരക്ഷണ ഉത്തരവ് (Protection Order):</strong> ദുരുപയോഗം ചെയ്യുന്നയാൾ പീഡനം തുടരുന്നതിൽ നിന്നോ, നിങ്ങളുടെ ഭവനത്തിൽ/ജോലിസ്ഥലത്ത് പ്രവേശിക്കുന്നതിൽ നിന്നോ കോടതി വിലക്കാം.</li>
+      <li><strong>വസതി ഉത്തരവ് (Residence Order):</strong> പൊതു ഭവനത്തിൽ തുടർന്ന് താമസിക്കാൻ നിങ്ങൾക്ക് അർഹതയുണ്ട്. ദുരുപയോഗം ചെയ്യുന്നയാളെ ഒഴിപ്പിക്കാം.</li>
+      <li><strong>സാമ്പത്തിക ആശ്വാസം:</strong> നഷ്ടങ്ങൾ, ചികിത്സ ചെലവ്, കുട്ടികളുടെ ജീവനാംശം എന്നിവ ക്ലെയിം ചെയ്യാം.</li>
+      <li><strong>കസ്റ്റഡി ഉത്തരവ്:</strong> കുട്ടികളുടെ താൽക്കാലിക കസ്റ്റഡി ലഭിക്കാം.</li>
+    </ul>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">അപേക്ഷ നൽകുന്നതെങ്ങനെ</h3>
+    <ul class="steps">
+      <li>ഓരോ ജില്ലയിലും ഉള്ള Protection Officer-നെ അല്ലെങ്കിൽ DV Act-ന് കീഴിൽ രജിസ്റ്റർ ചെയ്ത Service Provider (NGO)-നെ ബന്ധപ്പെടുക.</li>
+      <li>Protection Officer-ന്റെ അടുക്കൽ അല്ലെങ്കിൽ നേരിട്ട് മജിസ്‌ട്രേറ്റ് കോടതിയിൽ Domestic Incident Report ഫയൽ ചെയ്യുക.</li>
+      <li>ആദ്യ ഹിയറിംഗിൽ തന്നെ — സാധാരണ 3 ദിവസത്തിനുള്ളിൽ — ഇടക്കാല Protection Order ലഭിക്കാം.</li>
+    </ul>
+
+    <div class="box box-green">
+      <div class="box-title">DV Act ഉപയോഗിക്കുന്നത് വിവാഹമോചനം അർഥമാക്കുന്നില്ല</div>
+      DV Act-ന് കീഴിൽ ആശ്വാസം തേടുന്നത് വിവാഹ മോചനത്തിനുള്ള അപേക്ഷ അല്ല. ഇത് നിങ്ങളുടെ സുരക്ഷ ഉറപ്പ് വരുത്തുന്ന ഒരു സിവിൽ മാർഗ്ഗമാണ്. വിവാഹ ജീവിതത്തെ കുറിച്ചുള്ള നിർണ്ണയത്തിൽ നിന്ന് സ്വതന്ത്രമായി ഇത് ഉപയോഗിക്കാം.
+    </div>
+  </div>
+
+  <!-- Chapter 5 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">5</div>
+      <h2>ജോലിസ്ഥലത്തെ ലൈംഗിക പീഡനം (POSH Act)</h2>
+    </div>
+
+    <p>Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013 (POSH Act) ഏത് ജോലിസ്ഥലത്തും സ്ത്രീകൾ ലൈംഗിക ശല്യത്തിൽ നിന്ന് സംരക്ഷിക്കപ്പെടണമെന്ന് ഉറപ്പ് നൽകുന്നു.</p>
+
+    <div class="box box-blue">
+      <div class="box-title">ജോലിസ്ഥലത്തെ ലൈംഗിക ശല്യം എന്ത്?</div>
+      ശാരീരിക സ്പർശനം, ലൈംഗിക ആഗ്രഹ പ്രകടനം, അശ്ലീലം കാണിക്കൽ, ലൈംഗിക പരാമർശങ്ങൾ, അല്ലെങ്കിൽ ആവശ്യമില്ലാത്ത ലൈംഗിക സ്വഭാവമുള്ള ഏത് വാക്കും ആംഗ്യവും.
+    </div>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">POSH-ന് കീഴിൽ നിങ്ങളുടെ അവകാശങ്ങൾ</h3>
+    <ul style="padding-left:20px; margin-bottom:14px;">
+      <li>10-ൽ കൂടുതൽ ജീവനക്കാരുള്ള ഓരോ സ്ഥാപനത്തിലും <strong>Internal Complaints Committee (ICC)</strong> ഉണ്ടായിരിക്കണം.</li>
+      <li>ICC ഇല്ലെങ്കിൽ, ജില്ലാ ഓഫീസർ സ്ഥാപിക്കുന്ന <strong>Local Complaints Committee (LCC)</strong>-നെ സമീപിക്കാം.</li>
+      <li>സംഭവം നടന്ന് <strong>3 മാസത്തിനുള്ളിൽ</strong> പരാതി ഫയൽ ചെയ്യണം (6 മാസം വരെ നീട്ടാം).</li>
+      <li>അന്വേഷണ കാലത്ത് ട്രാൻസ്ഫർ അല്ലെങ്കിൽ അവധി ആവശ്യപ്പെടാൻ അർഹതയുണ്ട്.</li>
+      <li>നടപടിക്രമം മുഴുവൻ നിങ്ങളുടെ ഐഡന്റിറ്റി രഹസ്യമായിരിക്കും.</li>
+    </ul>
+  </div>
+
+  <!-- Chapter 6 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">6</div>
+      <h2>സൗജന്യ നിയമ സഹായം — ആർക്ക് ലഭിക്കും</h2>
+    </div>
+
+    <p>ഓരോ അതിജീവിതക്കും സൗജന്യ നിയമ പ്രാതിനിധ്യം ലഭിക്കാനുള്ള അവകാശമുണ്ട്. നീതി ലഭിക്കാൻ പണം ആവശ്യമില്ല.</p>
+
+    <div class="box box-green">
+      <div class="box-title">കേരളത്തിൽ സൗജന്യ നിയമ സഹായം ആർക്ക് ലഭിക്കും?</div>
+      <ul style="padding-left:18px; margin:0;">
+        <li>സ്ത്രീകളും കുട്ടികളും (എല്ലാ കേസുകളിലും)</li>
+        <li>ട്രാഫിക്കിംഗ് ഇരകൾ</li>
+        <li>വൈകല്യമുള്ളവർ</li>
+        <li>പ്രതിവർഷം 1 ലക്ഷം രൂപയിൽ കുറഞ്ഞ വരുമാനം ഉള്ളവർ</li>
+        <li>കസ്റ്റഡിയിൽ ഉള്ളവർ</li>
+      </ul>
+    </div>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">സൗജന്യ നിയമ സഹായം എങ്ങനെ ലഭിക്കും</h3>
+    <ul class="steps">
+      <li>ഓരോ ജില്ലയിലും ഉള്ള <strong>Kerala Legal Services Authority (KELSA)</strong>-നെ ബന്ധപ്പെടുക.</li>
+      <li>നിങ്ങളുടെ ജില്ലയിലെ District Legal Services Authority (DLSA) ഓഫീസ് സന്ദർശിക്കുക.</li>
+      <li>Legal Services ഹെൽപ്‌ലൈൻ: <strong>15100</strong> (ടോൾ ഫ്രീ)</li>
+      <li>കോടതിയോട് നേരിട്ട് ആവശ്യപ്പെടുക — ഓരോ കോടതിക്കും Legal Aid Clinic ഉണ്ട്.</li>
+    </ul>
+  </div>
+
+  <!-- Chapter 7 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">7</div>
+      <h2>പ്രധാനപ്പെട്ട ഹെൽപ്‌ലൈൻ നമ്പറുകൾ</h2>
+    </div>
+
+    <div class="helpline-grid">
+      <div class="helpline-item"><div class="num">181</div><div class="label">വനിതാ ഹെൽപ്‌ലൈൻ (മിഥ്ര) — കേരള</div></div>
+      <div class="helpline-item"><div class="num">112</div><div class="label">പോലീസ് അടിയന്തര സഹായം</div></div>
+      <div class="helpline-item"><div class="num">181</div><div class="label">വൺ സ്റ്റോപ്പ് സെന്റർ (സഖി)</div></div>
+      <div class="helpline-item"><div class="num">1098</div><div class="label">ചൈൽഡ്‌ലൈൻ (POCSO / ശിശു ദുരുപയോഗം)</div></div>
+      <div class="helpline-item"><div class="num">15100</div><div class="label">Legal Services (KELSA) — സൗജന്യ നിയമ സഹായം</div></div>
+      <div class="helpline-item"><div class="num">1091</div><div class="label">ദുരിതത്തിലുള്ള സ്ത്രീകൾ — ദേശീയ</div></div>
+    </div>
+
+    <div class="box box-pink">
+      <div class="box-title">ഒരു നിയമ സ്വമേധ്യ സേവകനെ ബന്ധപ്പെടുക</div>
+      ഞങ്ങളുടെ വെബ്‌സൈറ്റിലെ <strong>SHE Report — Legal Volunteers</strong> വിഭാഗം സന്ദർശിക്കുക. സ്ഥിരീകരിക്കപ്പെട്ട അഭിഭാഷകനോ LLB വിദ്യാർഥി സ്വമേധ്യ സേവകനോ ആയി ബന്ധപ്പെടാം. ഇത് രഹസ്യവും സൗജന്യവുമാണ്.
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div style="font-weight:700; font-size:14px; margin-bottom:6px;">SHE Report Kerala</div>
+  <div>Safety · Help · Evidence</div>
+  <div style="margin-top:8px; opacity:0.8;">ഈ ഗൈഡ് വിവര ആവശ്യങ്ങൾക്ക് മാത്രമുള്ളതാണ്. ഇത് നിയമ ഉപദേശം ഒരുക്കുന്നില്ല.<br>വ്യക്തിഗത സഹായത്തിന് ഞങ്ങളുടെ നിയമ സ്വമേധ്യ സേവകരെ ബന്ധപ്പെടുക അല്ലെങ്കിൽ KELSA — 15100.</div>
+</div>
+
+</body>
+</html>

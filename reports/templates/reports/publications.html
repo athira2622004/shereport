@@ -22,12 +22,7 @@
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; margin-top:2rem;">
 
-      <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:2rem; box-shadow:var(--shadow-sm); border:1px solid var(--border);">
-        <div style="font-size:2rem; margin-bottom:1rem;">📄</div>
-        <h3>SHE Report — Full Project Report</h3>
-        <p style="font-size:0.88rem;">Comprehensive project document covering objectives, components, theory of change, ethical framework and implementation strategy.</p>
-        <span style="display:inline-block; margin-top:1rem; padding:0.4rem 1rem; background:rgba(139,26,74,0.1); color:var(--primary); border-radius:50px; font-size:0.8rem; font-weight:600;">Coming Soon</span>
-      </div>
+      
 
       <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:2rem; box-shadow:var(--shadow-sm); border:1px solid var(--border);">
         <div style="font-size:2rem; margin-bottom:1rem;">📊</div>
@@ -37,10 +32,11 @@
       </div>
 
       <div style="background:var(--card-bg); border-radius:var(--radius-lg); padding:2rem; box-shadow:var(--shadow-sm); border:1px solid var(--border);">
-        <div style="font-size:2rem; margin-bottom:1rem;">📝</div>
-        <h3>Annual Reports</h3>
-        <p style="font-size:0.88rem;">Year-wise SHE Report annual summaries capturing data curation, survivor support, stakeholder coordination and policy advocacy activities.</p>
-        <span style="display:inline-block; margin-top:1rem; padding:0.4rem 1rem; background:rgba(139,26,74,0.1); color:var(--primary); border-radius:50px; font-size:0.8rem; font-weight:600;">Coming Soon</span>
+        <div style="font-size:2rem; margin-bottom:1rem;">⚖️</div>
+        <h3>Legal Rights and Procedures Manual</h3>
+        <p style="font-size:0.88rem;">A downloadable guide for survivors on legal steps, rights, and procedures — available in both Malayalam and English..</p>
+        <a href="{% url 'legal_manual_english' %}" class="btn-primary" style="display:inline-block; margin-top:1rem; font-size:0.88rem;">English  →</a>
+        <a href="{% url 'legal_manual_malayalm' %}" class="btn-primary" style="display:inline-block; margin-top:1rem; font-size:0.88rem;">Malayalam  →</a>
       </div>
 
     </div>

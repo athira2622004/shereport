@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Rights & Procedures Manual — SHE Report Kerala</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; font-size: 14px; color: #1a1a1a; background: #fff; line-height: 1.8; }
+
+    .cover { background: #E8401A; color: white; padding: 60px 0 48px; }
+    .cover-inner { max-width: 960px; margin: 0 auto; padding: 0 48px; }
+    .cover .logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+    .cover .logo-circle { width: 44px; height: 44px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #E8401A; }
+    .cover .org { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; opacity: 0.9; }
+    .cover h1 { font-size: 40px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+    .cover .subtitle { font-size: 16px; opacity: 0.85; margin-bottom: 32px; }
+    .cover .lang-badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; padding: 5px 16px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; }
+    .cover .disclaimer { margin-top: 36px; padding: 16px 20px; background: rgba(0,0,0,0.2); border-radius: 8px; font-size: 13px; line-height: 1.7; max-width: 700px; }
+
+    .content { max-width: 960px; margin: 0 auto; padding: 48px 48px 80px; }
+
+    @media (max-width: 768px) {
+      .cover-inner { padding: 0 20px; }
+      .cover h1 { font-size: 26px; }
+      .content { padding: 28px 20px 60px; }
+      .rights-grid { grid-template-columns: 1fr; }
+      .helpline-grid { grid-template-columns: 1fr; }
+    }
+
+    .toc { background: #fdf4f7; border: 1px solid #e8c8d4; border-radius: 10px; padding: 24px 28px; margin-bottom: 40px; }
+    .toc h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #E8401A; margin-bottom: 14px; }
+    .toc ol { padding-left: 20px; }
+    .toc li { font-size: 13px; color: #4a1a2e; margin-bottom: 6px; }
+
+    .chapter { margin-bottom: 44px; page-break-inside: avoid; }
+    .chapter-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #E8401A; }
+    .chapter-num { width: 36px; height: 36px; border-radius: 50%; background: #E8401A; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+    .chapter h2 { font-size: 18px; font-weight: 700; color: #E8401A; }
+
+    .chapter p { margin-bottom: 12px; color: #222; }
+    .chapter ul, .chapter ol { padding-left: 22px; margin-bottom: 14px; }
+    .chapter li { margin-bottom: 6px; color: #222; }
+
+    .box { border-radius: 8px; padding: 16px 20px; margin: 18px 0; }
+    .box-pink { background: #fdf4f7; border-left: 4px solid #E8401A; }
+    .box-green { background: #f0faf4; border-left: 4px solid #1a7a4a; }
+    .box-amber { background: #fffbf0; border-left: 4px solid #c47a00; }
+    .box-blue { background: #f0f6ff; border-left: 4px solid #1a5fa5; }
+    .box-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+    .box-pink .box-title { color: #E8401A; }
+    .box-green .box-title { color: #1a7a4a; }
+    .box-amber .box-title { color: #c47a00; }
+    .box-blue .box-title { color: #1a5fa5; }
+
+    .steps { counter-reset: step; list-style: none; padding: 0; }
+    .steps li { counter-increment: step; display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+    .steps li::before { content: counter(step); width: 26px; height: 26px; border-radius: 50%; background: #E8401A; color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+    .rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+    .right-item { background: #fdf4f7; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #4a1a2e; }
+    .right-item strong { display: block; font-size: 12px; color: #E8401A; margin-bottom: 3px; }
+
+    .helpline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+    .helpline-item { background: #f0faf4; border-radius: 6px; padding: 10px 14px; }
+    .helpline-item .num { font-size: 22px; font-weight: 700; color: #1a7a4a; }
+    .helpline-item .label { font-size: 12px; color: #555; margin-top: 2px; }
+
+    .footer { background: #E8401A; color: white; padding: 32px 48px; text-align: center; font-size: 13px; line-height: 1.8; }
+    .footer a { color: rgba(255,255,255,0.8); }
+
+    .print-btn { position: fixed; bottom: 28px; right: 28px; background: #E8401A; color: white; border: none; padding: 13px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+    .print-btn:hover { background: #E8401A; }
+    @media print {
+      .print-btn { display: none; }
+      .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .chapter { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">Save as PDF</button>
+
+<!-- Cover -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="logo-row">
+      <div class="org">SHE Report Kerala &nbsp;|&nbsp; Safety · Help · Evidence</div>
+    </div>
+    <h1>Legal Rights &amp;<br>Procedures Manual</h1>
+    <div class="subtitle">A Survivor's Guide to Legal Help in Kerala</div>
+    <div class="lang-badge">ENGLISH</div>
+    <div class="disclaimer">
+      <strong>Important Notice:</strong> This guide provides general legal information to help survivors understand their rights. It is not a substitute for legal advice. For personalised guidance, please connect with a legal volunteer through SHE Report or contact the Kerala Legal Services Authority (KELSA).
+    </div>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="content">
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li>How to File an FIR</li>
+      <li>Your Rights at a Police Station</li>
+      <li>Understanding the POCSO Act</li>
+      <li>The Domestic Violence Act (DV Act)</li>
+      <li>Workplace Sexual Harassment (POSH Act)</li>
+      <li>Free Legal Aid — Who is Eligible</li>
+      <li>Important Helpline Numbers</li>
+    </ol>
+  </div>
+
+  <!-- Chapter 1 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">1</div>
+      <h2>How to File an FIR</h2>
+    </div>
+
+    <p>A First Information Report (FIR) is the first step in starting a criminal case. It is a written document prepared by the police based on your complaint. Filing an FIR is your right — the police cannot refuse to register it.</p>
+
+    <div class="box box-pink">
+      <div class="box-title">What is an FIR?</div>
+      An FIR is a document registered by the police when they receive information about a cognizable offence (a serious crime where police can arrest without a warrant). Crimes against women — including rape, domestic violence, stalking, and sexual assault — are all cognizable offences.
+    </div>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">Steps to File an FIR</h3>
+    <ul class="steps">
+      <li>Go to the nearest police station. You can go to <em>any</em> police station — it does not have to be in the area where the crime happened.</li>
+      <li>Ask to speak to the Station House Officer (SHO) or the officer on duty. For crimes against women, ask for a woman officer if available.</li>
+      <li>Give your complaint verbally or in writing. The officer must write it down and read it back to you. Make sure all details are correct.</li>
+      <li>Sign the FIR only after verifying the contents are accurate. If you cannot read, the FIR must be read aloud to you.</li>
+      <li>You are entitled to a <strong>free copy of the FIR</strong>. Ask for it before you leave. Keep it safe.</li>
+    </ul>
+
+    <div class="box box-amber">
+      <div class="box-title">If the police refuse to file an FIR</div>
+      <ul style="padding-left:18px; margin:0;">
+        <li>Send a written complaint by post to the Superintendent of Police (SP) of the district.</li>
+        <li>File a complaint with the District Magistrate (DM).</li>
+        <li>Approach the Kerala State Women's Commission.</li>
+        <li>File a complaint online at <strong>cybercrime.gov.in</strong> for cyber/online offences.</li>
+      </ul>
+    </div>
+
+    <div class="box box-green">
+      <div class="box-title">Zero FIR</div>
+      You can file a "Zero FIR" at any police station regardless of jurisdiction. The police must register it and transfer it to the correct station. This is especially useful in emergencies when you are far from home.
+    </div>
+  </div>
+
+  <!-- Chapter 2 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">2</div>
+      <h2>Your Rights at a Police Station</h2>
+    </div>
+
+    <p>As a survivor, you have specific legal rights when you visit or are taken to a police station. These rights are protected by the Indian Constitution and the Code of Criminal Procedure (CrPC).</p>
+
+    <div class="rights-grid">
+      <div class="right-item"><strong>Right to be heard</strong>You cannot be turned away. The police must listen to your complaint.</div>
+      <div class="right-item"><strong>Right to a woman officer</strong>For crimes of sexual nature, a woman officer must record your statement.</div>
+      <div class="right-item"><strong>Right to free FIR copy</strong>You must receive a copy of your FIR at no charge.</div>
+      <div class="right-item"><strong>Right to legal aid</strong>You are entitled to a free lawyer if you cannot afford one.</div>
+      <div class="right-item"><strong>Right to medical care</strong>You must be taken for medical examination if needed. Government hospitals cannot refuse.</div>
+      <div class="right-item"><strong>Right to privacy</strong>Your statement must be recorded in private, not in a public area of the station.</div>
+      <div class="right-item"><strong>Right against night arrest</strong>A woman cannot be arrested after sunset and before sunrise except in exceptional cases with a female officer present.</div>
+      <div class="right-item"><strong>Right to inform family</strong>If detained, you have the right to inform a family member or friend.</div>
+    </div>
+
+    <div class="box box-pink">
+      <div class="box-title">Recording statement under Section 164 CrPC</div>
+      In cases of sexual assault, your statement can be recorded before a Magistrate under Section 164 CrPC. This is important because it becomes strong evidence in court and the police cannot later alter or deny it.
+    </div>
+  </div>
+
+  <!-- Chapter 3 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">3</div>
+      <h2>Understanding the POCSO Act</h2>
+    </div>
+
+    <p>The Protection of Children from Sexual Offences (POCSO) Act, 2012 is a special law that protects children under 18 years of age from sexual abuse, harassment, and exploitation.</p>
+
+    <div class="box box-blue">
+      <div class="box-title">Who does POCSO protect?</div>
+      Every person under the age of 18, regardless of gender. The accused can be anyone — a stranger, a family member, a teacher, or a known person.
+    </div>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">Key provisions</h3>
+    <ul style="padding-left:20px; margin-bottom:14px;">
+      <li><strong>Mandatory reporting:</strong> Any person who knows about sexual abuse of a child is legally required to report it to the police. Failure to report is itself a crime.</li>
+      <li><strong>Child-friendly procedures:</strong> The child's statement must be recorded at their home or a place of their choice — not at a police station.</li>
+      <li><strong>Special courts:</strong> POCSO cases are heard in designated Special Courts to ensure speedy trials.</li>
+      <li><strong>Identity protection:</strong> The child's name and identity must never be disclosed publicly or in media.</li>
+      <li><strong>Burden of proof on accused:</strong> In most POCSO offences, the accused must prove they are innocent — not the child.</li>
+      <li><strong>Compensation:</strong> The child/family can apply for interim compensation from the court even before the trial ends.</li>
+    </ul>
+
+    <div class="box box-amber">
+      <div class="box-title">How to report POCSO abuse</div>
+      <ol style="padding-left:18px; margin:0;">
+        <li>Call Childline: <strong>1098</strong> (free, 24/7)</li>
+        <li>Report to nearest police station — they must file an FIR immediately</li>
+        <li>Contact the District Child Protection Officer (DCPO)</li>
+        <li>Approach the Child Welfare Committee (CWC)</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Chapter 4 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">4</div>
+      <h2>The Domestic Violence Act (DV Act)</h2>
+    </div>
+
+    <p>The Protection of Women from Domestic Violence Act, 2005 (DV Act) provides civil remedies to women who are subjected to domestic violence. It covers not just physical violence but also emotional, verbal, sexual, and economic abuse.</p>
+
+    <div class="box box-pink">
+      <div class="box-title">Who can seek help under the DV Act?</div>
+      Any woman who lives or has lived in a shared household with the abuser — including wives, daughters-in-law, sisters, mothers, or women in live-in relationships.
+    </div>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">Types of relief available</h3>
+    <ul style="padding-left:20px; margin-bottom:14px;">
+      <li><strong>Protection Order:</strong> The court can prohibit the abuser from committing violence, entering your workplace or home, or contacting you.</li>
+      <li><strong>Residence Order:</strong> You have the right to continue living in the shared household. The abuser can be removed.</li>
+      <li><strong>Monetary Relief:</strong> You can claim compensation for losses, medical expenses, and maintenance for yourself and children.</li>
+      <li><strong>Custody Order:</strong> Temporary custody of children can be granted to you.</li>
+    </ul>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">How to apply</h3>
+    <ul class="steps">
+      <li>Contact a Protection Officer (available in every district) or a Service Provider (NGO registered under DV Act).</li>
+      <li>File an application (Domestic Incident Report) with the Protection Officer or directly at the Magistrate's court.</li>
+      <li>The Magistrate can grant an interim Protection Order on the very first hearing — often within 3 days.</li>
+    </ul>
+
+    <div class="box box-green">
+      <div class="box-title">DV Act does not require divorce</div>
+      Seeking relief under the DV Act does not mean you are filing for divorce. It is a civil remedy to keep you safe. You can use it regardless of your decision about your marriage.
+    </div>
+  </div>
+
+  <!-- Chapter 5 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">5</div>
+      <h2>Workplace Sexual Harassment (POSH Act)</h2>
+    </div>
+
+    <p>The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013 (POSH Act) protects women from sexual harassment at any workplace.</p>
+
+    <div class="box box-blue">
+      <div class="box-title">What counts as sexual harassment at work?</div>
+      Physical contact or advances, demand for sexual favours, showing pornography, making sexual remarks, or any unwelcome verbal or non-verbal sexual conduct.
+    </div>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">Your rights under POSH</h3>
+    <ul style="padding-left:20px; margin-bottom:14px;">
+      <li>Every organisation with 10 or more employees must have an <strong>Internal Complaints Committee (ICC)</strong>.</li>
+      <li>If your employer has no ICC, you can approach the <strong>Local Complaints Committee (LCC)</strong> set up by the District Officer.</li>
+      <li>You can file a complaint within <strong>3 months</strong> of the last incident (extendable to 6 months).</li>
+      <li>You have the right to request a transfer or leave during the inquiry.</li>
+      <li>Your identity must be kept confidential throughout the process.</li>
+    </ul>
+  </div>
+
+  <!-- Chapter 6 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">6</div>
+      <h2>Free Legal Aid — Who is Eligible</h2>
+    </div>
+
+    <p>Every survivor has the right to free legal representation. You do not need money to access justice.</p>
+
+    <div class="box box-green">
+      <div class="box-title">Who is entitled to free legal aid in Kerala?</div>
+      <ul style="padding-left:18px; margin:0;">
+        <li>Women and children (all cases)</li>
+        <li>Victims of trafficking or mass disaster</li>
+        <li>Persons with disability</li>
+        <li>Persons whose income is below Rs. 1 lakh per year</li>
+        <li>Persons in custody</li>
+      </ul>
+    </div>
+
+    <h3 style="font-size:15px; margin:18px 0 10px; color:#333;">How to get free legal aid</h3>
+    <ul class="steps">
+      <li>Contact the <strong>Kerala Legal Services Authority (KELSA)</strong> — available in every district.</li>
+      <li>Visit the District Legal Services Authority (DLSA) office in your district.</li>
+      <li>Call the Legal Services helpline: <strong>15100</strong> (toll-free)</li>
+      <li>Ask the court directly — every court has a Legal Aid Clinic.</li>
+    </ul>
+  </div>
+
+  <!-- Chapter 7 -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num">7</div>
+      <h2>Important Helpline Numbers</h2>
+    </div>
+
+    <div class="helpline-grid">
+      <div class="helpline-item"><div class="num">181</div><div class="label">Women's Helpline (Mithra) — Kerala</div></div>
+      <div class="helpline-item"><div class="num">112</div><div class="label">Police Emergency</div></div>
+      <div class="helpline-item"><div class="num">181</div><div class="label">One Stop Centre (Sakhi)</div></div>
+      <div class="helpline-item"><div class="num">1098</div><div class="label">Childline (POCSO / Child abuse)</div></div>
+      <div class="helpline-item"><div class="num">15100</div><div class="label">Legal Services (KELSA) — free legal aid</div></div>
+      <div class="helpline-item"><div class="num">1091</div><div class="label">Women in Distress — National</div></div>
+    </div>
+
+    <div class="box box-pink">
+      <div class="box-title">Connect with a legal volunteer</div>
+      Visit <strong>SHE Report — Legal Volunteers</strong> section on our website to connect with a verified advocate or LLB student volunteer who can guide you through the legal process confidentially and free of charge.
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div style="font-weight:700; font-size:14px; margin-bottom:6px;">SHE Report Kerala</div>
+  <div>Safety · Help · Evidence</div>
+  <div style="margin-top:8px; opacity:0.8;">This guide is for informational purposes only and does not constitute legal advice.<br>For personalised help, connect with our legal volunteers or contact KELSA at 15100.</div>
+</div>
+
+</body>
+</html>
