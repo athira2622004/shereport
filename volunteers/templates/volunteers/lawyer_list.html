@@ -13,7 +13,7 @@
 <section class="page-hero">
   <div class="container">
     <h1>Legal Volunteer Support</h1>
-    <p>Connect with approved lawyer volunteers who offer free or reduced-cost legal assistance to survivors.</p>
+    <p>Connect with approved lawyer volunteers and LLB student volunteers who offer free or reduced-cost legal assistance to survivors.</p>
   </div>
 </section>
 
@@ -21,7 +21,7 @@
   <div class="container">
 
     <div class="alert alert-info" style="max-width:700px; margin:0 auto 2rem;">
-      ℹ️ All lawyers listed here are verified volunteers. Your contact with them is facilitated through our admin team to protect your privacy.
+      ℹ️ All volunteers listed here are verified. Your contact with them is facilitated through our admin team to protect your privacy.
     </div>
 
     <!-- Filters -->
@@ -47,9 +47,16 @@
       <button type="submit" class="btn-primary" style="height:48px; padding:0 2rem; font-size:1rem;">Filter</button>
     </form>
 
-    {% if lawyers %}
-      <p style="color:var(--text-muted); margin-bottom:1.5rem;">{{ lawyers|length }} volunteer{{ lawyers|length|pluralize }} found</p>
+    {% with total=lawyers|length|add:students|length %}
+    {% if total > 0 %}
+      <p style="color:var(--text-muted); margin-bottom:1.5rem;">{{ total }} volunteer{{ total|pluralize }} found</p>
+    {% endif %}
+    {% endwith %}
+
+    {% if lawyers or students %}
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem;">
+
+        <!-- Lawyer cards -->
         {% for lawyer in lawyers %}
         <div class="support-card" style="border-top:4px solid #993556;">
           <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
@@ -62,20 +69,21 @@
             </div>
           </div>
 
-          <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; line-height:1.8;">
-            <div>📍 {{ lawyer.district }}</div>
-            <div>🗣 {{ lawyer.languages }}</div>
-            {% if lawyer.experience_years %}
-            <div>⚖️ {{ lawyer.experience_years }} years experience</div>
-            {% endif %}
-          </div>
-
-          <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1rem;">
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.75rem;">
+            <span style="background:#FBEAF0; color:#72243E; font-size:0.75rem; padding:3px 10px; border-radius:12px;">Advocate</span>
             {% if lawyer.pro_bono %}
             <span style="background:#E1F5EE; color:#0F6E56; font-size:0.75rem; padding:3px 10px; border-radius:12px;">Pro Bono</span>
             {% endif %}
             {% if lawyer.reduced_cost %}
             <span style="background:#E6F1FB; color:#185FA5; font-size:0.75rem; padding:3px 10px; border-radius:12px;">Reduced Cost</span>
+            {% endif %}
+          </div>
+
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; line-height:1.8;">
+            <div>📍 {{ lawyer.district }}</div>
+            <div>🗣 {{ lawyer.languages }}</div>
+            {% if lawyer.experience_years %}
+            <div>⚖️ {{ lawyer.experience_years }} years experience</div>
             {% endif %}
           </div>
 
@@ -86,6 +94,47 @@
           <a href="{% url 'connect_lawyer' lawyer.pk %}" class="btn-primary" style="display:inline-block; font-size:0.85rem;">Connect with {{ lawyer.name|truncatewords:1 }} →</a>
         </div>
         {% endfor %}
+
+        <!-- Student cards -->
+        {% for student in students %}
+        <div class="support-card" style="border-top:4px solid #185FA5;">
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+            <div style="width:48px; height:48px; border-radius:50%; background:#E6F1FB; display:flex; align-items:center; justify-content:center; font-size:1.2rem; font-weight:700; color:#185FA5; flex-shrink:0;">
+              {{ student.name|first|upper }}
+            </div>
+            <div>
+              <h3 style="margin:0; font-size:1rem;">{{ student.name }}</h3>
+              <span style="font-size:0.8rem; color:#185FA5; font-weight:500;">LLB — Year {{ student.year_of_study }}</span>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.75rem;">
+            <span style="background:#E6F1FB; color:#0C447C; font-size:0.75rem; padding:3px 10px; border-radius:12px;">LLB Student</span>
+            {% if student.legal_awareness %}
+            <span style="background:#FAEEDA; color:#854F0B; font-size:0.75rem; padding:3px 10px; border-radius:12px;">Legal Awareness</span>
+            {% endif %}
+            {% if student.document_assistance %}
+            <span style="background:#EAF3DE; color:#3B6D11; font-size:0.75rem; padding:3px 10px; border-radius:12px;">Document Assistance</span>
+            {% endif %}
+            {% if student.is_supervised %}
+            <span style="background:#E1F5EE; color:#085041; font-size:0.75rem; padding:3px 10px; border-radius:12px;">Supervised</span>
+            {% endif %}
+          </div>
+
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; line-height:1.8;">
+            <div>📍 {{ student.district }}</div>
+            <div>🗣 {{ student.languages }}</div>
+            <div>🎓 {{ student.college }}</div>
+          </div>
+
+          {% if student.bio %}
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem; line-height:1.6;">{{ student.bio|truncatewords:25 }}</p>
+          {% endif %}
+
+          <a href="{% url 'connect_student' student.pk %}" class="btn-primary" style="display:inline-block; font-size:0.85rem; background:#185FA5; border-color:#185FA5;">Connect with {{ student.name|truncatewords:1 }} →</a>
+        </div>
+        {% endfor %}
+
       </div>
 
     {% else %}
@@ -97,9 +146,12 @@
     {% endif %}
 
     <div style="text-align:center; margin-top:3rem; padding:2rem; background:#FBEAF0; border-radius:12px;">
-      <h3 style="margin-bottom:0.5rem;">Are you a lawyer?</h3>
+      <h3 style="margin-bottom:0.5rem;">Want to volunteer?</h3>
       <p style="color:var(--text-muted); margin-bottom:1rem;">Join our volunteer network and help survivors access justice.</p>
-      <a href="{% url 'register_lawyer' %}" class="btn-primary">Register as a Volunteer Lawyer →</a>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="{% url 'register_lawyer' %}" class="btn-primary">Register as a Volunteer Lawyer →</a>
+        <a href="{% url 'register_student' %}" class="btn-primary" style="background:#185FA5; border-color:#185FA5;">Register as an LLB Student →</a>
+      </div>
     </div>
 
   </div>

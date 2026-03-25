@@ -10,7 +10,6 @@
 .filter-bar label { font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.3rem; color: #4A4A6A; }
 .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: #4A4A6A; }
 .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-.stat-pill { background: #FBEAF0; color: #8B1A4A; font-size: 0.85rem; font-weight: 600; padding: 0.4rem 1rem; border-radius: 20px; }
 </style>
 {% endblock %}
 
@@ -119,19 +118,19 @@
         </select>
       </div>
       <div style="display:flex; align-items:flex-end;">
-        <button onclick="resetFilters()" style="padding:0.6rem 1.2rem; background:#8B1A4A; color:white; border:none; border-radius:8px; font-size:0.9rem; cursor:pointer;">Reset</button>
+        <button onclick="resetFilters()" style="padding:0.6rem 1.2rem; background:#E8401A; color:white; border:none; border-radius:8px; font-size:0.9rem; cursor:pointer;">Reset</button>
       </div>
       <div style="margin-left:auto; display:flex; align-items:flex-end;">
-        <span id="countLabel" style="font-size:0.9rem; font-weight:600; color:#8B1A4A;"></span>
+        <span id="countLabel" style="font-size:0.9rem; font-weight:600; color:#E8401A;"></span>
       </div>
     </div>
 
-    <!-- Map -->
+    <!-- Map — fixed to Kerala -->
     <div id="map"></div>
 
     <!-- Legend -->
     <div style="background:#fff; border:1px solid #e0d6d6; border-radius:12px; padding:1.25rem 1.5rem; margin-top:1.5rem;">
-      <p style="font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#1A1A2E;">Legend</p>
+      <p style="font-size:0.85rem; font-weight:600; margin-bottom:0.75rem; color:#1A1A2E;">Legend — Pin colour shows most common crime type in that district</p>
       <div style="display:flex; flex-wrap:wrap; gap:1rem;">
         <div class="legend-item"><div class="legend-dot" style="background:#E8401A;"></div>Domestic Violence</div>
         <div class="legend-item"><div class="legend-dot" style="background:#7B2D8B;"></div>Rape / Sexual Assault</div>
@@ -158,27 +157,39 @@
 <script>
 const allPins = {{ district_pins_json|safe }};
 
-const map = L.map('map').setView([10.2, 76.5], 7);
+const CRIME_COLORS = {
+  'domestic_violence': '#E8401A',
+  'rape':              '#7B2D8B',
+  'molestation':       '#185FA5',
+  'stalking':          '#BA7517',
+  'kidnapping':        '#444441',
+  'dowry':             '#993C1D',
+  'trafficking':       '#0F6E56',
+  'workplace':         '#3B6D11',
+  'other':             '#888780',
+};
+
+// Fixed to Kerala — zoom 7
+const map = L.map('map', {
+  center: [10.5, 76.5],
+  zoom: 7,
+  minZoom: 6,
+  maxZoom: 14,
+});
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
 let markers = [];
 
-function getPinColor(total) {
-  if (total >= 100) return '#7F1D1D';
-  if (total >= 50)  return '#B91C1C';
-  if (total >= 20)  return '#E8401A';
-  if (total >= 5)   return '#F97316';
-  return '#FCA5A5';
-}
-
-function getPinSize(total) {
-  if (total >= 100) return 36;
-  if (total >= 50)  return 30;
-  if (total >= 20)  return 24;
-  if (total >= 5)   return 20;
-  return 16;
+function makeIcon(color) {
+  return L.divIcon({
+    html: `<div style="width:14px;height:14px;border-radius:50%;background:${color};border:2.5px solid white;box-shadow:0 1px 5px rgba(0,0,0,0.4);"></div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7],
+    className: ''
+  });
 }
 
 function makePopup(pin) {
@@ -201,8 +212,9 @@ function makePopup(pin) {
     <div style="font-family:Inter,sans-serif;min-width:220px;max-width:260px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #eee;">
         <div style="font-weight:700;font-size:14px;color:#1a1a1a;">📍 ${pin.district}</div>
-        <span style="background:#E8401A;color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;">${pin.total} incident${pin.total !== 1 ? 's' : ''}</span>
+        <span style="background:#E8401A;color:#fff;font-size:11px;font-weight:600;padding:2px 8px;border-radius:12px;">${pin.total} submission${pin.total !== 1 ? 's' : ''}</span>
       </div>
+      <p style="font-size:11px;font-weight:600;color:#888;margin-bottom:6px;">CRIME TYPES</p>
       ${crimeRows}
       <div style="border-top:1px solid #eee;margin-top:8px;padding-top:8px;">
         <div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0;">
@@ -213,6 +225,10 @@ function makePopup(pin) {
           <span style="color:#555;">👤 Anonymous</span>
           <span style="font-weight:600;">${pin.anonymous}</span>
         </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0;">
+          <span style="color:#555;">📅 Most recent</span>
+          <span style="font-weight:600;">${pin.latest_month}</span>
+        </div>
       </div>
     </div>`;
 }
@@ -221,66 +237,36 @@ function renderMarkers() {
   markers.forEach(m => map.removeLayer(m));
   markers = [];
 
-  const dist  = document.getElementById('districtFilter').value;
-  const type  = document.getElementById('typeFilter').value;
-  const police = document.getElementById('policeFilter').value;
+  const dist   = document.getElementById('districtFilter').value;
+  const type   = document.getElementById('typeFilter').value;
 
   let totalShowing = 0;
 
   allPins.forEach(pin => {
     if (dist !== 'all' && pin.district !== dist) return;
+    if (pin.total === 0) return;
+    totalShowing += pin.total;
 
-    // Filter crimes by type if selected
-    let filteredCrimes = pin.crimes;
-    let filteredTotal  = pin.total;
-    let filteredPolice = pin.police;
-    let filteredAnon   = pin.anonymous;
-
-    if (type !== 'all') {
-      // We only have display labels so just show all if filtering by type
-      filteredCrimes = pin.crimes;
-    }
-
-    if (filteredTotal === 0) return;
-    totalShowing += filteredTotal;
-
-    const size  = getPinSize(filteredTotal);
-    const color = getPinColor(filteredTotal);
-
-    const icon = L.divIcon({
-      html: `<div style="
-        width:${size}px;height:${size}px;border-radius:50%;
-        background:${color};border:2.5px solid white;
-        box-shadow:0 2px 6px rgba(0,0,0,0.35);
-        display:flex;align-items:center;justify-content:center;
-        font-size:${size > 20 ? '10' : '8'}px;font-weight:700;color:white;
-      ">${filteredTotal > 1 ? filteredTotal : ''}</div>`,
-      iconSize: [size, size],
-      iconAnchor: [size/2, size/2],
-      className: ''
-    });
-
-    const popupPin = {...pin, crimes: filteredCrimes, total: filteredTotal, police: filteredPolice, anonymous: filteredAnon, max_crime: filteredCrimes[0] ? filteredCrimes[0][1] : 1};
-
-    const m = L.marker([pin.lat, pin.lng], {icon})
-      .bindPopup(makePopup(popupPin), {maxWidth: 280})
+    const color = CRIME_COLORS[pin.top_crime_key] || '#E8401A';
+    const m = L.marker([pin.lat, pin.lng], { icon: makeIcon(color) })
+      .bindPopup(makePopup(pin), { maxWidth: 280 })
       .addTo(map);
     markers.push(m);
   });
 
-  document.getElementById('countLabel').textContent = `Showing ${totalShowing} incident${totalShowing !== 1 ? 's' : ''}`;
+  document.getElementById('countLabel').textContent = `Showing ${totalShowing} submission${totalShowing !== 1 ? 's' : ''}`;
 }
 
 function resetFilters() {
-  document.getElementById('typeFilter').value    = 'all';
+  document.getElementById('typeFilter').value     = 'all';
   document.getElementById('districtFilter').value = 'all';
-  document.getElementById('policeFilter').value  = 'all';
+  document.getElementById('policeFilter').value   = 'all';
   renderMarkers();
 }
 
 renderMarkers();
-document.getElementById('typeFilter').onchange    = renderMarkers;
+document.getElementById('typeFilter').onchange     = renderMarkers;
 document.getElementById('districtFilter').onchange = renderMarkers;
-document.getElementById('policeFilter').onchange  = renderMarkers;
+document.getElementById('policeFilter').onchange   = renderMarkers;
 </script>
 {% endblock %}

@@ -10,7 +10,6 @@ def data_insights(request):
     years = [s.year for s in stats]
     totals = [s.total_crimes for s in stats]
 
-    # Always use the LATEST year for crime type breakdown
     latest_year = stats[-1].year if stats else 'N/A'
     crime_labels = ['Rape', 'Molestation', 'Kidnapping',
                     'Cruelty by Husband', 'Dowry Deaths', 'Harassment', 'Other']
@@ -22,7 +21,6 @@ def data_insights(request):
     else:
         crime_values = [0] * 7
 
-    # District data — use latest year available in district table
     latest_district_year = DistrictData.objects.order_by(
         '-year').values_list('year', flat=True).first()
     if latest_district_year:
@@ -54,6 +52,9 @@ def data_insights(request):
 
 def incident_map(request):
     """Live incident pin map from support requests."""
+    import random
+    from collections import defaultdict
+
     DISTRICT_COORDS = {
         'Thiruvananthapuram': [8.5241, 76.9366],
         'Kollam':             [8.8932, 76.6141],
@@ -86,10 +87,13 @@ def incident_map(request):
     requests = SupportRequest.objects.filter(
         district__isnull=False).exclude(district='')
 
-    # Build district summary data
-    from collections import defaultdict
     district_data = defaultdict(lambda: {
-        'total': 0, 'police': 0, 'anonymous': 0, 'crimes': defaultdict(int)
+        'total': 0,
+        'police': 0,
+        'anonymous': 0,
+        'crimes': defaultdict(int),
+        'crime_keys': defaultdict(int),
+        'latest_date': None,
     })
 
     for r in requests:
@@ -103,23 +107,38 @@ def incident_map(request):
             district_data[d]['anonymous'] += 1
         crime_label = r.get_crime_type_display()
         district_data[d]['crimes'][crime_label] += 1
+        district_data[d]['crime_keys'][r.crime_type] += 1
+        # Fix latest date tracking
+        if district_data[d]['latest_date'] is None:
+            district_data[d]['latest_date'] = r.created_at
+        elif r.created_at > district_data[d]['latest_date']:
+            district_data[d]['latest_date'] = r.created_at
 
-    # Build map pins — one per district
     district_pins = []
     for district, data in district_data.items():
         coords = DISTRICT_COORDS[district]
         crimes_sorted = sorted(
             data['crimes'].items(), key=lambda x: x[1], reverse=True)
         max_crime = crimes_sorted[0][1] if crimes_sorted else 1
+        top_crime_key = sorted(data['crime_keys'].items(), key=lambda x: x[1], reverse=True)[
+            0][0] if data['crime_keys'] else 'other'
+        # Fix latest_month
+        if data['latest_date'] is not None:
+            latest_month = data['latest_date'].strftime('%B %Y')
+        else:
+            latest_month = 'N/A'
+
         district_pins.append({
-            'lat':       coords[0],
-            'lng':       coords[1],
-            'district':  district,
-            'total':     data['total'],
-            'police':    data['police'],
-            'anonymous': data['anonymous'],
-            'crimes':    crimes_sorted,
-            'max_crime': max_crime,
+            'lat':           coords[0],
+            'lng':           coords[1],
+            'district':      district,
+            'total':         data['total'],
+            'police':        data['police'],
+            'anonymous':     data['anonymous'],
+            'crimes':        crimes_sorted,
+            'max_crime':     max_crime,
+            'top_crime_key': top_crime_key,
+            'latest_month':  latest_month,
         })
 
     total_count = sum(r['total'] for r in district_pins)
@@ -134,12 +153,12 @@ def incident_map(request):
     max_district_count = top_districts[0][1] if top_districts else 1
 
     return render(request, 'data_insights/incident_map.html', {
-        'district_pins_json': json.dumps(district_pins),
-        'total_count':        total_count,
-        'police_reported':    police_reported,
-        'not_reported':       not_reported,
-        'anonymous_count':    anonymous_count,
-        'top_districts':      top_districts,
-        'max_district_count': max_district_count,
-        'crime_colors':       json.dumps(CRIME_COLORS),
+        'district_pins_json':  json.dumps(district_pins),
+        'total_count':         total_count,
+        'police_reported':     police_reported,
+        'not_reported':        not_reported,
+        'anonymous_count':     anonymous_count,
+        'top_districts':       top_districts,
+        'max_district_count':  max_district_count,
+        'crime_colors':        json.dumps(CRIME_COLORS),
     })
