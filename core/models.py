@@ -41,11 +41,15 @@ class DistrictData(models.Model):
     ]
     district = models.CharField(max_length=100, choices=DISTRICT_CHOICES)
     year = models.IntegerField()
-    total_crimes = models.IntegerField()
-    rape = models.IntegerField(default=0)
-    molestation = models.IntegerField(default=0)
-    kidnapping = models.IntegerField(default=0)
-    cruelty_by_husband = models.IntegerField(default=0)
+    total_crimes = models.IntegerField(null=True, blank=True)
+    rape = models.IntegerField(null=True, blank=True)
+    molestation = models.IntegerField(null=True, blank=True)
+    kidnapping = models.IntegerField(null=True, blank=True)
+    cruelty_by_husband = models.IntegerField(null=True, blank=True)
+    dowry_deaths = models.IntegerField(null=True, blank=True)
+    harassment = models.IntegerField(null=True, blank=True)
+    other = models.IntegerField(null=True, blank=True)
+    note = models.TextField(blank=True)
 
     class Meta:
         ordering = ['year', 'district']

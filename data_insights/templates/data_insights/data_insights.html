@@ -145,7 +145,11 @@
             <div>Total: <strong id="ttTotal"></strong></div>
             <div style="margin-top:4px;">Rape: <span id="ttRape"></span></div>
             <div>Molestation: <span id="ttMol"></span></div>
+            <div>Kidnapping: <span id="ttKidnap"></span></div>
             <div>Cruelty: <span id="ttCruelty"></span></div>
+            <div>Dowry Deaths: <span id="ttDowry"></span></div>
+            <div>Harassment: <span id="ttHarassment"></span></div>
+            <div>Other: <span id="ttOther"></span></div>
           </div>
           <div id="mapHint" style="font-size:0.75rem;color:var(--text-light);margin-top:8px;">👆 Hover a district</div>
         </div>
@@ -166,16 +170,32 @@
     <div class="data-table-wrapper">
       <table class="data-table">
         <thead>
-          <tr><th>#</th><th>District</th><th>Total Crimes</th><th>Rape</th><th>Molestation</th><th>Kidnapping</th><th>Cruelty (Husband)</th></tr>
+          <tr>
+            <th>#</th>
+            <th>District</th>
+            <th>Total Crimes</th>
+            <th>Rape</th>
+            <th>Molestation</th>
+            <th>Kidnapping</th>
+            <th>Cruelty (Husband)</th>
+            <th>Dowry Deaths</th>
+            <th>Harassment</th>
+            <th>Other</th>
+          </tr>
         </thead>
         <tbody>
           {% for d in districts %}
           <tr>
             <td>{{ forloop.counter }}</td>
             <td><strong>{{ d.district }}</strong></td>
-            <td><strong>{{ d.total_crimes }}</strong></td>
-            <td>{{ d.rape }}</td><td>{{ d.molestation }}</td>
-            <td>{{ d.kidnapping }}</td><td>{{ d.cruelty_by_husband }}</td>
+            <td><strong>{{ d.total_crimes|default:"N/A" }}</strong></td>
+            <td>{{ d.rape|default:"N/A" }}</td>
+            <td>{{ d.molestation|default:"N/A" }}</td>
+            <td>{{ d.kidnapping|default:"N/A" }}</td>
+            <td>{{ d.cruelty_by_husband|default:"N/A" }}</td>
+            <td>{{ d.dowry_deaths|default:"N/A" }}</td>
+            <td>{{ d.harassment|default:"N/A" }}</td>
+            <td>{{ d.other|default:"N/A" }}</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -267,9 +287,30 @@ new Chart(document.getElementById('crimeTypeChart'), {
 // District data from Django
 const districtData = {
   {% for d in districts %}
-  "{{ d.district }}": { total: {{ d.total_crimes }}, rape: {{ d.rape }}, molestation: {{ d.molestation }}, cruelty: {{ d.cruelty_by_husband }} },
+  "{{ d.district }}": {
+    total:      {{ d.total_crimes|default:0 }},
+    rape:       {{ d.rape|default:0 }},
+    molestation:{{ d.molestation|default:0 }},
+    kidnapping: {{ d.kidnapping|default:0 }},
+    cruelty:    {{ d.cruelty_by_husband|default:0 }},
+    dowry:      {{ d.dowry_deaths|default:0 }},
+    harassment: {{ d.harassment|default:0 }},
+    other:      {{ d.other|default:0 }},
+    rape_na:       {% if d.rape is None %}true{% else %}false{% endif %},
+    molestation_na:{% if d.molestation is None %}true{% else %}false{% endif %},
+    kidnapping_na: {% if d.kidnapping is None %}true{% else %}false{% endif %},
+    cruelty_na:    {% if d.cruelty_by_husband is None %}true{% else %}false{% endif %},
+    dowry_na:      {% if d.dowry_deaths is None %}true{% else %}false{% endif %},
+    harassment_na: {% if d.harassment is None %}true{% else %}false{% endif %},
+    other_na:      {% if d.other is None %}true{% else %}false{% endif %},
+    total_na:      {% if d.total_crimes is None %}true{% else %}false{% endif %}
+  },
   {% endfor %}
 };
+
+function displayVal(value, isNa) {
+  return isNa ? 'N/A' : value.toLocaleString('en-IN');
+}
 
 // Color function based on crime count
 function getCrimeColor(total) {
@@ -294,37 +335,35 @@ document.querySelectorAll('#keralaMap path.district').forEach(path => {
   path.style.cursor = 'pointer';
   path.style.transition = 'opacity .15s';
 
-  path.addEventListener('mouseenter', () => {
-    path.style.opacity = '0.75';
-    path.style.strokeWidth = '3';
+  function showTooltip() {
     if (!data) return;
     document.getElementById('mapTooltip').style.display = 'block';
     document.getElementById('mapHint').style.display = 'none';
     document.getElementById('ttDistrict').textContent = name;
-    document.getElementById('ttTotal').textContent = data.total.toLocaleString('en-IN');
-    document.getElementById('ttRape').textContent = data.rape;
-    document.getElementById('ttMol').textContent = data.molestation;
-    document.getElementById('ttCruelty').textContent = data.cruelty;
+    document.getElementById('ttTotal').textContent      = displayVal(data.total, data.total_na);
+    document.getElementById('ttRape').textContent       = displayVal(data.rape, data.rape_na);
+    document.getElementById('ttMol').textContent        = displayVal(data.molestation, data.molestation_na);
+    document.getElementById('ttKidnap').textContent     = displayVal(data.kidnapping, data.kidnapping_na);
+    document.getElementById('ttCruelty').textContent    = displayVal(data.cruelty, data.cruelty_na);
+    document.getElementById('ttDowry').textContent      = displayVal(data.dowry, data.dowry_na);
+    document.getElementById('ttHarassment').textContent = displayVal(data.harassment, data.harassment_na);
+    document.getElementById('ttOther').textContent      = displayVal(data.other, data.other_na);
+  }
+
+  path.addEventListener('mouseenter', () => {
+    path.style.opacity = '0.75';
+    path.style.strokeWidth = '3';
+    showTooltip();
   });
   path.addEventListener('mouseleave', () => {
     path.style.opacity = '1';
     path.style.strokeWidth = '2';
   });
-  path.addEventListener('click', () => {
-    if (!data) return;
-    document.getElementById('mapTooltip').style.display = 'block';
-    document.getElementById('mapHint').style.display = 'none';
-    document.getElementById('ttDistrict').textContent = name;
-    document.getElementById('ttTotal').textContent = data.total.toLocaleString('en-IN');
-    document.getElementById('ttRape').textContent = data.rape;
-    document.getElementById('ttMol').textContent = data.molestation;
-    document.getElementById('ttCruelty').textContent = data.cruelty;
-  });
+  path.addEventListener('click', showTooltip);
 });
 
 // District bar chart
 const dTotals = {{ district_totals|safe }};
-const maxV = Math.max(...dTotals);
 new Chart(document.getElementById('districtChart'), {
   type: 'bar',
   data: { labels:{{ district_names|safe }}, datasets:[{ label:'Total Crimes', data:dTotals,
@@ -339,20 +378,33 @@ new Chart(document.getElementById('districtChart'), {
 {% if has_district_data %}
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const districtData = {{ map_data|safe }};
-
-// Full crime breakdown per district
+// Full crime breakdown per district for Leaflet map
 const districtFull = {
   {% for d in districts %}
   "{{ d.district }}": {
-    total: {{ d.total_crimes }},
-    rape: {{ d.rape }},
-    molestation: {{ d.molestation }},
-    kidnapping: {{ d.kidnapping }},
-    cruelty: {{ d.cruelty_by_husband }}
+    total:      {{ d.total_crimes|default:0 }},
+    rape:       {{ d.rape|default:0 }},
+    molestation:{{ d.molestation|default:0 }},
+    kidnapping: {{ d.kidnapping|default:0 }},
+    cruelty:    {{ d.cruelty_by_husband|default:0 }},
+    dowry:      {{ d.dowry_deaths|default:0 }},
+    harassment: {{ d.harassment|default:0 }},
+    other:      {{ d.other|default:0 }},
+    rape_na:       {% if d.rape is None %}true{% else %}false{% endif %},
+    molestation_na:{% if d.molestation is None %}true{% else %}false{% endif %},
+    kidnapping_na: {% if d.kidnapping is None %}true{% else %}false{% endif %},
+    cruelty_na:    {% if d.cruelty_by_husband is None %}true{% else %}false{% endif %},
+    dowry_na:      {% if d.dowry_deaths is None %}true{% else %}false{% endif %},
+    harassment_na: {% if d.harassment is None %}true{% else %}false{% endif %},
+    other_na:      {% if d.other is None %}true{% else %}false{% endif %},
+    total_na:      {% if d.total_crimes is None %}true{% else %}false{% endif %}
   },
   {% endfor %}
 };
+
+function fmtLeaflet(value, isNa) {
+  return isNa ? 'N/A' : value.toLocaleString('en-IN');
+}
 
 // District centre coordinates
 const districtCoords = {
@@ -419,22 +471,28 @@ function updateMap(type) {
       fillOpacity: 0.75,
     });
 
-    const label = type === 'total' ? 'Total Crimes' :
-                  type === 'rape' ? 'Rape' :
-                  type === 'molestation' ? 'Molestation' :
-                  type === 'kidnapping' ? 'Kidnapping' : 'Cruelty by Husband';
+    const label = type === 'total'      ? 'Total Crimes' :
+                  type === 'rape'       ? 'Rape' :
+                  type === 'molestation'? 'Molestation' :
+                  type === 'kidnapping' ? 'Kidnapping' :
+                  type === 'dowry'      ? 'Dowry Deaths' :
+                  type === 'harassment' ? 'Harassment' :
+                  type === 'other'      ? 'Other' : 'Cruelty by Husband';
 
     circle.bindPopup(`
       <div style="font-family:Inter,sans-serif;min-width:180px;">
         <div style="font-weight:700;font-size:1rem;color:#8B1A4A;margin-bottom:8px;">📍 ${dist}</div>
-        <div style="font-size:0.9rem;margin-bottom:4px;"><b>${label}:</b> ${v.toLocaleString('en-IN')}</div>
+        <div style="font-size:0.9rem;margin-bottom:4px;"><b>${label}:</b> ${fmtLeaflet(v, full[type+'_na'])}</div>
         <hr style="margin:6px 0;border-color:#eee;">
         <div style="font-size:0.8rem;color:#666;line-height:1.8;">
-          Total: ${(full.total||0).toLocaleString('en-IN')}<br>
-          Rape: ${(full.rape||0).toLocaleString('en-IN')}<br>
-          Molestation: ${(full.molestation||0).toLocaleString('en-IN')}<br>
-          Kidnapping: ${(full.kidnapping||0).toLocaleString('en-IN')}<br>
-          Cruelty: ${(full.cruelty||0).toLocaleString('en-IN')}
+          Total: ${fmtLeaflet(full.total, full.total_na)}<br>
+          Rape: ${fmtLeaflet(full.rape, full.rape_na)}<br>
+          Molestation: ${fmtLeaflet(full.molestation, full.molestation_na)}<br>
+          Kidnapping: ${fmtLeaflet(full.kidnapping, full.kidnapping_na)}<br>
+          Cruelty: ${fmtLeaflet(full.cruelty, full.cruelty_na)}<br>
+          Dowry Deaths: ${fmtLeaflet(full.dowry, full.dowry_na)}<br>
+          Harassment: ${fmtLeaflet(full.harassment, full.harassment_na)}<br>
+          Other: ${fmtLeaflet(full.other, full.other_na)}
         </div>
       </div>
     `);
