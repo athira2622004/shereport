@@ -192,8 +192,8 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.9rem 1rem;
-  max-width: 1400px;
+  padding: 0.9rem 1.5rem;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -240,28 +240,16 @@ p {
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 0.1rem;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-}
-
-.she-navbar-nav li {
-  display: flex;
-  align-items: center;
-  /* ✅ ADD THIS — centers each item vertically */
+  gap: 0.25rem;
 }
 
 .she-navbar-nav a {
-  padding: 0.5rem 0.6rem;
+  padding: 0.5rem 0.9rem;
   border-radius: 8px;
   font-weight: 500;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   color: var(--text-dark);
   transition: var(--transition);
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  line-height: 1;
 }
 
 .she-navbar-nav a:hover,
