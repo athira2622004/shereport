@@ -62,6 +62,7 @@ class NewsUpdate(models.Model):
     """Latest news and updates shown on homepage."""
     title = models.CharField(max_length=300)
     summary = models.TextField()
+    image = models.ImageField(upload_to='news/', blank=True, null=True)
     source = models.CharField(max_length=200, blank=True)
     url = models.URLField(blank=True)
     date_published = models.DateField()

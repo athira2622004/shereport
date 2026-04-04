@@ -1,0 +1,69 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}News & Updates | SHE Report Kerala{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="{% url 'home' %}">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">News & Updates</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>News & Updates</h1>
+    <p>Latest news, reports and updates on crimes against women in Kerala.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+
+    {% if news %}
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2rem;">
+      {% for item in news %}
+      <div class="news-card" style="display:flex; flex-direction:column;">
+
+        {% if item.image %}
+        <div style="width:100%; height:200px; overflow:hidden; border-radius:12px 12px 0 0; margin:-1.5rem -1.5rem 1rem -1.5rem; width:calc(100% + 3rem);">
+          <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        {% else %}
+        <div style="width:calc(100% + 3rem); height:160px; margin:-1.5rem -1.5rem 1rem -1.5rem; background:linear-gradient(135deg,#7a1e00,#c43800); border-radius:12px 12px 0 0; display:flex; align-items:center; justify-content:center; font-size:3rem;">
+          📰
+        </div>
+        {% endif %}
+
+        <div class="news-date">{{ item.date_published|date:"d M Y" }}</div>
+        <h4 style="font-size:1rem; font-weight:600; color:var(--text-dark); margin-bottom:0.75rem; line-height:1.4;">{{ item.title }}</h4>
+        <p style="font-size:0.88rem; color:var(--text-mid); flex:1;">{{ item.summary|truncatewords:30 }}</p>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border);">
+          {% if item.source %}
+          <span class="news-tag">{{ item.source }}</span>
+          {% endif %}
+          {% if item.url %}
+          <a href="{{ item.url }}" target="_blank" style="font-size:0.85rem; color:var(--primary); font-weight:500;">Read more →</a>
+          {% elif item.pk %}
+          <a href="{% url 'news_detail' item.pk %}" style="font-size:0.85rem; color:var(--primary); font-weight:500;">Read more →</a>
+          {% endif %}
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <div style="text-align:center; padding:4rem; color:var(--text-muted);">
+      <div style="font-size:3rem; margin-bottom:1rem;">📰</div>
+      <h3>No news yet</h3>
+      <p>Check back soon for latest updates.</p>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}

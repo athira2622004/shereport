@@ -48,11 +48,9 @@
         <li><a href="{% url 'data_insights' %}">Data & Insights</a></li>
         <li><a href="{% url 'get_support' %}">Get Support</a></li>
         <li><a href="{% url 'policy' %}">Policy</a></li>
+        <li><a href="{% url 'news_list' %}">News</a></li>
         <li><a href="{% url 'publications' %}">Reports</a></li>
         <li><a href="{% url 'contact' %}" class="nav-cta">Contact</a></li>
-        {% if user.is_staff %}
-        <li><a href="/admin/" class="nav-admin">⚙ Admin</a></li>
-        {% endif %}
       </ul>
     </div>
   </nav>

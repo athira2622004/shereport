@@ -6,4 +6,5 @@ urlpatterns = [
     path('what-is-she-report/', views.what_is_she_report,
          name='what_is_she_report'),
     path('news/<int:pk>/', views.news_detail, name='news_detail'),
+    path('news/', views.news_list, name='news_list'),
 ]

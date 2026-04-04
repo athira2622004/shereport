@@ -48,3 +48,9 @@ def news_detail(request, pk):
     item = get_object_or_404(NewsUpdate, pk=pk, is_active=True)
     recent = NewsUpdate.objects.filter(is_active=True).exclude(pk=pk)[:3]
     return render(request, 'core/news_detail.html', {'item': item, 'recent': recent})
+
+
+def news_list(request):
+    news = NewsUpdate.objects.filter(
+        is_active=True).order_by('-date_published')
+    return render(request, 'core/news_list.html', {'news': news})
