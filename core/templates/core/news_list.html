@@ -26,15 +26,21 @@
       {% for item in news %}
       <div class="news-card" style="display:flex; flex-direction:column;">
 
-        {% if item.image %}
-        <div style="width:100%; height:200px; overflow:hidden; border-radius:12px 12px 0 0; margin:-1.5rem -1.5rem 1rem -1.5rem; width:calc(100% + 3rem);">
-          <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        {% else %}
-        <div style="width:calc(100% + 3rem); height:160px; margin:-1.5rem -1.5rem 1rem -1.5rem; background:linear-gradient(135deg,#7a1e00,#c43800); border-radius:12px 12px 0 0; display:flex; align-items:center; justify-content:center; font-size:3rem;">
-          📰
-        </div>
-        {% endif %}
+       {% if item.image %}
+<div style="width:calc(100% + 3rem); height:200px; overflow:hidden; border-radius:12px 12px 0 0; margin:-1.5rem -1.5rem 1rem -1.5rem;">
+  <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%; height:100%; object-fit:cover;">
+</div>
+{% else %}
+<div style="width:calc(100% + 3rem); margin:-1.5rem -1.5rem 1rem -1.5rem; border-radius:12px 12px 0 0; overflow:hidden;">
+  <div style="height:3px; background:#c43800;"></div>
+  <div style="background:var(--bg-light, #f8f4f0); height:140px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1rem 1.5rem; text-align:center;">
+    {% if item.source %}
+    <span style="font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:#999; margin-bottom:10px; font-weight:500;">{{ item.source }}</span>
+    {% endif %}
+    <span style="font-size:13px; font-weight:600; color:#2a2a2a; line-height:1.45;">{{ item.title|truncatewords:12 }}</span>
+  </div>
+</div>
+{% endif %}
 
         <div class="news-date">{{ item.date_published|date:"d M Y" }}</div>
         <h4 style="font-size:1rem; font-weight:600; color:var(--text-dark); margin-bottom:0.75rem; line-height:1.4;">{{ item.title }}</h4>

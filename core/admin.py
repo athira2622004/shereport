@@ -20,6 +20,9 @@ class DistrictDataAdmin(admin.ModelAdmin):
 
 @admin.register(NewsUpdate)
 class NewsUpdateAdmin(admin.ModelAdmin):
-    list_display = ['title', 'date_published', 'is_active']
-    list_filter = ['is_active']
-    search_fields = ['title']
+    list_display = ["title", "source",
+                    "date_published", "is_active"]  # added source
+    list_filter = ["is_active", "source"]   # added source filter
+    search_fields = ["title", "summary"]      # added summary search
+    # ← NEW: tick publish directly in list
+    list_editable = ["is_active"]

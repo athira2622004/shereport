@@ -28,6 +28,8 @@
 
       {% if item.image %}
       <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%; max-height:400px; object-fit:cover; border-radius:12px; margin-bottom:1.5rem;">
+      {% elif item.image_url %}
+      <img src="{{ item.image_url }}" alt="{{ item.title }}" style="width:100%; max-height:400px; object-fit:cover; border-radius:12px; margin-bottom:1.5rem;">
       {% endif %}
 
       <p style="font-size:1.05rem; color:var(--text-mid); line-height:1.8; margin-bottom:2rem;">
