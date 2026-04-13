@@ -1,11 +1,15 @@
 """
 core/scrapers.py
 ────────────────
-Scrapes women/Kerala news from The Hindu, Mathrubhumi, Manorama Online
-and saves them into the existing NewsUpdate model.
+Scrapes women/Kerala news from 6 sources and saves into NewsUpdate model.
 
-Install dependencies first:
-    pip install requests beautifulsoup4
+Sources:
+  1. The Hindu        - Kerala + Women
+  2. Mathrubhumi      - Kerala + Women tag
+  3. Manorama Online  - Kerala + Latest
+  4. Times of India   - Women topic
+  5. Asianet News     - Latest + Kerala
+  6. NDTV             - Women in India
 """
 
 import requests
@@ -23,6 +27,16 @@ HEADERS = {
 }
 
 
+def _get_soup(url):
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=15)
+        resp.raise_for_status()
+        return BeautifulSoup(resp.text, "html.parser")
+    except Exception as e:
+        logger.error(f"Failed to fetch {url}: {e}")
+        return None
+
+
 def scrape_the_hindu():
     articles = []
     urls = [
@@ -30,143 +44,152 @@ def scrape_the_hindu():
         "https://www.thehindu.com/topic/women/",
     ]
     for url in urls:
-        try:
-            resp = requests.get(url, headers=HEADERS, timeout=15)
-            resp.raise_for_status()
-            soup = BeautifulSoup(resp.text, "html.parser")
-
-            for card in soup.select("div.story-card, div.element"):
-                title_tag = card.select_one("h3 a, h2 a")
-                if not title_tag:
-                    continue
-
-                title = title_tag.get_text(strip=True)
-                link = title_tag.get("href", "")
-                if link and not link.startswith("http"):
-                    link = "https://www.thehindu.com" + link
-
-                summary_tag = card.select_one("p.intro, p.story-card-text")
-                summary = summary_tag.get_text(
-                    strip=True) if summary_tag else ""
-
-                img_tag = card.select_one("img")
-                image_url = ""
-                if img_tag:
-                    image_url = img_tag.get(
-                        "src") or img_tag.get("data-src") or ""
-
-                if title and link:
-                    articles.append({
-                        "title":     title,
-                        "summary":   summary,
-                        "url":       link,
-                        "image_url": image_url,
-                        "source":    "The Hindu",
-                    })
-        except Exception as e:
-            logger.error(f"[The Hindu] {e}")
+        soup = _get_soup(url)
+        if not soup:
+            continue
+        for card in soup.select("div.story-card, div.element"):
+            title_tag = card.select_one("h3 a, h2 a")
+            if not title_tag:
+                continue
+            title = title_tag.get_text(strip=True)
+            link = title_tag.get("href", "")
+            if link and not link.startswith("http"):
+                link = "https://www.thehindu.com" + link
+            summary_tag = card.select_one("p.intro, p.story-card-text")
+            summary = summary_tag.get_text(strip=True) if summary_tag else ""
+            if title and link:
+                articles.append(
+                    {"title": title, "summary": summary, "url": link, "source": "The Hindu"})
     return articles
 
 
 def scrape_mathrubhumi():
     articles = []
     urls = [
-        "https://www.mathrubhumi.com/news/kerala",       # Kerala news
-        # Crime news (relevant for SHE Report)
-        "https://www.mathrubhumi.com/news/crime",
+        "https://www.mathrubhumi.com/news/kerala",
+        "https://www.mathrubhumi.com/topics/tag/women",
     ]
     for url in urls:
-        try:
-            resp = requests.get(url, headers=HEADERS, timeout=15)
-            resp.raise_for_status()
-            soup = BeautifulSoup(resp.text, "html.parser")
-
-            for card in soup.select("div.story-list-item, article, div.col-article"):
-                title_tag = card.select_one("h1 a, h2 a, h3 a")
-                if not title_tag:
-                    continue
-
-                title = title_tag.get_text(strip=True)
-                link = title_tag.get("href", "")
-                if link and not link.startswith("http"):
-                    link = "https://www.mathrubhumi.com" + link
-
-                summary_tag = card.select_one("p.summary, p.description, p")
-                summary = summary_tag.get_text(
-                    strip=True) if summary_tag else ""
-
-                img_tag = card.select_one("img")
-                image_url = ""
-                if img_tag:
-                    image_url = img_tag.get(
-                        "src") or img_tag.get("data-src") or ""
-
-                if title and link:
-                    articles.append({
-                        "title":     title,
-                        "summary":   summary,
-                        "url":       link,
-                        "image_url": image_url,
-                        "source":    "Mathrubhumi",
-                    })
-        except Exception as e:
-            logger.error(f"[Mathrubhumi] {e}")
+        soup = _get_soup(url)
+        if not soup:
+            continue
+        for card in soup.select("div.story-list-item, article, div.col-article"):
+            title_tag = card.select_one("h1 a, h2 a, h3 a")
+            if not title_tag:
+                continue
+            title = title_tag.get_text(strip=True)
+            link = title_tag.get("href", "")
+            if link and not link.startswith("http"):
+                link = "https://www.mathrubhumi.com" + link
+            summary_tag = card.select_one("p.summary, p.description, p")
+            summary = summary_tag.get_text(strip=True) if summary_tag else ""
+            if title and link:
+                articles.append(
+                    {"title": title, "summary": summary, "url": link, "source": "Mathrubhumi"})
     return articles
 
 
 def scrape_manorama():
     articles = []
     urls = [
-        # Kerala news (confirmed working)
+        "https://www.manoramaonline.com/news/latest-news.html",
         "https://www.onmanorama.com/news/kerala.html",
-        "https://www.onmanorama.com/news.html",          # General news
     ]
     for url in urls:
-        try:
-            resp = requests.get(url, headers=HEADERS, timeout=15)
-            resp.raise_for_status()
-            soup = BeautifulSoup(resp.text, "html.parser")
+        soup = _get_soup(url)
+        if not soup:
+            continue
+        for card in soup.select("div.story-card, div.om-list-story, article, h2"):
+            title_tag = card.select_one("h1 a, h2 a, h3 a, a.title") or (
+                card.find("a") if card.name == "h2" else None
+            )
+            if not title_tag:
+                continue
+            title = title_tag.get_text(strip=True)
+            link = title_tag.get("href", "")
+            if link and not link.startswith("http"):
+                link = "https://www.onmanorama.com" + link
+            summary_tag = card.select_one("p.summary, p.intro, p")
+            summary = summary_tag.get_text(strip=True) if summary_tag else ""
+            if title and link and ("onmanorama.com" in link or "manoramaonline.com" in link):
+                articles.append(
+                    {"title": title, "summary": summary, "url": link, "source": "Manorama Online"})
+    return articles
 
-            for card in soup.select("div.story-card, div.om-list-story, article, h2"):
-                title_tag = card.select_one("h1 a, h2 a, h3 a, a.title") or (
-                    card.find("a") if card.name == "h2" else None
-                )
-                if not title_tag:
-                    continue
 
-                title = title_tag.get_text(strip=True)
-                link = title_tag.get("href", "")
-                if link and not link.startswith("http"):
-                    link = "https://www.onmanorama.com" + link
+def scrape_times_of_india():
+    articles = []
+    url = "https://timesofindia.indiatimes.com/topic/women"
+    soup = _get_soup(url)
+    if not soup:
+        return articles
+    for card in soup.select("div.uwU81, div.iN3cm, li.article"):
+        title_tag = card.select_one("a.wjfZO, a.xXa29, h3 a, h2 a, a")
+        if not title_tag:
+            continue
+        title = title_tag.get_text(strip=True)
+        link = title_tag.get("href", "")
+        if link and not link.startswith("http"):
+            link = "https://timesofindia.indiatimes.com" + link
+        summary_tag = card.select_one("p, div.oxXSK")
+        summary = summary_tag.get_text(strip=True) if summary_tag else ""
+        if title and link and len(title) > 10:
+            articles.append({"title": title, "summary": summary,
+                            "url": link, "source": "Times of India"})
+    return articles
 
-                summary_tag = card.select_one("p.summary, p.intro, p")
-                summary = summary_tag.get_text(
-                    strip=True) if summary_tag else ""
 
-                img_tag = card.select_one("img")
-                image_url = ""
-                if img_tag:
-                    image_url = img_tag.get(
-                        "src") or img_tag.get("data-src") or ""
+def scrape_asianet():
+    articles = []
+    urls = [
+        "https://www.asianetnews.com/latest-news",
+        "https://www.asianetnews.com/kerala-news",
+    ]
+    for url in urls:
+        soup = _get_soup(url)
+        if not soup:
+            continue
+        for card in soup.select("a[href*='/kerala-news/'], a[href*='/crime-news/'], a[href*='/india-news/']"):
+            title = card.get_text(strip=True)
+            link = card.get("href", "")
+            if link and not link.startswith("http"):
+                link = "https://www.asianetnews.com" + link
+            if title and link and len(title) > 15:
+                articles.append({"title": title, "summary": "",
+                                "url": link, "source": "Asianet News"})
+    return articles
 
-                if title and link and "onmanorama.com" in link:
-                    articles.append({
-                        "title":     title,
-                        "summary":   summary,
-                        "url":       link,
-                        "image_url": image_url,
-                        "source":    "Manorama Online",
-                    })
-        except Exception as e:
-            logger.error(f"[Manorama] {e}")
+
+def scrape_ndtv():
+    articles = []
+    url = "https://www.ndtv.com/topic/women-in-india"
+    soup = _get_soup(url)
+    if not soup:
+        return articles
+    for card in soup.select("div.news_Itm, div.nwscntnr, div.story__list-item, article"):
+        title_tag = card.select_one("h2 a, h3 a, a.newsHdng")
+        if not title_tag:
+            continue
+        title = title_tag.get_text(strip=True)
+        link = title_tag.get("href", "")
+        if link and not link.startswith("http"):
+            link = "https://www.ndtv.com" + link
+        summary_tag = card.select_one("p, div.newsCont")
+        summary = summary_tag.get_text(strip=True) if summary_tag else ""
+        if title and link and len(title) > 10:
+            articles.append({"title": title, "summary": summary,
+                            "url": link, "source": "NDTV"})
     return articles
 
 
 def fetch_all_news():
-    """Collect articles from all 3 sources."""
+    """Collect articles from all 6 sources."""
     results = []
     results.extend(scrape_the_hindu())
     results.extend(scrape_mathrubhumi())
     results.extend(scrape_manorama())
+    results.extend(scrape_times_of_india())
+    results.extend(scrape_asianet())
+    results.extend(scrape_ndtv())
     logger.info(f"Total articles fetched: {len(results)}")
     return results
